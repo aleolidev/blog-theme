@@ -108,6 +108,10 @@ export const PostWrapper = styled.main`
         margin: 0.25rem 0;
     }
 
+    pre {
+        overflow-x: auto;
+    }
+
     code {
         font-family: ${props => props.theme.fonts.code};
         font-size: 1rem;
