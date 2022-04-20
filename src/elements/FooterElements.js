@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const FooterWrapper = styled.footer`
     grid-column: 2 / span 12;
+    grid-row: 10;
     min-height: 5em;
     display: flex;
     justify-content: center;

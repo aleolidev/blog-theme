@@ -89,8 +89,20 @@ module.exports = {
               maxWidth: 1200,
             },
           },
+          'gatsby-remark-autolink-headers',
         ],
       },
+    },
+    // `gatsby-plugin-emotion`,
+    // `gatsby-plugin-smoothscroll`,
+    {
+        resolve: `gatsby-transformer-remark`,
+        options: {
+            plugins: [
+                // ...
+                `gatsby-remark-autolink-headers`,
+            ],
+        },
     },
     {
       resolve: `gatsby-plugin-google-fonts`,

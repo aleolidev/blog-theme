@@ -2,10 +2,13 @@ import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { H1 } from "../elements"
-import { Container, Post, FeatureImage, Seo, Breadcrumb } from "../components"
+import { Container, Post, FeatureImage, Seo, Breadcrumb, ToC } from "../components"
 
 const singlePost = ({pageContext, data, location }) => {
     const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData;
+
+    const headings = data.mdx.headings;
+    console.log('headings:', headings)
 
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
 
@@ -24,15 +27,29 @@ const singlePost = ({pageContext, data, location }) => {
                 description={ data.mdx.frontmatter.excerpt }
             />
             <FeatureImage image={ featureImage } />
+            { 
+                (headings !== null && headings !== undefined && headings.length > 0) 
+                ?
+                    <ToC headings={headings} desktop={true} />
+                : 
+                    <></>
+            }
             <Post>
                 <Breadcrumb
                     crumbs={crumbs}
                     crumbSeparator=" » "
                     crumbLabel={customCrumbLabel}
-                />
+                    />
                 <H1 margin="0 0 2rem 0">
                     {data.mdx.frontmatter.title}
                 </H1>
+                { 
+                    (headings !== null && headings !== undefined && headings.length > 0) 
+                    ?
+                        <ToC headings={headings} desktop={false} />
+                    : 
+                        <></>
+                }
                 <MDXRenderer>
                     {data.mdx.body}
                 </MDXRenderer>
@@ -58,6 +75,10 @@ export const pageQuery = graphql`
                     gatsbyImageData(layout: FIXED)
                 }
               }
+            }
+            headings {
+                value
+                depth
             }
         }
     }

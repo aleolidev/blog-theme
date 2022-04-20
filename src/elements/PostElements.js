@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
 export const PostWrapper = styled.main`
-    grid-column: 4 / span 8;
-    grid-row: 3 / span 5;
+    grid-column: 2 / span 9;
+    grid-row: 4 / span 5;
     background-color: ${props => props.theme.colors.light2};
     padding: ${props => 
-        `${props.theme.spacings.xLarge} ${props.theme.spacings.xxLarge}`};
+        `${props.theme.spacings.medium} ${props.theme.spacings.xLarge}`};
     box-shadow: ${props => props.theme.shadows.shadow1};
     z-index: 10;
 
@@ -155,7 +155,8 @@ export const PostWrapper = styled.main`
     }
 
     @media ${props => props.theme.breakpoints.tablet} {
-        grid-column: 2 / span 6;
+        grid-column: 1 / span 8;  
+        grid-row: 5 / span 5;
     }
 
     @media ${props => props.theme.breakpoints.mobile} {
