@@ -29,7 +29,7 @@ const allPosts = ({pageContext, data}) => {
                         date={post.node.frontmatter.date}
                         title={post.node.frontmatter.title}
                         excerpt={post.node.frontmatter.excerpt}
-                        slug={post.node.frontmatter.slug}
+                        slug={`/${post.node.frontmatter.slug}`}
                     />
                 ))}
             </Content>
