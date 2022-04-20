@@ -1,3 +1,5 @@
+const theme = require('./src/themes/theme');
+
 module.exports = {
   siteMetadata: {
     title: "My Starter Blog",
@@ -59,6 +61,18 @@ module.exports = {
         trailingSlashes: false,
         // usePathPrefix: optional, if you are using pathPrefix above
         // usePathPrefix: '/blog',
+      },
+    },
+    {
+      resolve: "gatsby-plugin-page-progress",
+      options: {
+        includePaths: [{ regex: "^\/.+" }],
+        // excludePaths: ["/blog/beep-beep-lettuce"],
+        height: 5,
+        prependToBody: false,
+        color: `${theme.colors.main1}`,
+        footerHeight: 500,
+        headerHeight: 0,
       },
     },
     `gatsby-plugin-sharp`,
