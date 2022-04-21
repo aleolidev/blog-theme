@@ -5,7 +5,7 @@ import { P } from "../elements"
 export const Footer = () => {
     return (
         <FooterWrapper>
-            <P size="xSmall" color="dark3">© 2020 Company. All right reserved.</P>
+            <P size="xSmall" color="dark2">© 2020 Company. All right reserved.</P>
         </FooterWrapper>
     )
 }

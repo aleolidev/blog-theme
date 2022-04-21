@@ -1,6 +1,4 @@
-import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
 
 export const PaginationWrapper = styled.div`
     grid-column: 2 / span 12;
@@ -30,7 +28,7 @@ export const PaginationWrapper = styled.div`
     }
 `
 
-export const PaginationElement = styled (props => <Link {...props} />)`
+export const PaginationElement = styled.a`
     font-size: 0.875rem;
     line-height: 1.125rem;
     font-weight: 400;

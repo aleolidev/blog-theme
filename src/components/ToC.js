@@ -1,28 +1,28 @@
 import React from "react"
 import styled from "styled-components"
-import { makeStyles } from "@material-ui/core"
-import theme from "../themes/theme"
+import { A, H2 } from "../elements"
 
 
-export const ToC = ({ headings, desktop }) => {
-    const classes = useStyles();
+export const ToC = ({ headings }) => {
 
     return (
-        <Toc className={ desktop ? classes.desktop : classes.mobile }>
-            <Title>Table of contents</Title>
+        <Toc>
+            <TitleWrapper>
+                <H2>Table of contents</H2>
+            </TitleWrapper>
             <InnerScroll>
             {headings.map(heading => {
                 if (heading.depth > 4) {
-                return <div />
+                    return (null);
                 }
 
                 return (
                 <ToCElement key={heading.value}>
-                    <ToCLink
-                    href={`#${heading.value.replace(/\s+/g, "-").toLowerCase()}`}
+                    <A color="main1" hoverColor="main2" 
+                        href={`#${heading.value.replace(/\s+/g, "-").toLowerCase()}`}
                     >
                     {heading.value}
-                    </ToCLink>
+                    </A>
                 </ToCElement>
                 )
             })}
@@ -31,16 +31,14 @@ export const ToC = ({ headings, desktop }) => {
     )
 }
 
-const Toc = styled.ul`  
+const Toc = styled.div`  
     grid-column: 11 / span 3;
     grid-row: 4 / span 1;
     overflow: hidden;
     position: relative;
-    background-color: ${props => props.theme.colors.light2};
-    margin: 0 4rem 0 0rem!important;
+    margin: .5em 4rem 0 0rem !important;
     padding: ${props => 
         `${props.theme.spacings.xxLarge} 0`};
-    box-shadow: ${props => props.theme.shadows.shadow1};
     z-index: 10;
 
     @media ${props => props.theme.breakpoints.tablet} {
@@ -49,9 +47,8 @@ const Toc = styled.ul`
     }
 `
 
-const Title = styled.h2`
-    font-size: 1.5rem;
-    margin: 0 0 .75em 0 !important;
+const TitleWrapper = styled.div`
+    margin: 0 0 1em 0 !important;
     
     @media ${props => props.theme.breakpoints.tablet} {
         margin: 1.5em 0 .5em 0 !important;
@@ -59,35 +56,14 @@ const Title = styled.h2`
 `
 
 const ToCElement = styled.li`
-      padding: .75em 0;
+      padding: .5em 0;
 `
 
-const ToCLink = styled.a`
-      &:hover {
-          color: black;
-          transition: filter 0.3s ease;
-      }
-`
-
-const InnerScroll = styled.div`
+const InnerScroll = styled.ul`
   scrollbar-width: thin;
   scrollbar-color: #367ee9 rgba(48, 113, 209, 0.3);
   overflow: hidden auto;
+  margin: 0 !important;
+  padding: 0;
+  list-style-type: none;
 `
-
-const useStyles = makeStyles({
-    desktop: {
-        display: "block",
-        
-        [`@media ${theme.breakpoints.tablet}`]: {
-            display: "none",     
-        },
-    },
-    mobile: {
-        display: "none",
-
-        [`@media ${theme.breakpoints.tablet}`]: {
-            display: "block",
-        },
-    }
-})

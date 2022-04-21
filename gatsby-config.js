@@ -1,11 +1,12 @@
 const theme = require('./src/themes/theme');
 
 module.exports = {
+  trailingSlash: "always",
   siteMetadata: {
     title: "My Starter Blog",
     description: "A simple blog built with Gatsby and MDX",
     url: "https://url.url",
-    image: "/laptop.png",
+    image: "/laptop.jpeg",
     author: "Author",
   },
   plugins: [
@@ -19,8 +20,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `posts`,
-        path: `${__dirname}/src/posts`
+        name: `articles`,
+        path: `${__dirname}/src/articles`
       },
     },
     {
@@ -36,7 +37,7 @@ module.exports = {
         // useAutoGen: required 'true' to use autogen
         useAutoGen: true,
         // autoGenHomeLabel: optional 'Home' is default
-        autoGenHomeLabel: `Inicio`,
+        autoGenHomeLabel: `Home`,
         // exclude: optional, include this array to exclude paths you don't want to
         // generate breadcrumbs for (see below for details).
         exclude: [
@@ -58,7 +59,7 @@ module.exports = {
         ],*/
         // trailingSlashes: optional, will add trailing slashes to the end
         // of crumb pathnames. default is false
-        trailingSlashes: false,
+        trailingSlashes: true,
         // usePathPrefix: optional, if you are using pathPrefix above
         // usePathPrefix: '/blog',
       },
@@ -66,14 +67,21 @@ module.exports = {
     {
       resolve: "gatsby-plugin-page-progress",
       options: {
-        includePaths: [{ regex: "^\/.+" }],
-        // excludePaths: ["/blog/beep-beep-lettuce"],
+        includePaths: [{ regex: "^\/.+\/.+" }], // TODO: Include manual paths
         height: 5,
         prependToBody: false,
         color: `${theme.colors.main1}`,
         footerHeight: 500,
         headerHeight: 0,
       },
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /images/
+        }
+      }
     },
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`, 
@@ -84,35 +92,58 @@ module.exports = {
         extensions: [`.md`, `.mdx`],
         gatsbyRemarkPlugins: [
           {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              icon: false,
+              maintainCase: false,
+              removeAccents: true,
+              isIconAfterHeader: false,
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1200,
             },
           },
-          'gatsby-remark-autolink-headers',
         ],
       },
     },
-    // `gatsby-plugin-emotion`,
-    // `gatsby-plugin-smoothscroll`,
+    `gatsby-plugin-emotion`,
+    `gatsby-plugin-smoothscroll`,
     {
         resolve: `gatsby-transformer-remark`,
         options: {
             plugins: [
-                // ...
                 `gatsby-remark-autolink-headers`,
             ],
         },
     },
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        fonts: [
-          `roboto mono`,
-          `muli\:400,400i,700,700i`,
-        ],
-        display: "swap",
+        fonts: {
+          google: [
+            {
+              family: "Roboto Mono",
+              variants: [`400`, `400i`, `700`, `700i`],
+            },
+            {
+              family: "Muli",
+              variants: [`400`, `400i`, `700`, `700i`],
+            },
+          ]
+          // {
+          //   family: `Roboto Mono`,
+          // },
+          // {
+          //   family: `Muli`,
+          //   variants: [`400`, `400i`, `700`, `700i`]
+          // },
+        },
       },
     },
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-material-ui`,
   ],
 }

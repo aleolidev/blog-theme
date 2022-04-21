@@ -16,6 +16,9 @@ export const Seo = ({ description, keywords, title, image, url, author}) => {
 
                 return (
                     <Helmet
+                        htmlAttributes={{
+                            lang: 'es',
+                        }}
                         title={title}
                         meta={[
                             {

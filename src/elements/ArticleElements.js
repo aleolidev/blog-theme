@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
-export const PostWrapper = styled.main`
+export const ArticleWrapper = styled.main`
     grid-column: 2 / span 9;
     grid-row: 4 / span 5;
-    background-color: ${props => props.theme.colors.light2};
+    margin: ${props => 
+        `0 0 0 ${props.theme.spacings.xLarge}`};
     padding: ${props => 
-        `${props.theme.spacings.medium} ${props.theme.spacings.xLarge}`};
-    box-shadow: ${props => props.theme.shadows.shadow1};
+        `${props.theme.spacings.medium} 0`};
     z-index: 10;
 
     h1,
@@ -110,6 +110,11 @@ export const PostWrapper = styled.main`
 
     pre {
         overflow-x: auto;
+        padding: 0.5em 0.5rem;
+        background-color: ${props => props.theme.colors.dark1};
+        border-radius: .5em;
+        margin: 1em 0;
+        border-left: 4px solid ${props => props.theme.colors.main1};
     }
 
     code {
@@ -117,8 +122,7 @@ export const PostWrapper = styled.main`
         font-size: 1rem;
         line-height: 1.875rem;
         color: ${props => props.theme.colors.light1};
-        background-color: ${props => props.theme.colors.dark3};
-        padding: 0 0.3rem;
+        padding: 0.25em 0.5rem;
     }
 
     hr {
@@ -155,10 +159,13 @@ export const PostWrapper = styled.main`
     }
 
     @media ${props => props.theme.breakpoints.tablet} {
+        margin: 0;
+        padding: ${props => 
+            `${props.theme.spacings.medium} ${props.theme.spacings.xLarge}`};
         grid-column: 1 / span 8;  
         grid-row: 5 / span 5;
     }
-
+    
     @media ${props => props.theme.breakpoints.mobile} {
         padding: ${props => 
             `${props.theme.spacings.medium} ${props.theme.spacings.large}`};

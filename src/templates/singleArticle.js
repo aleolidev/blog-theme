@@ -2,22 +2,26 @@ import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { H1 } from "../elements"
-import { Container, Post, FeatureImage, Seo, Breadcrumb, ToC } from "../components"
+import { useMediaQuery } from "@material-ui/core"
+import { Container, Article, FeatureImage, Seo, Breadcrumb, ToC } from "../components"
 
-const singlePost = ({pageContext, data, location }) => {
+const SingleArticle = ({pageContext, data, location }) => {
     const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData;
-
     const headings = data.mdx.headings;
-    console.log('headings:', headings)
-
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
 
-    const {
-        breadcrumb: { crumbs },
-    } = pageContext
-    
-    let customCrumbLabel = location.pathname.toLowerCase().replace('-', ' ').replaceAll('/', '')
-    customCrumbLabel = customCrumbLabel.charAt(0).toUpperCase() + customCrumbLabel.slice(1) // Capitalize
+    const isMobile = useMediaQuery('(max-width: 65rem)')
+
+    let { breadcrumb: { crumbs } } = pageContext
+
+    crumbs = crumbs.map(crumb => {
+        let prettyName = crumb
+        
+        prettyName.crumbLabel = prettyName.crumbLabel.toLowerCase().replaceAll('-', ' ').replaceAll('/', '')
+        prettyName.crumbLabel = prettyName.crumbLabel.charAt(0).toUpperCase() + prettyName.crumbLabel.slice(1) // Capitalize
+
+        return prettyName
+    })
 
     return (
         <Container>
@@ -28,40 +32,39 @@ const singlePost = ({pageContext, data, location }) => {
             />
             <FeatureImage image={ featureImage } />
             { 
-                (headings !== null && headings !== undefined && headings.length > 0) 
+                (headings !== null && headings !== undefined && headings.length > 0 && !isMobile) 
                 ?
-                    <ToC headings={headings} desktop={true} />
+                    <ToC headings={headings} isDesktop={true} />
                 : 
                     <></>
             }
-            <Post>
+            <Article>
                 <Breadcrumb
                     crumbs={crumbs}
                     crumbSeparator=" » "
-                    crumbLabel={customCrumbLabel}
                     />
-                <H1 margin="0 0 2rem 0">
+                <H1 margin="0 0 0rem 0">
                     {data.mdx.frontmatter.title}
                 </H1>
                 { 
-                    (headings !== null && headings !== undefined && headings.length > 0) 
+                    (headings !== null && headings !== undefined && headings.length > 0 && isMobile) 
                     ?
-                        <ToC headings={headings} desktop={false} />
+                        <ToC headings={headings} isDesktop={false} />
                     : 
                         <></>
                 }
                 <MDXRenderer>
                     {data.mdx.body}
                 </MDXRenderer>
-            </Post>
+            </Article>
         </Container>
     )
 }
 
-export default singlePost;
+export default SingleArticle;
 
 export const pageQuery = graphql`
-    query SinglePostQuery($id: String!) {
+    query SingleArticleQuery($id: String!) {
         mdx(id: {eq: $id}) {
             body
             frontmatter {

@@ -1,9 +1,8 @@
 import styled from "styled-components"
 
-export const CardWrapper = styled.div`
-    margin-top: 2rem;
-    padding: 1rem;
+export const CardWrapper = styled.a`;
+    border: 1px solid ${props => props.theme.colors.gray3};
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-decoration: none;
 `

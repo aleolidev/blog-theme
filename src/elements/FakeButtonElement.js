@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const ButtonWrapper = styled.a`
+export const FakeButtonWrapper = styled.span`
     padding: 0.5rem 0.75rem;
     background-color: ${props => props.theme.colors.main1};
     border-radius: 0.5rem;
@@ -10,7 +10,6 @@ export const ButtonWrapper = styled.a`
     width: fit-content;
     transition: filter 0.3s ease;
     cursor: pointer;
-    text-decoration: none;
     
     &:hover,
     &:focus {
