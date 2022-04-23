@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const PaginationWrapper = styled.div`
     grid-column: 2 / span 12;
-    padding: 3rem 0;
+    padding: 0 0 1rem 0;
     display: flex;
     align-items: center;
     justify-content: center;

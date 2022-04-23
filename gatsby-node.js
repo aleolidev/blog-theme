@@ -48,19 +48,29 @@ exports.createPages = async ({ actions, graphql }) => {
     }
 
     const dedupedCategories = dedupeCategories(data.allMdx)
+    const articlesPerCategoryPage = 10
 
     dedupedCategories.forEach(category => {
-        actions.createPage({
-            path: `${category}`,
-            component: require.resolve("./src/templates/singleCategory.js"),
-            context: {
-                category,
-                ids: data.allMdx.edges
-                    .filter(({ node }) => {
-                        return node.frontmatter.categories.includes(category)
-                    })
-                    .map(({ node }) => node.id),
-            },
+
+        const categoryIds = data.allMdx.edges.filter(({ node }) => {
+            return node.frontmatter.categories.includes(category)
+        }).map(({ node }) => node.id)
+        
+        const numCategoryPages = Math.ceil(categoryIds?.length / articlesPerCategoryPage)
+
+        Array.from({ length: numCategoryPages }).forEach((_, i) => {
+            actions.createPage({
+                path: i === 0 ? `${category}` : `${category}/${i + 1}`,
+                component: require.resolve("./src/templates/singleCategory.js"),
+                context: {
+                    category,
+                    ids: categoryIds,
+                    limit: articlesPerCategoryPage,
+                    skip: i * articlesPerCategoryPage,
+                    numPages: numCategoryPages,
+                    currentPage: i + 1,
+                },
+            })
         })
     })
 

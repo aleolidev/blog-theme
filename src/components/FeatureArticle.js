@@ -50,7 +50,7 @@ const BlackCover = styled.div`
         background:rgba(0,0,0,0.2);
         opacity: 1;
         transition: all 0.5s;
-        -webkit-transition: all 0.5s;
+        -webkit-transition: all 0.15s;
     }
 
     &:hover:after {

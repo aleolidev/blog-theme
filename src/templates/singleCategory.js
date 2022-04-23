@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Container, Content, Seo } from "../components"
+import { Container, Content, Pagination, Seo } from "../components"
 import { H1, A } from "../elements"
 import theme from "../themes/theme"
 import styled from "styled-components"
@@ -9,6 +9,12 @@ import { useMediaQuery } from "@material-ui/core"
 
 const SingleCategory = ({pageContext, data}) => {
     const categories = data.allMdx.edges
+
+    const { currentPage, numPages, category } = pageContext
+    const isFirst = currentPage === 1
+    const isLast = currentPage === numPages
+    const prevPage = currentPage - 1 === 1 ? `/${category}` : `/${category}/${currentPage - 1}`
+    const nextPage = `/${category}/${currentPage + 1}`
 
     let title = pageContext.category.replaceAll('-', ' ')
     title = title.charAt(0).toUpperCase() + title.slice(1) // Capitalize
@@ -78,6 +84,19 @@ const SingleCategory = ({pageContext, data}) => {
                     })}
                 </ArticlesWrapper>
             </Content>
+            {
+                (numPages > 1)
+                ?
+                <Pagination 
+                    isFirst={isFirst}
+                    isLast={isLast}
+                    prevPage={prevPage}
+                    nextPage={nextPage}
+                    isRelativePath
+                />
+                :
+                null
+            }
         </Container>
     )
 }
@@ -149,8 +168,8 @@ const ReadMoreWrapper = styled.div`
 `
 
 export const query = graphql`
-  query SingleCategoryQuery($ids: [String]!) {
-    allMdx(filter: { id: { in: $ids } }) {
+  query SingleCategoryQuery($ids: [String]!, $skip: Int!, $limit: Int!) {
+    allMdx(filter: { id: { in: $ids } }, sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit) {
       edges {
         node {
           frontmatter {

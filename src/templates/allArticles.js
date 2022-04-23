@@ -38,10 +38,7 @@ const AllArticles = ({pageContext, data}) => {
                                 title={ article.node.frontmatter.title } 
                                 image={ article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData } 
                                 href={ `/${category}/${article.node.frontmatter.slug}/` }
-                                gridRow={() => {
-                                    console.log(`${1 + (index * 2)} / span 2`)
-                                    return (`${1 + (index * 2)} / span 2`)
-                                }} 
+                                gridRow={ () => (`${1 + (index * 2)} / span 2`) } 
                             />
                         )
                     })}
