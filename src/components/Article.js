@@ -3,7 +3,7 @@ import { ArticleWrapper } from "../elements"
 
 export const Article = ({ children }) => {
     return (
-        <ArticleWrapper>
+        <ArticleWrapper >
             { children }
         </ArticleWrapper>
     )

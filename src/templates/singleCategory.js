@@ -14,9 +14,8 @@ const SingleCategory = ({pageContext, data}) => {
     title = title.charAt(0).toUpperCase() + title.slice(1) // Capitalize
     const description = `This is the description of the ${pageContext.category} category`
     const author = "Author"
-    
 
-    const isMobile = useMediaQuery('(max-width: 50rem)')
+    const isMobile = useMediaQuery('(max-width: 50rem)', { noSsr: true })
 
     return (
         <Container>
@@ -35,7 +34,8 @@ const SingleCategory = ({pageContext, data}) => {
                                 <ImageWrapper>
                                     <A href={`/${category}/${node.frontmatter.slug}`}>
                                         <GatsbyImage 
-                                            image={ image ? image : null } 
+                                            image={ image ? image : null }
+                                            fadeIn={false} 
                                             placeholder="blurred"
                                             alt=""
                                         />

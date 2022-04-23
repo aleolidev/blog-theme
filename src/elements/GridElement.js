@@ -7,8 +7,19 @@ export const GridWrapper = styled.section`
 
     @media ${props => props.theme.breakpoints.tablet} {
         grid-template-columns: ${
-            props => props.mobileColumns ? 
-            `repeat(${props.mobileColumns}, 1fr)` : 
+            props => props.tabletColumns ? 
+            `repeat(${props.tabletColumns}, 1fr)` : 
             `repeat(${props.columns}, 1fr)`};
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {
+        grid-template-columns: ${
+            props => props.mobileColumns ? 
+            `repeat(${props.mobileColumns}, 1fr)` :
+            (props.tabletColumns ?            
+                `repeat(${props.tabletColumns}, 1fr)` :
+                `repeat(${props.columns}, 1fr)`)
+            };
+            
     }
 `

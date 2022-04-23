@@ -166,7 +166,8 @@ export const ArticleWrapper = styled.main`
         grid-row: 5 / span 5;
     }
     
-    @media ${props => props.theme.breakpoints.mobile} {
+    @media ${props => props.theme.breakpoints.mobile} {    
+        grid-row: 2 / span 5;
         padding: ${props => 
             `${props.theme.spacings.medium} ${props.theme.spacings.large}`};
     }

@@ -29,7 +29,7 @@ const Categories = ({ data }) => {
                 <H1 margin="0 0 .75em 0" mobileTextAlign="center">
                     Categories
                 </H1>
-                <Grid columns={3} mobileColumns={1} gap={"2em"}>
+                <Grid columns={3} tabletColumns={1} gap={"2em"}>
                     { 
                         dedupedCategories.map((category) => {
                             let prettyName = category.replaceAll('-', ' ');

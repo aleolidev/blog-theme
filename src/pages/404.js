@@ -25,7 +25,7 @@ export const notFoundQuery = graphql`
     query NotFoundQuery {
         file(relativePath: { eq: "not-found.jpeg" }) {
             childImageSharp {
-                gatsbyImageData(layout: FIXED)
+                gatsbyImageData
             }
         }
     }

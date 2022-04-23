@@ -1,9 +1,14 @@
 import React from "react"
 import { ContentWrapper } from "../elements"
 
-export const Content = ({ children, hideBanner, padding }) => {
+export const Content = ({ children, hideBanner, padding, mobilePadding, tabletGridColumn }) => {
     return (
-        <ContentWrapper padding={ padding } hideBanner={ hideBanner }>
+        <ContentWrapper 
+            padding={ padding } 
+            mobilePadding = { mobilePadding }
+            hideBanner={ hideBanner } 
+            tabletGridColumn={ tabletGridColumn }
+        >
             { children }
         </ContentWrapper>
     )

@@ -10,7 +10,8 @@ const SingleArticle = ({pageContext, data, location }) => {
     const headings = data.mdx.headings;
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
 
-    const isMobile = useMediaQuery('(max-width: 65rem)')
+    const isTablet = useMediaQuery('(max-width: 65rem)', { noSsr: true })
+    const isMobile = useMediaQuery('(max-width: 50rem)', { noSsr: true })
 
     let { breadcrumb: { crumbs } } = pageContext
 
@@ -30,11 +31,17 @@ const SingleArticle = ({pageContext, data, location }) => {
                 image={ seoImage }
                 description={ data.mdx.frontmatter.excerpt }
             />
-            <FeatureImage image={ featureImage } />
-            { 
-                (headings !== null && headings !== undefined && headings.length > 0 && !isMobile) 
+            {
+                !isMobile 
                 ?
-                    <ToC headings={headings} isDesktop={true} />
+                    <FeatureImage image={ featureImage } alt={ data.mdx.frontmatter.title } />
+                :
+                    <></>
+            }
+            { 
+                (headings !== null && headings !== undefined && headings.length > 0 && !isTablet) 
+                ?
+                    <ToC headings={headings} isMobile={false} />
                 : 
                     <></>
             }
@@ -42,14 +49,14 @@ const SingleArticle = ({pageContext, data, location }) => {
                 <Breadcrumb
                     crumbs={crumbs}
                     crumbSeparator=" » "
-                    />
-                <H1 margin="0 0 0rem 0">
+                />
+                <H1 margin="0 0 2rem 0">
                     {data.mdx.frontmatter.title}
                 </H1>
                 { 
-                    (headings !== null && headings !== undefined && headings.length > 0 && isMobile) 
+                    (headings !== null && headings !== undefined && headings.length > 0 && isTablet) 
                     ?
-                        <ToC headings={headings} isDesktop={false} />
+                        <ToC headings={headings} isMobile={true} />
                     : 
                         <></>
                 }
@@ -75,7 +82,7 @@ export const pageQuery = graphql`
               featureImage {
                 publicURL
                 childImageSharp {
-                    gatsbyImageData(layout: FIXED)
+                    gatsbyImageData(placeholder: BLURRED)
                 }
               }
             }
