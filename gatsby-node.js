@@ -17,7 +17,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
     // Create paginated pages for articles
 
-    const articlePerPage = 5
+    const articlePerPage = 10
 
     const numPages = Math.ceil(data.allMdx.edges.length / articlePerPage)
 
@@ -48,7 +48,7 @@ exports.createPages = async ({ actions, graphql }) => {
     }
 
     const dedupedCategories = dedupeCategories(data.allMdx)
-    const articlesPerCategoryPage = 2
+    const articlesPerCategoryPage = 10
 
     dedupedCategories.forEach(category => {
 

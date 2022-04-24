@@ -1,7 +1,7 @@
 import React from "react"
 import { ContainerWrapper } from "../elements"
-import { Footer } from "./Footer"
-import { Nav } from "./Nav"
+import { Cookies, Footer, Nav } from "../components"
+import theme from "../themes/theme"
 
 export const Container = ({ children }) => {
     return (
@@ -9,6 +9,7 @@ export const Container = ({ children }) => {
             <Nav />
             { children }
             <Footer />
+            <Cookies theme={ theme }/>
         </ContainerWrapper>
     )
 }
