@@ -5,11 +5,11 @@ import theme from "../themes/theme"
 import { useMediaQuery } from "@material-ui/core"
 
 const AllArticles = ({pageContext, data}) => {
-    const { currentPage, numPages, articlesPerPage } = pageContext
+    const { currentPage, numPages, lang } = pageContext
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
-    const prevPage = currentPage - 1 === 1 ? "/" : `/${currentPage - 1}`
-    const nextPage = `/${currentPage + 1}`
+    const prevPage = currentPage - 1 === 1 ? `/${lang}` : `/${lang}/${currentPage - 1}`
+    const nextPage = `/${lang}/${currentPage + 1}`
 
     
     let articles = data.allMdx.edges
@@ -38,7 +38,7 @@ const AllArticles = ({pageContext, data}) => {
                             <FeatureArticle 
                                 title={ article.node.frontmatter.title } 
                                 image={ article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData } 
-                                href={ `/${category}/${article.node.frontmatter.slug}/` }
+                                href={ `/${lang}/${category}/${article.node.frontmatter.slug}/` }
                                 gridRow={ () => (`${1 + (index * 2)} / span 2`) } 
                             />
                         )
@@ -59,7 +59,7 @@ const AllArticles = ({pageContext, data}) => {
                         ?
                         <>
 
-                            <FeatureArticle image={ featuredImage } title={ featuredArticle.node.frontmatter.title } href={ `/${featuredCategory}/${featuredSlug}/` } />
+                            <FeatureArticle image={ featuredImage } title={ featuredArticle.node.frontmatter.title } href={ `/${lang}/${featuredCategory}/${featuredSlug}/` } />
                             <Content padding={ `${ theme.spacings.small } ${ theme.spacings.xLarge }` } tabletGridColumn={'1 / span 8'}>
                                 <Grid columns={3} mobileColumns={1} gap={"2em"}>
                                     {articles.map((article, index) => {
@@ -73,6 +73,7 @@ const AllArticles = ({pageContext, data}) => {
                                                         title={article.node.frontmatter.title}
                                                         image={article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData}
                                                         slug={article.node.frontmatter.slug}
+                                                        lang={lang}
                                                         category={category}
                                                     />
                                                 </Column>
@@ -83,7 +84,7 @@ const AllArticles = ({pageContext, data}) => {
                                 {
                                     (articles.length > 4)
                                     ?
-                                        <Articles articles={ articles.slice(4, articles.length) }/>
+                                        <Articles articles={ articles.slice(4, articles.length) } lang={lang}/>
                                     :
                                     null
                                 }
@@ -103,7 +104,7 @@ const AllArticles = ({pageContext, data}) => {
                             padding={ `${ theme.spacings.small } ${ theme.spacings.xLarge }` } 
                             tabletGridColumn={'1 / span 8'}
                         >
-                            <Articles articles={ articles }/>
+                            <Articles articles={ articles } lang={lang}/>
                             {(numPages > 1) &&
                                 <Pagination
                                     isFirst={isFirst}

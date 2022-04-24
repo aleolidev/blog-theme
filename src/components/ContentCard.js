@@ -4,9 +4,9 @@ import { CardWrapper, P } from "../elements"
 import { FakeButton } from "../components"
 import { GatsbyImage } from "gatsby-plugin-image"
 
-export const ContentCard = ({ date, title, image, slug, category }) => {
+export const ContentCard = ({ date, title, image, slug, category, lang }) => {
     return (
-        <CardWrapper href={`/${category}/${slug}/`}>
+        <CardWrapper href={`/${lang}/${category}/${slug}/`}>
             <GatsbyImage 
                 image={ image ? image : null } 
                 // placeholder="blurred"

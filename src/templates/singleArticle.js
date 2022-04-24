@@ -15,13 +15,15 @@ const SingleArticle = ({pageContext, data, location }) => {
 
     let { breadcrumb: { crumbs } } = pageContext
 
-    crumbs = crumbs.map(crumb => {
-        let prettyName = crumb
-        
-        prettyName.crumbLabel = prettyName.crumbLabel.toLowerCase().replaceAll('-', ' ').replaceAll('/', '')
-        prettyName.crumbLabel = prettyName.crumbLabel.charAt(0).toUpperCase() + prettyName.crumbLabel.slice(1) // Capitalize
-
-        return prettyName
+    crumbs = crumbs.map((crumb, i) => {
+        if (i > 0) {
+            let prettyName = crumb
+            
+            prettyName.crumbLabel = prettyName.crumbLabel.toLowerCase().replaceAll('-', ' ').replaceAll('/', '')
+            prettyName.crumbLabel = prettyName.crumbLabel.charAt(0).toUpperCase() + prettyName.crumbLabel.slice(1) // Capitalize
+    
+            return prettyName
+        }
     })
 
     return (
@@ -47,7 +49,7 @@ const SingleArticle = ({pageContext, data, location }) => {
             }
             <Article>
                 <Breadcrumb
-                    crumbs={crumbs}
+                    crumbs={crumbs.slice(1, crumbs.length)}
                     crumbSeparator=" » "
                 />
                 <H1 margin="0 0 2rem 0">

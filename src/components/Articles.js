@@ -4,7 +4,7 @@ import React from "react"
 import styled from "styled-components"
 import { A } from "../elements"
 
-export const Articles = ({ articles }) => {
+export const Articles = ({ articles, lang }) => {
     const isMobile = useMediaQuery('(max-width: 50rem)')
 
     return (
@@ -16,7 +16,7 @@ export const Articles = ({ articles }) => {
             return (
                 <ArticleWrapper key={ node.frontmatter.title }>
                     <ImageWrapper>
-                        <A href={`/${category}/${node.frontmatter.slug}`}>
+                        <A href={`/${lang}/${category}/${node.frontmatter.slug}`}>
                             <GatsbyImage 
                                 image={ image ? image : null }
                                 fadeIn={false} 
@@ -27,7 +27,7 @@ export const Articles = ({ articles }) => {
                     </ImageWrapper>
                     <TitleWrapper>
                         <A 
-                            href={`/${category}/${node.frontmatter.slug}`} 
+                            href={`/${lang}/${category}/${node.frontmatter.slug}`} 
                             fontSize={isMobile ? '1.2em' : '1.5em'} 
                             fontWeight='700'
                             hoverColor="main1"
@@ -44,7 +44,7 @@ export const Articles = ({ articles }) => {
                             </ExcerptWrapper>
                             <ReadMoreWrapper>
                                 <A 
-                                    href={`/${category}/${node.frontmatter.slug}`} 
+                                    href={`/${lang}/${category}/${node.frontmatter.slug}`} 
                                     fontSize='.8em' 
                                     fontWeight='700'
                                     color="main1"

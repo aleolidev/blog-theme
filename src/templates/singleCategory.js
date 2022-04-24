@@ -7,7 +7,7 @@ import theme from "../themes/theme"
 const SingleCategory = ({pageContext, data}) => {
     const articles = data.allMdx.edges
 
-    const { currentPage, numPages, category, articlesPerPage } = pageContext
+    const { currentPage, numPages, category, lang } = pageContext
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
     const prevPage = currentPage - 1 === 1 ? `/${category}` : `/${category}/${currentPage - 1}`
@@ -25,7 +25,7 @@ const SingleCategory = ({pageContext, data}) => {
                 <H1 margin="0 0 .75em 0" mobileTextAlign="center">
                     {title}
                 </H1>
-                <Articles articles={ articles }/>
+                <Articles articles={ articles } lang={lang}/>
                 {(numPages > 1) &&
                     <Pagination 
                         isFirst={isFirst}

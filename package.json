@@ -26,11 +26,13 @@
     "gatsby-plugin-emotion": "^7.12.1",
     "gatsby-plugin-gdpr-cookies": "^2.0.8",
     "gatsby-plugin-google-fonts": "^1.0.1",
+    "gatsby-plugin-i18n": "^1.0.1",
     "gatsby-plugin-image": "^2.12.1",
     "gatsby-plugin-material-ui": "^4.1.0",
     "gatsby-plugin-mdx": "^3.12.1",
     "gatsby-plugin-page-progress": "^2.2.1",
     "gatsby-plugin-preact": "^6.12.1",
+    "gatsby-plugin-react-helmet": "^5.12.1",
     "gatsby-plugin-react-svg": "^3.1.0",
     "gatsby-plugin-sharp": "^4.12.1",
     "gatsby-plugin-smoothscroll": "^1.2.0",
@@ -48,6 +50,7 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.3.1",
+    "react-intl": "^5.25.0",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
