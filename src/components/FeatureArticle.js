@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { A, FeatureImageWrapper, H1 } from "../elements"
 import styled from "styled-components"
 
-export const FeatureArticle = ({ title, href, image, alt, gridRow, isTablet }) => {
+export const FeatureArticle = ({ title, href, image, alt, gridRow }) => {
 
     const data = useStaticQuery(graphql`
         {
@@ -65,6 +65,7 @@ const TitleWrapper = styled.div`
     left: 1.5em;
     width: 60%;
     text-shadow: 0 0 8px rgba(0,0,0, 0.5);
+    background-color: transparent;
 
     @media ${props => props.theme.breakpoints.tablet} {
         width: 100%;

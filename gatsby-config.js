@@ -85,6 +85,9 @@ module.exports = {
         }
       }
     },
+    `gatsby-plugin-styled-components`,
+    // `gatsby-plugin-emotion`,
+    `gatsby-plugin-material-ui`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`, 
     `gatsby-transformer-sharp`,
@@ -111,7 +114,6 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-emotion`,
     `gatsby-plugin-smoothscroll`,
     {
         resolve: `gatsby-transformer-remark`,
@@ -145,7 +147,5 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-styled-components`,
-    `gatsby-plugin-material-ui`,
   ],
 }
