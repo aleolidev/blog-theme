@@ -4,7 +4,7 @@ import { Articles, Column, Container, Content, ContentCard, FeatureArticle, Grid
 import theme from "../themes/theme"
 import { useMediaQuery } from "@material-ui/core"
 
-const AllArticles = ({pageContext, data}) => {
+const AllArticles = ({ pageContext, data }) => {
     const { currentPage, numPages, lang } = pageContext
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
@@ -16,7 +16,7 @@ const AllArticles = ({pageContext, data}) => {
     
     const featuredArticle = articles[0]
     const featuredImage = featuredArticle.node.frontmatter.featureImage.childImageSharp.gatsbyImageData;
-    const featuredCategory = featuredArticle.node.frontmatter.categories[0]
+    const featuredCategory = featuredArticle.node.frontmatter.category
     const featuredSlug = featuredArticle.node.frontmatter.slug
     
     const title = "Main page"
@@ -27,13 +27,13 @@ const AllArticles = ({pageContext, data}) => {
 
     return (
         <Container>
-            <Seo title={ title } description={ description } author={ author } />
+            <Seo title={ title } description={ description } author={ author } lang={lang} />
             {
                 isMobile
                 ?
                 <Content mobilePadding={'0'} hideBanner={ true } tabletGridColumn={'1 / span 8'}>
                     {articles.map((article, index) => {
-                        const category = article.node.frontmatter.categories[0]
+                        const category = article.node.frontmatter.category
                         return (
                             <FeatureArticle 
                                 title={ article.node.frontmatter.title } 
@@ -64,7 +64,7 @@ const AllArticles = ({pageContext, data}) => {
                                 <Grid columns={3} mobileColumns={1} gap={"2em"}>
                                     {articles.map((article, index) => {
                                         if (index > 0 && index < 4) {
-                                            const category = article.node.frontmatter.categories[0]
+                                            const category = article.node.frontmatter.category
                                             return (
                                                 <Column style={{margin: '1em 0'}}>
                                                     <ContentCard 
@@ -124,16 +124,20 @@ const AllArticles = ({pageContext, data}) => {
 export default AllArticles
 
 export const pageQuery = graphql`
-    query AllArticlesQuery($skip: Int!, $limit: Int!) {
-        allMdx(sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit) {
+    query AllArticlesQuery($skip: Int!, $limit: Int!, $lang: String!) {
+        allMdx(
+            sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit
+            filter: {frontmatter: {lang: {eq: $lang}}}
+            ) {
             edges {
                 node {
                     frontmatter {
                         slug
                         title
-                        categories
                         date(formatString: "DD/MM/YYYY")
                         excerpt
+                        author
+                        category
                         featureImage {
                             childImageSharp {
                                 gatsbyImageData(placeholder: BLURRED)

@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { CardWrapper, P } from "../elements"
 import { FakeButton } from "../components"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { cardelement } from "../translations/translations"
 
 export const ContentCard = ({ date, title, image, slug, category, lang }) => {
     return (
@@ -19,7 +20,7 @@ export const ContentCard = ({ date, title, image, slug, category, lang }) => {
                     {date}
                 </DateWrapper>
                 <ButtonWrapper style={{ justifyContent: 'flex-end' }}>
-                    <FakeButton>Read More</FakeButton> {/* SEO Purposes */}
+                    <FakeButton>{ cardelement.read_more[lang] }</FakeButton> {/* SEO Purposes */}
                 </ButtonWrapper>
             </P>
         </CardWrapper>

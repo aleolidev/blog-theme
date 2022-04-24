@@ -29,7 +29,7 @@ exports.createPages = async ({ actions, graphql }) => {
                     edges {
                       node {
                         frontmatter {
-                            categories
+                            category
                             slug
                         }
                         id
@@ -44,7 +44,7 @@ exports.createPages = async ({ actions, graphql }) => {
         const articlePerPage = 10
     
         const numPages = Math.ceil(data.allMdx.edges.length / articlePerPage)
-    
+
         Array.from({ length: numPages }).forEach((_, i) => {
             actions.createPage({
                 path: i === 0 ? `/${langs[lang]}/` : `/${langs[lang]}/${i + 1}`,
@@ -63,10 +63,8 @@ exports.createPages = async ({ actions, graphql }) => {
     
         const dedupeCategories = (allMdx) => {
             const uniqueCategories = new Set()
-            allMdx.edges.forEach(({ node }) => {
-                node.frontmatter.categories.forEach(category => {
-                    uniqueCategories.add(category)
-                })
+            allMdx.edges.forEach(({ node }) => {            
+                uniqueCategories.add(node.frontmatter.category)
             })
     
             return Array.from(uniqueCategories)
@@ -78,7 +76,7 @@ exports.createPages = async ({ actions, graphql }) => {
         dedupedCategories.forEach(category => {
     
             const categoryIds = data.allMdx.edges.filter(({ node }) => {
-                return node.frontmatter.categories.includes(category)
+                return node.frontmatter.category.includes(category)
             }).map(({ node }) => node.id)
             
             const numCategoryPages = Math.ceil(categoryIds?.length / articlesPerCategoryPage)
@@ -104,7 +102,7 @@ exports.createPages = async ({ actions, graphql }) => {
     
         data.allMdx.edges.forEach(edge => {
             const slug = edge.node.frontmatter.slug
-            const category = edge.node.frontmatter.categories[0]
+            const category = edge.node.frontmatter.category
             const id = edge.node.id
     
             actions.createPage({

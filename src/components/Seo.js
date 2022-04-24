@@ -2,7 +2,7 @@ import React from "react"
 import { Helmet } from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
 
-export const Seo = ({ description, keywords, title, image, url, author}) => {
+export const Seo = ({ description, keywords, title, image, url, author, lang }) => {
     return (
         <StaticQuery
             query={ detailsQuery }
@@ -17,7 +17,7 @@ export const Seo = ({ description, keywords, title, image, url, author}) => {
                 return (
                     <Helmet
                         htmlAttributes={{
-                            lang: 'es',
+                            lang: lang ? lang : 'en-US',
                         }}
                         title={title}
                         meta={[

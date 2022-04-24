@@ -5,17 +5,14 @@ export const NavWrapper = styled.nav`
     grid-row: 1;
     display: flex;
     align-items: center;
-    padding: 0 4em;
+    justify-content: space-between;
 
     box-sizing: content-box;
-    box-shadow: ${props => props.theme.shadows.shadow1};
+    box-shadow: ${props => props.theme.shadows.shadow2};
 
-    // & img {
-    //     height: 50px;
-    // }
+    z-index: 10;
 
     @media ${props => props.theme.breakpoints.tablet} {
-        justify-content: center;
-        grid-column: 2 / span 6;
+        grid-column: 1 / span 8;
     }
 `

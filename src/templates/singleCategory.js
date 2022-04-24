@@ -20,9 +20,9 @@ const SingleCategory = ({pageContext, data}) => {
 
     return (
         <Container>
-            <Seo title={ title } description={ description } author={ author } />
+            <Seo title={ title } description={ description } author={ author } lang={lang} />
             <Content hideBanner={ true } padding={`${theme.spacings.large} ${theme.spacings.xLarge}`}>
-                <H1 margin="0 0 .75em 0" mobileTextAlign="center">
+                <H1 margin="0 0 .75em 0">
                     {title}
                 </H1>
                 <Articles articles={ articles } lang={lang}/>
@@ -41,8 +41,8 @@ const SingleCategory = ({pageContext, data}) => {
 }
 
 export const query = graphql`
-  query SingleCategoryQuery($ids: [String]!, $skip: Int!, $limit: Int!) {
-    allMdx(filter: { id: { in: $ids } }, sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit) {
+  query SingleCategoryQuery($ids: [String]!, $skip: Int!, $limit: Int!, $lang: String!) {
+    allMdx(filter: {id: {in: $ids}, frontmatter: {lang: {eq: $lang}}}, sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit) {
       edges {
         node {
           frontmatter {
@@ -51,7 +51,7 @@ export const query = graphql`
             date(formatString: "DD/MM/YYYY")
             excerpt
             author
-            categories
+            category
             featureImage {
                 childImageSharp {
                     gatsbyImageData(placeholder: BLURRED)

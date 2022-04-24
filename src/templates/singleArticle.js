@@ -4,6 +4,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { H1 } from "../elements"
 import { useMediaQuery } from "@material-ui/core"
 import { Container, Article, FeatureImage, Seo, Breadcrumb, ToC } from "../components"
+import { breadcrumb } from "../translations/translations"
 
 const SingleArticle = ({pageContext, data, location }) => {
     const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData;
@@ -13,17 +14,20 @@ const SingleArticle = ({pageContext, data, location }) => {
     const isTablet = useMediaQuery('(max-width: 65rem)', { noSsr: true })
     const isMobile = useMediaQuery('(max-width: 50rem)', { noSsr: true })
 
-    let { breadcrumb: { crumbs } } = pageContext
+    let { breadcrumb: { crumbs }, lang } = pageContext
 
     crumbs = crumbs.map((crumb, i) => {
         if (i > 0) {
             let prettyName = crumb
-            
-            prettyName.crumbLabel = prettyName.crumbLabel.toLowerCase().replaceAll('-', ' ').replaceAll('/', '')
-            prettyName.crumbLabel = prettyName.crumbLabel.charAt(0).toUpperCase() + prettyName.crumbLabel.slice(1) // Capitalize
-    
+            if (i > 1) {
+                prettyName.crumbLabel = prettyName.crumbLabel.toLowerCase().replaceAll('-', ' ').replaceAll('/', '')
+                prettyName.crumbLabel = prettyName.crumbLabel.charAt(0).toUpperCase() + prettyName.crumbLabel.slice(1) // Capitalize
+            } else {
+                prettyName.crumbLabel = breadcrumb.home[lang]
+            }
             return prettyName
         }
+        return crumb;
     })
 
     return (
@@ -32,6 +36,7 @@ const SingleArticle = ({pageContext, data, location }) => {
                 title={ data.mdx.frontmatter.title }
                 image={ seoImage }
                 description={ data.mdx.frontmatter.excerpt }
+                lang={lang}
             />
             {
                 !isMobile 
@@ -52,7 +57,10 @@ const SingleArticle = ({pageContext, data, location }) => {
                     crumbs={crumbs.slice(1, crumbs.length)}
                     crumbSeparator=" » "
                 />
-                <H1 margin="0 0 2rem 0">
+                <H1 
+                    margin="1.5rem 0 0 0 !important"
+                    tabletMargin=".75rem 0 2rem 0 !important"
+                >
                     {data.mdx.frontmatter.title}
                 </H1>
                 { 
@@ -73,8 +81,11 @@ const SingleArticle = ({pageContext, data, location }) => {
 export default SingleArticle;
 
 export const pageQuery = graphql`
-    query SingleArticleQuery($id: String!) {
-        mdx(id: {eq: $id}) {
+    query SingleArticleQuery($id: String!, $lang: String!) {
+        mdx(
+            id: {eq: $id}
+            frontmatter: {lang: {eq: $lang}}
+            ) {
             body
             frontmatter {
               date

@@ -3,6 +3,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import React from "react"
 import styled from "styled-components"
 import { A } from "../elements"
+import { articleelement } from "../translations/translations"
 
 export const Articles = ({ articles, lang }) => {
     const isMobile = useMediaQuery('(max-width: 50rem)')
@@ -11,7 +12,7 @@ export const Articles = ({ articles, lang }) => {
         <ArticlesWrapper>
             {articles.map(({ node }) => {    
             const image = node.frontmatter.featureImage.childImageSharp.gatsbyImageData;
-            const category = node.frontmatter.categories[0]
+            const category = node.frontmatter.category
 
             return (
                 <ArticleWrapper key={ node.frontmatter.title }>
@@ -49,7 +50,7 @@ export const Articles = ({ articles, lang }) => {
                                     fontWeight='700'
                                     color="main1"
                                 >
-                                    Read more »
+                                    { articleelement.read_more[lang] } »
                                 </A>
                             </ReadMoreWrapper>
                         </> : null

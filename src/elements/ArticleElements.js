@@ -6,7 +6,7 @@ export const ArticleWrapper = styled.main`
     margin: ${props => 
         `0 0 0 ${props.theme.spacings.xLarge}`};
     padding: ${props => 
-        `${props.theme.spacings.medium} 0`};
+        `1.5em 0 ${props.theme.spacings.xLarge}`};
     z-index: 10;
 
     h1,
@@ -18,7 +18,7 @@ export const ArticleWrapper = styled.main`
         color: ${props => props.theme.colors.dark1};    
     }
 
-    h1:not(:first-child),
+    h1:not(:nth-child(2)),
     h2,
     h3,
     h4,
@@ -161,7 +161,7 @@ export const ArticleWrapper = styled.main`
     @media ${props => props.theme.breakpoints.tablet} {
         margin: 0;
         padding: ${props => 
-            `${props.theme.spacings.medium} ${props.theme.spacings.xLarge}`};
+            `${props.theme.spacings.small} ${props.theme.spacings.xLarge} 3em ${props.theme.spacings.xLarge}`};
         grid-column: 1 / span 8;  
         grid-row: 5 / span 5;
     }
@@ -169,6 +169,6 @@ export const ArticleWrapper = styled.main`
     @media ${props => props.theme.breakpoints.mobile} {    
         grid-row: 2 / span 5;
         padding: ${props => 
-            `${props.theme.spacings.medium} ${props.theme.spacings.large}`};
+            `${props.theme.spacings.small} ${props.theme.spacings.large} 3em ${props.theme.spacings.large}`};
     }
 `

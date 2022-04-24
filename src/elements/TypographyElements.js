@@ -60,7 +60,8 @@ export const P = styled.p`
                 return props.theme.colors.dark1
         }
     }};
-    text-align: ${props => props.textAlign ? props.textAlign : "left"}
+    text-align: ${props => props.textAlign ? props.textAlign : "left"};
+    text-transform: ${props => props.textTransform ? props.textTransform : 'none'};
 `
 
 export const H1 = styled.h1`
@@ -83,12 +84,17 @@ export const H1 = styled.h1`
         }
     }};
     font-weight: ${props => props.fontWeight ? props.fontWeight : '400'};
+    text-transform: ${props => props.textTransform ? props.textTransform : 'none'};
     text-align: ${props => props.textAlign ? props.textAlign : "left"};
     margin: ${props => props.margin ? props.margin : 0};
 
     @media ${props => props.theme.breakpoints.tablet} {
+        margin: ${props => props.tabletMargin ? props.tabletMargin : (props.margin ? props.margin : 0)};
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {
+        margin: ${props => props.mobileMargin ? props.mobileMargin : (props.tabletMargin ? props.tabletMargin : (props.margin ? props.margin : 0))};
         text-align: ${props => props.mobileTextAlign ? props.mobileTextAlign : (props.textAlign ? props.textAlign : "left")};
-        margin: ${props => props.mobileMargin ? props.mobileMargin : (props.margin ? props.margin : 0)};
     }
 `
 
@@ -130,6 +136,12 @@ export const A = styled.a`
                 return props.theme.colors.dark2
             case "dark3":
                 return props.theme.colors.dark3
+            case "gray1":
+                return props.theme.colors.gray1
+            case "gray2":
+                return props.theme.colors.gray2
+            case "gray3":
+                return props.theme.colors.gray3
             case "light1":
                 return props.theme.colors.light1
             case "light2":
@@ -144,6 +156,7 @@ export const A = styled.a`
     text-align: ${props => props.textAlign ? props.textAlign : "left"};
     margin: ${props => props.margin ? props.margin : 0};
     text-decoration: ${props => props.textDecoration ? props.textDecoration : 'none'};
+    text-transform: ${props => props.textTransform ? props.textTransform : 'none'};
     transition: filter 1s ease;
 
     &:hover {
@@ -170,7 +183,10 @@ export const A = styled.a`
     }
 
     @media ${props => props.theme.breakpoints.tablet} {
-        text-align: ${props => props.mobileTextAlign ? props.mobileTextAlign : (props.textAlign ? props.textAlign : "left")};
         margin: ${props => props.mobileMargin ? props.mobileMargin : (props.margin ? props.margin : 0)};
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {
+        text-align: ${props => props.mobileTextAlign ? props.mobileTextAlign : (props.textAlign ? props.textAlign : "left")};
     }
 `
