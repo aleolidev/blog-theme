@@ -2,7 +2,7 @@ import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import Theme from "./src/themes/theme";
-import { Table } from "./src/components";
+import { Table, ToC } from "./src/components";
 
 const GlobalStyles = createGlobalStyle`
     * {
@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
 
 const components = {
     table: Table,
+    ToC,
 }
 
 export const wrapRootElement = ({ element }) => (

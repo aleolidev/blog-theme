@@ -108,4 +108,16 @@ const cookies = {
     
 }
 
-module.exports = { breadcrumb, cardelement, articleelement, navbar, footer, cookies }
+const toc = {
+    title: {
+        'en-US': 'Table of contents',
+        'en-AU': 'Table of contents',
+        'en-GB': 'Table of contents',
+        'en-CA': 'Table of contents',
+        'de-DE': 'Index',
+        'fr-FR': 'Indice',
+        'es-ES': 'Índice'
+    }
+}
+
+module.exports = { breadcrumb, cardelement, articleelement, navbar, footer, cookies, toc }

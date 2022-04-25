@@ -3,9 +3,11 @@ import styled from "styled-components"
 import { A, H2 } from "../elements"
 import { HiMenu } from "react-icons/hi"
 import { slugify } from "../utils/utils"
+import { useMediaQuery } from "@material-ui/core"
+import { toc } from "../translations/translations"
 
 
-export const ToC = ({ headings, isMobile }) => {
+export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [contentHeight, setContentHeight] = useState('200em')
@@ -14,6 +16,8 @@ export const ToC = ({ headings, isMobile }) => {
     const [reset, setReset] = useState(false);
     
     const contentRef = useRef();
+
+    const isTablet = useMediaQuery('(max-width: 65rem)')
 
     useEffect(() => {
         setSizeSet(true)
@@ -44,41 +48,52 @@ export const ToC = ({ headings, isMobile }) => {
         }
     }, [])
 
-    return (
-        <Toc contentHeight={ contentHeight } contentWidth={ contentWidth } sizeSet={ sizeSet }>
-            <TitleWrapper onClick={() => (isMobile ? setIsOpen(current => !current) : null)}>
-                <H2>Table of contents</H2>
-                { isMobile ? <HiMenu /> : null }
-            </TitleWrapper>
-            <ContentWrapper className={ isOpen ? "container show" : "container" }>
-                <InnerScroll ref={ contentRef }>
-                {headings.map(heading => {
-                    if (heading.depth > 4) {
-                        return (null);
-                    }
+    
+    console.log('headings:', headings, '\nisTablet:', isTablet, '\nshowOnlyOnTablet:', showOnlyOnTablet)
 
-                    return (
-                    <ToCElement key={heading.value}>
-                        <A color="main1" hoverColor="main2" 
-                            href={`#${
-                                // heading.value.replaceAll(/\s+/g, "-")
-                                //     .replaceAll(",", "")
-                                //     .replaceAll(".", "")
-                                //     .replaceAll("'", "")
-                                //     .toLowerCase()
-                                //     .normalize("NFD")
-                                //     .replace(/[\u0300-\u036f]/g, "")
-                                slugify(heading.value)
-                            }`}
-                        >
-                        {heading.value}
-                        </A>
-                    </ToCElement>
-                    )
-                })}
-                </InnerScroll>
-            </ContentWrapper>
-        </Toc>
+    return (
+        <>
+            { 
+                ((isTablet && showOnlyOnTablet && headings && headings.length > 0) || (!isTablet && !showOnlyOnTablet)) 
+                ?
+                <Toc contentHeight={ contentHeight } contentWidth={ contentWidth } sizeSet={ sizeSet }>
+                    <TitleWrapper onClick={() => (isMobile ? setIsOpen(current => !current) : null)}>
+                        <H2>{ toc.title[lang] }</H2>
+                        { isMobile ? <HiMenu /> : null }
+                    </TitleWrapper>
+                    <ContentWrapper className={ isOpen ? "container show" : "container" }>
+                        <InnerScroll ref={ contentRef }>
+                        {headings.map(heading => {
+                            if (heading.depth > 4) {
+                                return (null);
+                            }
+        
+                            return (
+                            <ToCElement key={heading.value}>
+                                <A color="main1" hoverColor="main2" 
+                                    href={`#${
+                                        // heading.value.replaceAll(/\s+/g, "-")
+                                        //     .replaceAll(",", "")
+                                        //     .replaceAll(".", "")
+                                        //     .replaceAll("'", "")
+                                        //     .toLowerCase()
+                                        //     .normalize("NFD")
+                                        //     .replace(/[\u0300-\u036f]/g, "")
+                                        slugify(heading.value)
+                                    }`}
+                                >
+                                {heading.value}
+                                </A>
+                            </ToCElement>
+                            )
+                        })}
+                        </InnerScroll>
+                    </ContentWrapper>
+                </Toc>
+                :
+                null
+            }
+        </>
     )
 }
 
@@ -87,23 +102,24 @@ export const ToC = ({ headings, isMobile }) => {
 const Toc = styled.div`  
     grid-column: 11 / span 3;
     grid-row: 4 / span 1;
-    // height: auto;
-    // width: auto;
     overflow: hidden;
     position: relative;
     margin: .5em 4rem 0 0rem;
     padding: ${props => 
         `${props.theme.spacings.xLarge} 0`};
     z-index: 10;
-        
+    
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        grid-column: 10 / span 4; 
+    }
+
     @media ${props => props.theme.breakpoints.tablet} {
         display: inline-block;
         grid-column: 1 / span 8;
         padding: 1.25rem 1.5rem;
-        margin: -.5em 0;
+        margin: 2em 0 0 0;
         border: 1px solid ${props => props.theme.colors.gray3};
         border-radius: .5em;
-        // width: 100%;
         
         .container {
             display: ${props => props.sizeSet ? 'block' : 'none'};

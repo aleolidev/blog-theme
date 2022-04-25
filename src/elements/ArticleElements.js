@@ -89,13 +89,35 @@ export const ArticleWrapper = styled.main`
         text-decoration: line-through;
     }
 
-    blockquoute p {
+    blockquote {
+        padding: .65em 1.75em 0 1.75em;
+        border-left: 4px solid ${props => props.theme.colors.main1};
+        margin: 2.5em 0;
+    }
+
+    blockquote:before {
+        color: ${props => props.theme.colors.gray2};
+        content: open-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+
+    blockquote:after {
+        color: ${props => props.theme.colors.gray2};
+        content: close-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-left: 0.25em;
+        vertical-align: -0.6em;
+    }
+
+    blockquote p {
+        display: inline;
         font-style: italic;
-        font-size: 1.5rem;
-        line-height: 2.125rem;
-        text-align: center;
-        max-width: 36rem;
-        margin: 3rem auto;
+        font-size: 1.15rem;
+        margin: 0.2em 0 0 0;
     }
 
     ul,
@@ -110,9 +132,9 @@ export const ArticleWrapper = styled.main`
 
     pre {
         overflow-x: auto;
-        padding: 0.5em 0.5rem;
+        padding: 0.5em 0.5em 0.5em 1.5em;
         background-color: ${props => props.theme.colors.dark1};
-        border-radius: .5em;
+        border-radius: 0 .5em .5em 0;
         margin: 1em 0;
         border-left: 4px solid ${props => props.theme.colors.main1};
     }
@@ -122,7 +144,13 @@ export const ArticleWrapper = styled.main`
         font-size: 1rem;
         line-height: 1.875rem;
         color: ${props => props.theme.colors.light1};
-        padding: 0.25em 0.5rem;
+        background-color: ${props => props.theme.colors.dark1};
+        border-radius: .5em;
+        padding: 0.5em;
+    }
+
+    pre code {
+        padding: 0;
     }
 
     hr {
@@ -156,6 +184,10 @@ export const ArticleWrapper = styled.main`
     td {
         text-align: left;
         padding: 0.5rem;
+    }
+
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        grid-column: 2 / span 8; 
     }
 
     @media ${props => props.theme.breakpoints.tablet} {

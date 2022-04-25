@@ -18,6 +18,7 @@ const theme = {
     breakpoints: {
         mobile: "only screen and (max-width: 50rem)",
         tablet: "only screen and (max-width: 65rem)",
+        smallDesktop: "only screen and (max-width: 75rem)",
     },
     spacings: {
         xxSmall: ".25rem",

@@ -11,8 +11,6 @@ const SingleArticle = ({pageContext, data, location }) => {
     const headings = data.mdx.headings;
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
 
-    console.log(headings)
-
     const isTablet = useMediaQuery('(max-width: 65rem)', { noSsr: true })
     const isMobile = useMediaQuery('(max-width: 50rem)', { noSsr: true })
 
@@ -32,6 +30,8 @@ const SingleArticle = ({pageContext, data, location }) => {
         return crumb;
     })
 
+    console.log(JSON.stringify(headings));
+
     return (
         <Container>
             <Seo
@@ -50,7 +50,7 @@ const SingleArticle = ({pageContext, data, location }) => {
             { 
                 (headings !== null && headings !== undefined && headings.length > 0 && !isTablet) 
                 ?
-                    <ToC headings={headings} isMobile={false} />
+                    <ToC headings={headings} isMobile={false} lang={ lang } />
                 : 
                     <></>
             }
@@ -65,14 +65,7 @@ const SingleArticle = ({pageContext, data, location }) => {
                 >
                     {data.mdx.frontmatter.title}
                 </H1>
-                { 
-                    (headings !== null && headings !== undefined && headings.length > 0 && isTablet) 
-                    ?
-                        <ToC headings={headings} isMobile={true} />
-                    : 
-                        <></>
-                }
-                <MDXRenderer>
+                <MDXRenderer headings={headings} lang={lang}>
                     {data.mdx.body}
                 </MDXRenderer>
             </Article>

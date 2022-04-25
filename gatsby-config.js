@@ -96,7 +96,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-page-progress",
       options: {
-        includePaths: [{ regex: "^\/.+\/.+\/.+" }], // TODO: Include manual paths
+        includePaths: [{ regex: "^\/.+\/.+" }], // TODO: Include manual paths
         height: 5,
         prependToBody: false,
         color: `${theme.colors.main1}`,
@@ -112,8 +112,6 @@ module.exports = {
         }
       }
     },
-    `gatsby-plugin-styled-components`,
-    `gatsby-plugin-material-ui`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`, 
     `gatsby-transformer-sharp`,
@@ -140,6 +138,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-emotion`,
     `gatsby-plugin-smoothscroll`,
     {
         resolve: `gatsby-transformer-remark`,
@@ -163,15 +162,17 @@ module.exports = {
               variants: [`400`, `400i`, `700`, `700i`],
             },
           ]
+          // {
+          //   family: `Roboto Mono`,
+          // },
+          // {
+          //   family: `Muli`,
+          //   variants: [`400`, `400i`, `700`, `700i`]
+          // },
         },
       },
     },
-    {
-      resolve: 'gatsby-plugin-i18n',
-      options: {
-        langKeyDefault: 'en-US',
-        useLangKeyLayout: false
-      }
-  },
-  ],
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-material-ui`,
+  ]
 }
