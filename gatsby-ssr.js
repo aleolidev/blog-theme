@@ -2,7 +2,7 @@ import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import Theme from "./src/themes/theme";
-import { Table } from "./src/components";
+import { Table, ToC } from "./src/components";
 
 const GlobalStyles = createGlobalStyle`
     * {
@@ -15,12 +15,12 @@ const GlobalStyles = createGlobalStyle`
         scroll-behavior: smooth;
         font-family: ${props => props.theme.fonts.main};
         height: 100%;
-        background-color: ${props =>  props.theme.colors.light1};
     }
 `
 
 const components = {
     table: Table,
+    ToC,
 }
 
 export const wrapRootElement = ({ element }) => (
