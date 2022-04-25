@@ -11,6 +11,8 @@ const SingleArticle = ({pageContext, data, location }) => {
     const headings = data.mdx.headings;
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
 
+    console.log(headings)
+
     const isTablet = useMediaQuery('(max-width: 65rem)', { noSsr: true })
     const isMobile = useMediaQuery('(max-width: 50rem)', { noSsr: true })
 

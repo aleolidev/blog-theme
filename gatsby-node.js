@@ -1,3 +1,4 @@
+const { slugify } = require("./src/utils/utils")
 
 exports.createPages = async ({ actions, graphql }) => {
     const langs = [
@@ -75,6 +76,7 @@ exports.createPages = async ({ actions, graphql }) => {
     
         dedupedCategories.forEach(category => {
     
+            const prettyCategory = slugify(category)
             const categoryIds = data.allMdx.edges.filter(({ node }) => {
                 return node.frontmatter.category.includes(category)
             }).map(({ node }) => node.id)
@@ -83,7 +85,7 @@ exports.createPages = async ({ actions, graphql }) => {
     
             Array.from({ length: numCategoryPages }).forEach((_, i) => {
                 actions.createPage({
-                    path: i === 0 ? `${langs[lang]}/${category}` : `${langs[lang]}/${category}/${i + 1}`,
+                    path: i === 0 ? `${langs[lang]}/${prettyCategory}` : `${langs[lang]}/${prettyCategory}/${i + 1}`,
                     component: require.resolve("./src/templates/singleCategory.js"),
                     context: {
                         lang: langs[lang],
@@ -103,10 +105,11 @@ exports.createPages = async ({ actions, graphql }) => {
         data.allMdx.edges.forEach(edge => {
             const slug = edge.node.frontmatter.slug
             const category = edge.node.frontmatter.category
+            const prettyCategory = slugify(category)
             const id = edge.node.id
     
             actions.createPage({
-                path: `${langs[lang]}/${category}/${slug}`,
+                path: `${langs[lang]}/${prettyCategory}/${slug}`,
                 component: require.resolve(`./src/templates/singleArticle.js`),
                 context: { 
                     lang: langs[lang],

@@ -77,4 +77,35 @@ const footer = {
     
 }
 
-module.exports = { breadcrumb, cardelement, articleelement, navbar, footer }
+const cookies = {
+    text: {
+        'en-US': 'We use cookies!',
+        'en-AU': 'We use cookies!',
+        'en-GB': 'We use cookies!',
+        'en-CA': 'We use cookies!',
+        'de-DE': 'Wir verwenden Cookies!',
+        'fr-FR': 'Nous utilisons des cookies !',
+        'es-ES': '¡Usamos cookies!'
+    },
+    accept: {
+        'en-US': 'Accept',
+        'en-AU': 'Accept',
+        'en-GB': 'Accept',
+        'en-CA': 'Accept',
+        'de-DE': 'Annehmen',
+        'fr-FR': 'Accepter',
+        'es-ES': 'Aceptar'
+    },
+    decline: {
+        'en-US': 'Decline',
+        'en-AU': 'Decline',
+        'en-GB': 'Decline',
+        'en-CA': 'Decline',
+        'de-DE': 'Ablehnen',
+        'fr-FR': 'Déclin',
+        'es-ES': 'Rechazar'
+    }
+    
+}
+
+module.exports = { breadcrumb, cardelement, articleelement, navbar, footer, cookies }

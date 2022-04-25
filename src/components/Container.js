@@ -18,7 +18,7 @@ export const Container = ({ children }) => {
             <Nav lang={ lang }/>
             { children }
             <Footer lang={ lang }/>
-            <Cookies theme={ theme }/>
+            <Cookies theme={ theme } lang={ lang }/>
         </ContainerWrapper>
     )
 }

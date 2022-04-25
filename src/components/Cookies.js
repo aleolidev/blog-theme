@@ -1,12 +1,13 @@
 import React from "react"
 import CookieConsent from "react-cookie-consent";
+import { cookies } from "../translations/translations";
 
-export const Cookies = ({ theme }) => {
+export const Cookies = ({ theme, lang }) => {
     return (
         <CookieConsent
             location="bottom"
-            buttonText="Accept"
-            declineButtonText="Decline"
+            buttonText={ cookies.accept[lang] }
+            declineButtonText={ cookies.decline[lang] }
             cookieName="gatsby-gdpr-google-analytics"
             enableDeclineButton
             style={{
@@ -45,8 +46,7 @@ export const Cookies = ({ theme }) => {
                 textDecoration: 'none',
             }}
         >
-            {/* TODO: Change cookies text */}
-            We use cookies! 
+            { cookies.text[lang] }
         </CookieConsent> 
     )
 }

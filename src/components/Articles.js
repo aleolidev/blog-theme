@@ -4,6 +4,7 @@ import React from "react"
 import styled from "styled-components"
 import { A } from "../elements"
 import { articleelement } from "../translations/translations"
+import { slugify } from "../utils/utils"
 
 export const Articles = ({ articles, lang }) => {
     const isMobile = useMediaQuery('(max-width: 50rem)')
@@ -13,11 +14,12 @@ export const Articles = ({ articles, lang }) => {
             {articles.map(({ node }) => {    
             const image = node.frontmatter.featureImage.childImageSharp.gatsbyImageData;
             const category = node.frontmatter.category
+            const prettyCategory = slugify(category)
 
             return (
                 <ArticleWrapper key={ node.frontmatter.title }>
                     <ImageWrapper>
-                        <A href={`/${lang}/${category}/${node.frontmatter.slug}`}>
+                        <A href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`}>
                             <GatsbyImage 
                                 image={ image ? image : null }
                                 fadeIn={false} 
@@ -28,7 +30,7 @@ export const Articles = ({ articles, lang }) => {
                     </ImageWrapper>
                     <TitleWrapper>
                         <A 
-                            href={`/${lang}/${category}/${node.frontmatter.slug}`} 
+                            href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`} 
                             fontSize={isMobile ? '1.2em' : '1.5em'} 
                             fontWeight='700'
                             hoverColor="main1"
@@ -45,10 +47,11 @@ export const Articles = ({ articles, lang }) => {
                             </ExcerptWrapper>
                             <ReadMoreWrapper>
                                 <A 
-                                    href={`/${lang}/${category}/${node.frontmatter.slug}`} 
+                                    href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`} 
                                     fontSize='.8em' 
                                     fontWeight='700'
                                     color="main1"
+                                    textTransform="uppercase"
                                 >
                                     { articleelement.read_more[lang] } »
                                 </A>
@@ -99,7 +102,7 @@ const TitleWrapper = styled.div`
 
 const PublicationWrapper = styled.div`
     font-size: 0.8em;
-    margin: 2rem 0 0.5rem 0;
+    margin: 1.5rem 0 0.5rem 0;
     color: ${props => props.theme.colors.dark3};
     text-transform: uppercase;
     font-weight: 700;

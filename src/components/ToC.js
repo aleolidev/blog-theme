@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { A, H2 } from "../elements"
 import { HiMenu } from "react-icons/hi"
+import { slugify } from "../utils/utils"
 
 
 export const ToC = ({ headings, isMobile }) => {
@@ -59,7 +60,16 @@ export const ToC = ({ headings, isMobile }) => {
                     return (
                     <ToCElement key={heading.value}>
                         <A color="main1" hoverColor="main2" 
-                            href={`#${heading.value.replace(/\s+/g, "-").toLowerCase()}`}
+                            href={`#${
+                                // heading.value.replaceAll(/\s+/g, "-")
+                                //     .replaceAll(",", "")
+                                //     .replaceAll(".", "")
+                                //     .replaceAll("'", "")
+                                //     .toLowerCase()
+                                //     .normalize("NFD")
+                                //     .replace(/[\u0300-\u036f]/g, "")
+                                slugify(heading.value)
+                            }`}
                         >
                         {heading.value}
                         </A>

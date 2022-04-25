@@ -3,15 +3,17 @@ import { graphql } from "gatsby"
 import { Articles, Container, Content, Pagination, Seo } from "../components"
 import { H1 } from "../elements"
 import theme from "../themes/theme"
+import { slugify } from "../utils/utils"
 
 const SingleCategory = ({pageContext, data}) => {
     const articles = data.allMdx.edges
 
     const { currentPage, numPages, category, lang } = pageContext
+    const prettyCategory = slugify(category)
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
-    const prevPage = currentPage - 1 === 1 ? `/${category}` : `/${category}/${currentPage - 1}`
-    const nextPage = `/${category}/${currentPage + 1}`
+    const prevPage = currentPage - 1 === 1 ? `/${prettyCategory}` : `/${prettyCategory}/${currentPage - 1}`
+    const nextPage = `/${prettyCategory}/${currentPage + 1}`
 
     let title = pageContext.category.replaceAll('-', ' ')
     title = title.charAt(0).toUpperCase() + title.slice(1) // Capitalize

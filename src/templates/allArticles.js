@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import { Articles, Column, Container, Content, ContentCard, FeatureArticle, Grid, Pagination, Seo } from "../components"
 import theme from "../themes/theme"
 import { useMediaQuery } from "@material-ui/core"
+import { slugify } from "../utils/utils"
 
 const AllArticles = ({ pageContext, data }) => {
     const { currentPage, numPages, lang } = pageContext
@@ -16,7 +17,7 @@ const AllArticles = ({ pageContext, data }) => {
     
     const featuredArticle = articles[0]
     const featuredImage = featuredArticle.node.frontmatter.featureImage.childImageSharp.gatsbyImageData;
-    const featuredCategory = featuredArticle.node.frontmatter.category
+    const featuredCategory = slugify(featuredArticle.node.frontmatter.category)
     const featuredSlug = featuredArticle.node.frontmatter.slug
     
     const title = "Main page"
@@ -34,11 +35,12 @@ const AllArticles = ({ pageContext, data }) => {
                 <Content mobilePadding={'0'} hideBanner={ true } tabletGridColumn={'1 / span 8'}>
                     {articles.map((article, index) => {
                         const category = article.node.frontmatter.category
+                        const prettyCategory = slugify(category)
                         return (
                             <FeatureArticle 
                                 title={ article.node.frontmatter.title } 
                                 image={ article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData } 
-                                href={ `/${lang}/${category}/${article.node.frontmatter.slug}/` }
+                                href={ `/${lang}/${prettyCategory}/${article.node.frontmatter.slug}/` }
                                 gridRow={ () => (`${1 + (index * 2)} / span 2`) } 
                             />
                         )
@@ -65,6 +67,7 @@ const AllArticles = ({ pageContext, data }) => {
                                     {articles.map((article, index) => {
                                         if (index > 0 && index < 4) {
                                             const category = article.node.frontmatter.category
+                                            const prettyCategory = slugify(category)
                                             return (
                                                 <Column style={{margin: '1em 0'}}>
                                                     <ContentCard 
@@ -74,7 +77,7 @@ const AllArticles = ({ pageContext, data }) => {
                                                         image={article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData}
                                                         slug={article.node.frontmatter.slug}
                                                         lang={lang}
-                                                        category={category}
+                                                        category={prettyCategory}
                                                     />
                                                 </Column>
                                             )

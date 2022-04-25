@@ -6,6 +6,7 @@ import { footer } from "../translations/translations"
 import styled from "styled-components"
 import { useMediaQuery } from "@material-ui/core"
 import langs from "../translations/langs"
+import { slugify } from "../utils/utils"
 
 export const Footer = ({ lang }) => {
     
@@ -84,6 +85,7 @@ export const Footer = ({ lang }) => {
             >
                 { 
                     Object.keys(categoryData).map((category, i) => {
+                        const prettyCategory = slugify(category);
                         let prettyName = category.replaceAll('-', ' ');
                         prettyName = prettyName.charAt(0).toUpperCase() + prettyName.slice(1) // Capitalize
                         
@@ -98,7 +100,7 @@ export const Footer = ({ lang }) => {
 
                         return (
                             <Column justifyContent={"start"} specialMargin={specialMargin}>
-                                <A href={`/${lang}/${category}`} 
+                                <A href={`/${lang}/${prettyCategory}`} 
                                     color="light1" 
                                     fontSize={'0.875em'} 
                                     fontWeight={700} 
@@ -111,7 +113,7 @@ export const Footer = ({ lang }) => {
                                 {
                                     Object.keys(categoryData[category]).map((article) => {
                                         return (
-                                            <A href={`/${lang}/${category}/${categoryData[category][article].slug}`} 
+                                            <A href={`/${lang}/${prettyCategory}/${categoryData[category][article].slug}`} 
                                                 color="gray2" 
                                                 fontSize={'0.875em'} 
                                                 fontWeight={400}
