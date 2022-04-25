@@ -120,14 +120,8 @@ export const ArticleWrapper = styled.main`
         margin: 0.2em 0 0 0;
     }
 
-    ul,
-    ol {
-        color: ${props => props.theme.colors.dark2};
-        margin: 1rem 0 1rem 2rem;
-    }
-
     li {
-        margin: 0.25rem 0;
+        margin: 0.65rem 0;
     }
 
     pre {

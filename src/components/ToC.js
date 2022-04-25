@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { A, H2 } from "../elements"
 import { HiMenu } from "react-icons/hi"
-import { slugify } from "../utils/utils"
+import { nestify, slugify } from "../utils/utils"
 import { useMediaQuery } from "@material-ui/core"
 import { toc } from "../translations/translations"
 
@@ -14,10 +14,52 @@ export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
     const [contentWidth, setContentWidth] = useState('200em')
     const [sizeSet, setSizeSet] = useState(false);
     const [reset, setReset] = useState(false);
-    
+ 
     const contentRef = useRef();
-
+    
     const isTablet = useMediaQuery('(max-width: 65rem)')
+    
+    const filterHeadings = (obj, minDepth, maxDepth) => {
+        const filteredObj = JSON.parse(JSON.stringify(obj)) // In-depth copy
+        
+        return filteredObj.filter((item) => {
+            if (item.depth >= minDepth && item.depth <= maxDepth)
+            return item;
+        })
+    }
+    
+    const minHeading = 2;
+    const maxHeading = 3;
+    const filteredHeadings = filterHeadings(headings, minHeading, maxHeading)
+    const nestedHeadings = nestify(filteredHeadings)
+
+    const getNestedList = (obj, isFirst) => {
+        console.log(obj)
+
+        if (Object.keys(obj).length === 0) return null;
+
+        return (
+            <OrderedList isFirst={isFirst}>
+            {
+                Object.keys(obj).map(children => {
+                    return (<>
+                        <ListItem>
+                            
+                            <A color="main1" hoverColor="main2" 
+                                href={`#${
+                                    slugify(obj[children].value)
+                                }`}
+                            >
+                                { obj[children].value }
+                            </A>
+                        </ListItem>
+                        { getNestedList(obj[children].childrens, false) }
+                    </>)
+                })
+            }
+            </OrderedList>
+        )
+    }
 
     useEffect(() => {
         setSizeSet(true)
@@ -48,9 +90,6 @@ export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
         }
     }, [])
 
-    
-    console.log('headings:', headings, '\nisTablet:', isTablet, '\nshowOnlyOnTablet:', showOnlyOnTablet)
-
     return (
         <>
             { 
@@ -62,32 +101,32 @@ export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
                         { isMobile ? <HiMenu /> : null }
                     </TitleWrapper>
                     <ContentWrapper className={ isOpen ? "container show" : "container" }>
-                        <InnerScroll ref={ contentRef }>
+                        {
+                            getNestedList(nestedHeadings, true)
+                        }
+                        {/* <OrderedList ref={ contentRef }>
                         {headings.map(heading => {
-                            if (heading.depth > 4) {
+                            const startingDepth = 2;
+
+                            if ( heading.depth < startingDepth || heading.depth > 4) {
                                 return (null);
                             }
-        
+
+                            const inset = `${heading.depth - startingDepth}em`
+
                             return (
-                            <ToCElement key={heading.value}>
+                            <ListItem key={heading.value} inset={inset}>
                                 <A color="main1" hoverColor="main2" 
                                     href={`#${
-                                        // heading.value.replaceAll(/\s+/g, "-")
-                                        //     .replaceAll(",", "")
-                                        //     .replaceAll(".", "")
-                                        //     .replaceAll("'", "")
-                                        //     .toLowerCase()
-                                        //     .normalize("NFD")
-                                        //     .replace(/[\u0300-\u036f]/g, "")
                                         slugify(heading.value)
                                     }`}
                                 >
                                 {heading.value}
                                 </A>
-                            </ToCElement>
+                            </ListItem>
                             )
                         })}
-                        </InnerScroll>
+                        </OrderedList> */}
                     </ContentWrapper>
                 </Toc>
                 :
@@ -161,15 +200,13 @@ const TitleWrapper = styled.div`
     }
 `
 
-const ToCElement = styled.li`
-      padding: .5em 0;
+const ListItem = styled.li`
+    // padding: .25em 0 .25em ${props => props.inset ? props.inset : 0};
+    margin: 0.65rem 0;
 `
 
-const InnerScroll = styled.ul`
-  scrollbar-width: thin;
-  scrollbar-color: #367ee9 rgba(48, 113, 209, 0.3);
-  list-style-type: none;
-  overflow: hidden auto;
-  margin: 0 !important;
-  padding: 0;
+const OrderedList = styled.ol`
+    list-style-type: decimal;
+    list-style-position: ${props => props.isFirst ? 'inside' : 'outside'};
+    padding: ${props => props.isFirst ? '0' : null};
 `

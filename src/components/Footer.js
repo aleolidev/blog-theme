@@ -109,7 +109,7 @@ export const Footer = ({ lang }) => {
                                 >
                                     {prettyName}
                                 </A>
-                                <HorizontalRule margin={".55em 0 .6em 0"}/>
+                                <HorizontalRule margin={".55em 0 .4em 0"}/>
                                 {
                                     Object.keys(categoryData[category]).map((article) => {
                                         return (
@@ -118,7 +118,7 @@ export const Footer = ({ lang }) => {
                                                 fontSize={'0.875em'} 
                                                 fontWeight={400}
                                                 mobileTextAlign="center"
-                                                margin=".55em 0 0 0"
+                                                margin="1em 0 0 0"
                                             >
                                                 { categoryData[category][article].title }
                                             </A>

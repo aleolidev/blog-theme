@@ -30,8 +30,6 @@ const SingleArticle = ({pageContext, data, location }) => {
         return crumb;
     })
 
-    console.log(JSON.stringify(headings));
-
     return (
         <Container>
             <Seo

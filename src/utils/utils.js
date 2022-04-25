@@ -44,4 +44,57 @@ const slugify = (text) => {
         .replace(/-+$/, '')      // Trim - from end of text
 }
 
-module.exports = { slugify }
+const nestify = (obj) => {
+    const minDepth = Math.min.apply(Math, obj.map(item => item.depth))
+    let normalizedObj = JSON.parse(JSON.stringify(obj)) // Create a deep copy
+    
+    normalizedObj.map((item) => {
+        item.depth -= minDepth
+        return item
+    })
+    
+    let nested = []
+    let lastIndex = []
+    let currentDepth = 0
+
+    const getItem = (arrIndex) => {
+        let item = nested
+        for(let i in arrIndex) {
+            item = item[arrIndex[i]].childrens
+        }
+        return item
+    }
+
+    for(let i in normalizedObj) {
+        const { value, depth } = normalizedObj[i]
+        let newItem = { value: value, childrens: [] }
+        
+        if (Object.keys(nested).length === 0){
+            nested.push(newItem)
+            lastIndex.push(currentDepth)
+        } else if (depth === 0){
+            nested.push(newItem)
+            lastIndex = lastIndex.slice(0, 1)
+            lastIndex[depth]++
+        } else if (lastIndex.length - 1 === depth) {
+            let toAppend = getItem(lastIndex.slice(0, -1))
+            toAppend.push(newItem)
+            lastIndex[depth]++
+
+        } else if (lastIndex.length - 1 < depth) { // If the current item is inside the past one
+            let toAppend = getItem(lastIndex)
+            toAppend.push(newItem)
+            lastIndex[depth] = 0
+        } else if (lastIndex.length - 1 > depth) { // If the current item is outside the past one
+            const depthDifference = depth - (lastIndex.length - 1)
+            let toAppend = getItem(lastIndex.slice(0, -(1 + depthDifference)))
+            toAppend.push(newItem)
+            lastIndex = lastIndex.slice(0, -depthDifference)
+            lastIndex[depth]++
+        }        
+    }
+
+    return nested
+}
+
+module.exports = { slugify, nestify }
