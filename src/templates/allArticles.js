@@ -129,9 +129,11 @@ export default AllArticles
 export const pageQuery = graphql`
     query AllArticlesQuery($skip: Int!, $limit: Int!, $lang: String!) {
         allMdx(
-            sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit
-            filter: {frontmatter: {lang: {eq: $lang}}}
-            ) {
+            filter: {frontmatter: {lang: {eq: $lang}}} 
+            sort: {fields: frontmatter___date, order: DESC}
+            skip: $skip
+            limit: $limit
+        ) {
             edges {
                 node {
                     frontmatter {

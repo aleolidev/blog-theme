@@ -44,7 +44,12 @@ const SingleCategory = ({pageContext, data}) => {
 
 export const query = graphql`
   query SingleCategoryQuery($ids: [String]!, $skip: Int!, $limit: Int!, $lang: String!) {
-    allMdx(filter: {id: {in: $ids}, frontmatter: {lang: {eq: $lang}}}, sort: {fields: frontmatter___date, order: DESC}, skip: $skip, limit: $limit) {
+    allMdx(
+      filter: {id: {in: $ids}, frontmatter: {lang: {eq: $lang}}} 
+      sort: {fields: frontmatter___date, order: DESC}
+      skip: $skip
+      limit: $limit
+    ) {
       edges {
         node {
           frontmatter {
