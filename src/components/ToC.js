@@ -199,12 +199,23 @@ const TitleWrapper = styled.div`
 `
 
 const ListItem = styled.li`
-    // padding: .25em 0 .25em ${props => props.inset ? props.inset : 0};
-    margin: 0.65rem 0;
+    margin: 0.4rem 0;
 `
 
 const OrderedList = styled.ol`
-    list-style-type: decimal;
-    list-style-position: ${props => props.isFirst ? 'inside' : 'outside'};
+    list-style: none;
     padding: ${props => props.isFirst ? '0' : null};
+
+    & > li:first-child {
+        counter-reset: item;
+    }
+
+    & > li {
+        counter-increment: item;
+    }
+
+    & > li:before {
+        content:counters(item, ".") ". "; 
+    }
+
 `

@@ -32,6 +32,13 @@ exports.createPages = async ({ actions, graphql }) => {
                         frontmatter {
                             category
                             slug
+                            products {
+                                description
+                                href
+                                img
+                                name
+                                stars
+                            }
                         }
                         id
                       }

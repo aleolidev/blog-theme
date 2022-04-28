@@ -30,7 +30,14 @@ export const ProductCarousel = ({ products, baseImg }) => {
                         // return product
                         return (
                             <div key={i}>
-                                <ProductCard value={i} imgSrc={baseImg} />
+                                <ProductCard 
+                                    img={ product.img }
+                                    name={ product.name }
+                                    tags={ product.tags }
+                                    stars={ product.stars }
+                                    description={ product.description }
+                                    buyHref={ product.href }
+                                />
                             </div>
                         )
                     })

@@ -1,24 +1,24 @@
-import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react'
+import { graphql, useStaticQuery } from "gatsby"
+import { GatsbyImage, StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import Stars from './Stars';
 
-const ProductCard = props => {
+const ProductCard = ({ img, name, tags, stars, description, buyHref }) => {
+  
+    const srcImg = `../images/${img}`
     return (
-        <>
-          <Card style={{ width: "inherit" }}>
-            <GatsbyImage image={props.imgSrc} fadeIn={false} alt="" />
+        <Card style={{ width: "inherit" }}>
+            <StaticImage src={ srcImg }/>
             <CardBody>
-              <CardTitle>Card Title {props.value}</CardTitle>
-              <Stars stars={2.5} />
-              <CardText>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
-              </CardText>
+                <CardTitle>{ name }</CardTitle>
+                <Stars stars={ stars } />
+                <CardText>
+                    { description }
+                </CardText>
             </CardBody>
-          </Card>
-        </>
-      );
+        </Card>
+    );
 }
 
 export default ProductCard
@@ -39,7 +39,7 @@ const CardTitle = styled.h5`
 `
 
 const CardText = styled.p`
-    text-align: justify;
+    line-height: 1.5rem !important;
     margin: 0 !important;
 
 `
