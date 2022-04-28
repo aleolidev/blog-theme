@@ -34,8 +34,6 @@ export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
     const nestedHeadings = nestify(filteredHeadings)
 
     const getNestedList = (obj, isFirst) => {
-        console.log(obj)
-
         if (Object.keys(obj).length === 0) return null;
 
         return (

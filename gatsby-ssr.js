@@ -5,7 +5,7 @@ import Theme from "./src/themes/theme";
 import { Table, ToC } from "./src/components";
 
 const GlobalStyles = createGlobalStyle`
-    *:not(ol) {
+    *:not(ol):not(ul) {
         box-sizing: border-box;
         margin: 0;
         padding: 0;

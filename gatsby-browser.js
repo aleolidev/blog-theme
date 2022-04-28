@@ -2,10 +2,10 @@ import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import Theme from "./src/themes/theme";
-import { Table, ToC } from "./src/components";
+import { Table, ToC, ProductCarousel } from "./src/components";
 
 const GlobalStyles = createGlobalStyle`
-    *:not(ol) {
+    *:not(ol):not(ul) {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
 const components = {
     table: Table,
     ToC,
+    ProductCarousel,
 }
 
 export const wrapRootElement = ({ element }) => (

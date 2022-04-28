@@ -63,7 +63,7 @@ const SingleArticle = ({pageContext, data, location }) => {
                 >
                     {data.mdx.frontmatter.title}
                 </H1>
-                <MDXRenderer headings={headings} lang={lang}>
+                <MDXRenderer headings={headings} lang={lang} img={ featureImage }>
                     {data.mdx.body}
                 </MDXRenderer>
             </Article>

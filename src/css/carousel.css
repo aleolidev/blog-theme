@@ -1,0 +1,23 @@
+.slick-list {
+    margin: 2.5em 0;
+}
+
+.slick-prev,
+.slick-next {
+    display: flex !important;
+    width: unset;
+    height: unset;
+    font-size: unset;
+    line-height: unset;
+    z-index: 1;
+    border-radius: 100%;
+    box-shadow: 0 5px 10px rgb(30 30 31 / 30%);
+    justify-content: center;
+    align-items: center;
+}
+
+.slick-prev::before,
+.slick-next::before {
+    content: none;
+}
+  
