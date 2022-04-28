@@ -14,6 +14,7 @@ const theme = {
         gray3: "hsl(227, 2%, 86%)",
         light1: "hsl(0, 0%, 97%)",
         light2: "hsl(0, 0%, 99%)",
+        starColor: "hsl(38, 95%, 55%)",
     },
     breakpoints: {
         mobile: "only screen and (max-width: 50rem)",

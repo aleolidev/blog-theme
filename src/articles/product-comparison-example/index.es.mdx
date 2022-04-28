@@ -15,13 +15,19 @@ Los portátiles han recorrido un largo camino en los últimos años y ahora hay 
 
 <ToC isMobile={true} showOnlyOnTablet={true} headings={props.headings} lang={props.lang} />
 
-<ProductCarousel baseImg={props.img} products={[{name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}, {name: "Prueba"}]} />
 
-| Number | Title                                    | Title                                    | Year |
-| :----- | :--------------------------------------- | :--------------------------------------- | ---: |
-| 1      | Harry Potter and the Philosopher’s Stone | Harry Potter and the Philosopher’s Stone | 2001 |
-| 2      | Harry Potter and the Chamber of Secrets  | Harry Potter and the Chamber of Secrets  | 2002 |
-| 3      | Harry Potter and the Prisoner of Azkaban | Harry Potter and the Prisoner of Azkaban | 2004 |
+export const products = [
+    {name: "Prueba"},
+    {name: "Prueba"},
+    {name: "Prueba"},
+    {name: "Prueba"},
+    {name: "Prueba"},
+    {name: "Prueba"},
+    {name: "Prueba"},
+    {name: "Prueba"}
+]
+
+<ProductCarousel baseImg={props.img} products={products} />
 
 ## Principales marcas y alternativas
 

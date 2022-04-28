@@ -68,8 +68,5 @@ const CustomArrowDiv = styled.div`
 
     :hover, :focus {
         background-color: ${props => props.theme.colors.light1};
-        svg{
-            font-size: 3.75rem;
-        }
     }
 `;

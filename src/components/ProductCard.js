@@ -1,6 +1,7 @@
 import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react'
 import styled from 'styled-components';
+import Stars from './Stars';
 
 const ProductCard = props => {
     return (
@@ -9,6 +10,7 @@ const ProductCard = props => {
             <GatsbyImage image={props.imgSrc} fadeIn={false} alt="" />
             <CardBody>
               <CardTitle>Card Title {props.value}</CardTitle>
+              <Stars stars={2.5} />
               <CardText>
                 Some quick example text to build on the card title and make up the
                 bulk of the card's content.
@@ -31,12 +33,13 @@ const CardBody = styled.div`
 
 `
 
-const CardTitle = styled.h3`
-    margin: 0 !important;
+const CardTitle = styled.h5`
+    margin: .25em 0 !important;
     padding: 0;
 `
 
 const CardText = styled.p`
     text-align: justify;
+    margin: 0 !important;
 
 `

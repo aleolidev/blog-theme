@@ -16,6 +16,11 @@
     align-items: center;
 }
 
+.slick-prev:hover,
+.slick-next:hover {
+    box-shadow: 0 5px 15px rgb(30 30 31 / 45%);
+}
+
 .slick-prev::before,
 .slick-next::before {
     content: none;
