@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
         scroll-behavior: smooth;
         font-family: ${props => props.theme.fonts.main};
         height: 100%;
+        min-width: 23em;
     }
 `
 

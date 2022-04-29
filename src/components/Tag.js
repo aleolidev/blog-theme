@@ -20,6 +20,10 @@ const TagWrapper = styled.div`
     position: absolute;
     z-index: 1;
     margin-left: -.5em;
+    
+    @media ${props => props.theme.breakpoints.mobile} {  
+        margin-top: -1em;
+    }
 `
 
 const UnderTag = styled.div`

@@ -1,7 +1,7 @@
 const theme = {
     fonts: {
-        main: "Muli, sans-serif",
-        code: "Roboto Mono, monospace",
+        main: "\"Mulish\", sans-serif",
+        code: "monospace",
     },
     colors: {
         main1: "hsl(207, 95%, 40%)",
@@ -19,6 +19,7 @@ const theme = {
         amazonBuy: "hsl(36, 100%, 50%)",
     },
     breakpoints: {
+        smallMobile: "only screen and (max-width: 30rem)",
         mobile: "only screen and (max-width: 50rem)",
         tablet: "only screen and (max-width: 65rem)",
         smallDesktop: "only screen and (max-width: 75rem)",

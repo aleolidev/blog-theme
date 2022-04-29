@@ -4,12 +4,16 @@ import { ProductCarouselElement } from "../elements"
 import Slider from "react-slick"
 import ProductCard from "./ProductCard"
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs"
+import { useMediaQuery } from "@material-ui/core"
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import "../css/carousel.css";
 
 export const ProductCarousel = ({ products, lang }) => {
+    
+    const isMobile = useMediaQuery('(max-width: 50rem)')
+
     let settings = {
         dots: false,
         infinite: true,
@@ -17,34 +21,58 @@ export const ProductCarousel = ({ products, lang }) => {
         slidesToShow: 3,
         slidesToScroll: 3,
         initialSlide: 0,
+        touchMove: false,
         nextArrow: <CustomArrow isLeft={false} />,
         prevArrow: <CustomArrow isLeft={true} />,   
     }
-
     
     return (
-        <ProductCarouselElement>
-            <Slider {...settings} style={{padding: '0 .5em'}}>
-                {
-                    products.map((product, i) => {
-                        // return product
-                        return (
-                            <ProductWrapper key={i}>
-                                <ProductCard 
-                                    lang={ lang }
-                                    image={ product.image }
-                                    name={ product.name }
-                                    tags={ product.tags }
-                                    stars={ product.stars }
-                                    description={ product.description }
-                                    buyHref={ product.href }
-                                />
-                            </ProductWrapper>
-                        )
-                    })
-                }
-            </Slider>
-        </ProductCarouselElement>
+        (!isMobile)
+        ? 
+            <ProductCarouselElement>
+                <Slider {...settings} style={{padding: '0 .5em'}}>
+                    {
+                        products.map((product, i) => {
+                            // return product
+                            return (
+                                <ProductWrapper key={i}>
+                                    <ProductCard 
+                                        lang={ lang }
+                                        image={ product.image }
+                                        name={ product.name }
+                                        tags={ product.tags }
+                                        stars={ product.stars }
+                                        description={ product.description }
+                                        buyHref={ product.href }
+                                    />
+                                </ProductWrapper>
+                            )
+                        })
+                    }
+                </Slider>
+            </ProductCarouselElement>
+        :
+        <MobileWrapper>
+        {
+            products.map((product, i) => {
+                // return product
+                return (
+                    <ProductWrapper key={i}>
+                        <ProductCard 
+                            lang={ lang }
+                            image={ product.image }
+                            name={ product.name }
+                            tags={ product.tags }
+                            stars={ product.stars }
+                            description={ product.description }
+                            buyHref={ product.href }
+                            isMobile={ isMobile }
+                        />
+                    </ProductWrapper>
+                )
+            })
+        }
+        </MobileWrapper>
     )
 }
 
@@ -62,6 +90,11 @@ const CustomArrow = props => {
         </CustomArrowDiv>
     );
 }
+
+const MobileWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`
 
 const CustomArrowDiv = styled.div`
     background-color: ${props => props.theme.colors.light1};
@@ -81,4 +114,12 @@ const CustomArrowDiv = styled.div`
 
 const ProductWrapper = styled.div`
     height: 100%;
+
+    @media ${props => props.theme.breakpoints.mobile} {  
+        border-top: 1px solid ${props => props.theme.colors.gray3};
+        
+        :nth-child(1) {
+            border-top: 1px solid transparent;
+        }
+    }
 `

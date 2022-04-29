@@ -7,30 +7,56 @@ import { productcard } from '../translations/translations';
 import { GrAmazon } from "react-icons/gr"
 import Tag from './Tag';
 
-const ProductCard = ({ lang, image, name, tags, stars, description, buyHref }) => {
+const ProductCard = ({ lang, image, name, tags, stars, description, buyHref, isMobile }) => {
     return (
         <Card style={{ width: "inherit", height: "100%" }}>
             {
-                (tags !== null && tags !== undefined && tags.length > 0) &&
-                tags.map(tag => {
-                    return ( <Tag tag={tag}/> )
-                })
+                isMobile
+                ?
+                <CardBody>
+                        <ImageWrapper>
+                            {(tags !== null && tags !== undefined && tags.length > 0) &&
+                                tags.map(tag => {
+                                    return ( <Tag tag={tag}/> )
+                                }
+                            )}
+                            <a href={ buyHref } target="_blank">
+                                <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain" loading='lazy'/>
+                            </a>
+                        </ImageWrapper>
+                        <TitleWrapper>
+                            <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
+                        </TitleWrapper>
+                        <Stars stars={ stars } />
+                        <CardText>
+                            { description }
+                        </CardText>        
+                        <BuyButton text={ productcard.viewAtAmazon[lang] } href={ buyHref } icon={<GrAmazon />}  />
+                    </CardBody>
+                :
+                <>
+                    {(tags !== null && tags !== undefined && tags.length > 0) &&
+                        tags.map(tag => {
+                            return ( <Tag tag={tag}/> )
+                        }
+                    )}
+                    <ImageWrapper>
+                        <a href={ buyHref } target="_blank">
+                            <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain"/>
+                        </a>
+                    </ImageWrapper>
+                    <CardBody>
+                        <TitleWrapper>
+                            <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
+                        </TitleWrapper>
+                        <Stars stars={ stars } />
+                        <CardText>
+                            { description }
+                        </CardText>
+                    </CardBody>
+                    <BuyButton text={ productcard.viewAtAmazon[lang] } href={ buyHref } icon={<GrAmazon />}  />
+                </>
             }
-            <ImageWrapper>
-                <a href={ buyHref } target="_blank">
-                    <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain"/>
-                </a>
-            </ImageWrapper>
-            <CardBody>
-                <TitleWrapper>
-                    <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
-                </TitleWrapper>
-                <Stars stars={ stars } />
-                <CardText>
-                    { description }
-                </CardText>
-            </CardBody>
-            <BuyButton text={ productcard.viewAtAmazon[lang] } href={ buyHref } icon={<GrAmazon />}  />
         </Card>
     );
 }
@@ -42,9 +68,15 @@ const Card = styled.div`
     flex-direction: column;
     padding: 0 1.15em;
     border-right: 1px solid ${props => props.theme.colors.gray3};
+    
+    @media ${props => props.theme.breakpoints.mobile} {  
+        margin: 1.5em 0;  
+        padding: 0;
+        border-right: 1px solid transparent;
+    }
 `
 
-const CardBody = styled.div`
+const CardBody = styled.span`
 `
 
 const ImageWrapper = styled.div`
@@ -59,6 +91,20 @@ const ImageWrapper = styled.div`
         height: 10em;
         width: 100%;
     }
+
+    @media ${props => props.theme.breakpoints.mobile} {  
+        margin: 0 0 1em 2em;
+        padding: .5em 0;
+        width: auto;
+        float: right;
+    }
+
+    @media ${props => props.theme.breakpoints.smallMobile} {  
+        margin: 0 0 2em 0;
+        padding: .5em 0;
+        width: auto;
+        float: none;
+    }
 `
 
 const CardTitle = styled.a`
@@ -71,6 +117,10 @@ const CardTitle = styled.a`
 
 const TitleWrapper = styled.div`
     margin: .25em 0 .5em 0 !important;
+
+    @media ${props => props.theme.breakpoints.mobile} {  
+        margin: 0 0 .5em 0 !important;
+    }
 `
 
 const CardText = styled.p`

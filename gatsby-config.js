@@ -148,30 +148,31 @@ module.exports = {
             ],
         },
     },
-    {
-      resolve: `gatsby-plugin-webfonts`,
-      options: {
-        fonts: {
-          google: [
-            {
-              family: "Roboto Mono",
-              variants: [`400`, `400i`, `700`, `700i`],
-            },
-            {
-              family: "Muli",
-              variants: [`400`, `400i`, `700`, `700i`],
-            },
-          ]
-          // {
-          //   family: `Roboto Mono`,
-          // },
-          // {
-          //   family: `Muli`,
-          //   variants: [`400`, `400i`, `700`, `700i`]
-          // },
-        },
-      },
-    },
+    `gatsby-plugin-preload-fonts`,
+    // {
+    //   resolve: `gatsby-plugin-webfonts`,
+    //   options: {
+    //     fonts: {
+    //       google: [
+    //         // {
+    //         //   family: "Roboto Mono",
+    //         //   variants: [`400`, `400i`, `700`, `700i`],
+    //         // },
+    //         {
+    //           family: "Muli",
+    //           variants: [`400`, `400i`, `700`, `700i`],
+    //         },
+    //       ]
+    //       // {
+    //       //   family: `Roboto Mono`,
+    //       // },
+    //       // {
+    //       //   family: `Muli`,
+    //       //   variants: [`400`, `400i`, `700`, `700i`]
+    //       // },
+    //     },
+    //   },
+    // },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-material-ui`,
   ]

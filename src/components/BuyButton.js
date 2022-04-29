@@ -28,7 +28,6 @@ const ContentWrapper = styled.span`
     padding: .95em;
     font-size: 1rem;
     font-weight: 700;
-    // text-transform: uppercase;
     color: ${props => props.theme.colors.light1};
 
     svg {
@@ -47,4 +46,9 @@ const Button = styled.div`
     align-items: flex-end;
     justify-content: center;
     height: 100%;
+    width: 100%;
+
+    @media ${props => props.theme.breakpoints.mobile} {  
+        margin-top: 1.5em;
+    }
 `
