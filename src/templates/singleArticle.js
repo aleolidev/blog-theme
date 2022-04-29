@@ -10,6 +10,7 @@ const SingleArticle = ({pageContext, data, location }) => {
     const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData;
     const headings = data.mdx.headings;
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
+    const products = data.mdx.frontmatter.products
 
     const isTablet = useMediaQuery('(max-width: 65rem)', { noSsr: true })
     const isMobile = useMediaQuery('(max-width: 50rem)', { noSsr: true })
@@ -63,7 +64,7 @@ const SingleArticle = ({pageContext, data, location }) => {
                 >
                     {data.mdx.frontmatter.title}
                 </H1>
-                <MDXRenderer headings={headings} lang={lang} img={ featureImage }>
+                <MDXRenderer headings={headings} lang={lang} img={ featureImage } products={ products }>
                     {data.mdx.body}
                 </MDXRenderer>
             </Article>
@@ -90,6 +91,17 @@ export const pageQuery = graphql`
                 childImageSharp {
                     gatsbyImageData(placeholder: BLURRED)
                 }
+              }
+              products {
+                image {
+                  childImageSharp {
+                    gatsbyImageData(placeholder: BLURRED)
+                  }
+                }
+                href
+                description
+                stars
+                name
               }
             }
             headings {

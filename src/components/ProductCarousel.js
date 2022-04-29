@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { H1, ProductCarouselElement } from "../elements"
+import { ProductCarouselElement } from "../elements"
 import Slider from "react-slick"
 import ProductCard from "./ProductCard"
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs"
@@ -10,7 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/carousel.css";
 
-export const ProductCarousel = ({ products, baseImg }) => {
+export const ProductCarousel = ({ products }) => {
     let settings = {
         dots: false,
         infinite: true,
@@ -31,7 +30,7 @@ export const ProductCarousel = ({ products, baseImg }) => {
                         return (
                             <div key={i}>
                                 <ProductCard 
-                                    img={ product.img }
+                                    image={ product.image }
                                     name={ product.name }
                                     tags={ product.tags }
                                     stars={ product.stars }

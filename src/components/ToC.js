@@ -24,7 +24,8 @@ export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
         
         return filteredObj.filter((item) => {
             if (item.depth >= minDepth && item.depth <= maxDepth)
-            return item;
+                return item;
+            return null;
         })
     }
     
