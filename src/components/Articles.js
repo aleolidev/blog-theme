@@ -1,13 +1,13 @@
-import { useMediaQuery } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 import React from "react"
 import styled from "styled-components"
 import { A } from "../elements"
+import useBreakpoints from '../hooks/useBreakpoints';
 import { articleelement } from "../translations/translations"
 import { slugify } from "../utils/utils"
 
 export const Articles = ({ articles, lang }) => {
-    const isMobile = useMediaQuery('(max-width: 50rem)')
+    const breakpoints = useBreakpoints();
 
     return (
         <ArticlesWrapper>
@@ -31,7 +31,7 @@ export const Articles = ({ articles, lang }) => {
                     <TitleWrapper>
                         <A 
                             href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`} 
-                            fontSize={isMobile ? '1.2em' : '1.5em'} 
+                            fontSize={breakpoints.mobile ? '1.2em' : '1.5em'} 
                             fontWeight='700'
                             hoverColor="main1"
                             color="main2" 
@@ -40,7 +40,7 @@ export const Articles = ({ articles, lang }) => {
                         </A>
                     </TitleWrapper>
                     {
-                        !isMobile ?
+                        !breakpoints.mobile ?
                         <>
                             <ExcerptWrapper>
                                 {node.frontmatter.excerpt}

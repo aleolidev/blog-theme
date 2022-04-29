@@ -4,14 +4,13 @@ import { A, FooterWrapper, P } from "../elements"
 import { Column, Grid } from "../components"
 import { footer } from "../translations/translations"
 import styled from "styled-components"
-import { useMediaQuery } from "@material-ui/core"
 import langs from "../translations/langs"
 import { slugify } from "../utils/utils"
+import useBreakpoints from "../hooks/useBreakpoints"
 
 export const Footer = ({ lang }) => {
     
-    const isTablet = useMediaQuery('(max-width: 65rem)')
-    const isMobile = useMediaQuery('(max-width: 50rem)')
+    const breakpoints = useBreakpoints();
 
     let existingLanguages = {};
 
@@ -90,11 +89,11 @@ export const Footer = ({ lang }) => {
                         prettyName = prettyName.charAt(0).toUpperCase() + prettyName.slice(1) // Capitalize
                         
                         let specialMargin = '2.5em 0 0 0';
-                        if (isMobile && i < mobileColumns ) {
+                        if (breakpoints.mobile && i < mobileColumns ) {
                             specialMargin = '0'
-                        } else if (!isMobile && isTablet && i < tabletColumns) {
+                        } else if (!breakpoints.mobile && breakpoints.tablet && i < tabletColumns) {
                             specialMargin = '0'
-                        } else if (!isMobile && !isTablet && i < desktopColumns) {
+                        } else if (!breakpoints.mobile && !breakpoints.tablet && i < desktopColumns) {
                             specialMargin = '0'
                         }
 

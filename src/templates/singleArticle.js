@@ -2,20 +2,24 @@ import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { H1 } from "../elements"
-import { useMediaQuery } from "@material-ui/core"
 import { Container, Article, FeatureImage, Seo, Breadcrumb, ToC } from "../components"
 import { breadcrumb } from "../translations/translations"
+import { mediaQuery } from "../utils/utils"
+import theme from "../themes/theme"
+import useBreakpoints from "../hooks/useBreakpoints"
 
-const SingleArticle = ({pageContext, data, location }) => {
+const SingleArticle = ({pageContext, data, location }, props) => {
     const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData;
     const headings = data.mdx.headings;
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
     const products = data.mdx.frontmatter.products
-
-    const isTablet = useMediaQuery('(max-width: 65rem)', { noSsr: true })
-    const isMobile = useMediaQuery('(max-width: 50rem)', { noSsr: true })
+    
+    const breakpoints = useBreakpoints()
 
     let { breadcrumb: { crumbs }, lang } = pageContext
+
+    // console.log('breakpoints:', )
+    // breakpoints()
 
     crumbs = crumbs.map((crumb, i) => {
         if (i > 0) {
@@ -40,16 +44,16 @@ const SingleArticle = ({pageContext, data, location }) => {
                 lang={lang}
             />
             {
-                !isMobile 
+                !breakpoints.mobile 
                 ?
                     <FeatureImage image={ featureImage } alt={ data.mdx.frontmatter.title } />
                 :
                     <></>
             }
             { 
-                (headings !== null && headings !== undefined && headings.length > 0 && !isTablet) 
+                (headings !== null && headings !== undefined && headings.length > 0 && !breakpoints.tablet) 
                 ?
-                    <ToC headings={headings} isMobile={false} lang={ lang } />
+                    <ToC headings={headings} isMobile={false} lang={ lang } isTablet={ breakpoints.tablet } />
                 : 
                     <></>
             }
@@ -64,7 +68,7 @@ const SingleArticle = ({pageContext, data, location }) => {
                 >
                     {data.mdx.frontmatter.title}
                 </H1>
-                <MDXRenderer headings={headings} lang={lang} img={ featureImage } products={ products }>
+                <MDXRenderer headings={headings} lang={lang} img={ featureImage } products={ products } isTablet={ breakpoints.tablet }>
                     {data.mdx.body}
                 </MDXRenderer>
             </Article>

@@ -3,11 +3,11 @@ import styled from "styled-components"
 import { A, H2 } from "../elements"
 import { HiMenu } from "react-icons/hi"
 import { nestify, slugify } from "../utils/utils"
-import { useMediaQuery } from "@material-ui/core"
 import { toc } from "../translations/translations"
+import ConditionalWrapper from "./ConditionalWrapper"
 
 
-export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
+export const ToC = ({ headings, showOnlyOnTablet, lang, isMobile, isTablet }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [contentHeight, setContentHeight] = useState('200em')
@@ -16,8 +16,6 @@ export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
     const [reset, setReset] = useState(false);
  
     const contentRef = useRef();
-    
-    const isTablet = useMediaQuery('(max-width: 65rem)')
     
     const filterHeadings = (obj, minDepth, maxDepth) => {
         const filteredObj = JSON.parse(JSON.stringify(obj)) // In-depth copy
@@ -34,29 +32,36 @@ export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
     const filteredHeadings = filterHeadings(headings, minHeading, maxHeading)
     const nestedHeadings = nestify(filteredHeadings)
 
-    const getNestedList = (obj, isFirst) => {
+    const getNestedList = (obj, isFirst, indexArray) => {
         if (Object.keys(obj).length === 0) return null;
 
         return (
-            <OrderedList isFirst={isFirst}>
-            {
-                Object.keys(obj).map(children => {
-                    return (<>
-                        <ListItem>
-                            
-                            <A color="main1" hoverColor="main2" 
-                                href={`#${
-                                    slugify(obj[children].value)
-                                }`}
-                            >
-                                { obj[children].value }
-                            </A>
-                        </ListItem>
-                        { getNestedList(obj[children].childrens, false) }
-                    </>)
-                })
-            }
-            </OrderedList>
+            <ConditionalWrapper
+                condition={ !isFirst }
+                wrapper={ children => <ListItem>{ children }</ListItem> }
+            >
+                <OrderedList isFirst={isFirst}>
+                {
+                    Object.keys(obj).map((children, i) => {
+                        const newIndexArray = [...indexArray, i]
+                        const itemNumber =  newIndexArray.map(num => `${num + 1}.`).join("")
+                        return (<>
+                            <ListItem>
+                                <ItemNumber>{ itemNumber }</ItemNumber>
+                                <A color="main1" hoverColor="main2" 
+                                    href={`#${
+                                        slugify(obj[children].value)
+                                    }`}
+                                >
+                                    { obj[children].value }
+                                </A>
+                            </ListItem>
+                            { getNestedList(obj[children].childrens, false, newIndexArray) }
+                        </>)
+                    })
+                }
+                </OrderedList>
+            </ConditionalWrapper>
         )
     }
 
@@ -101,31 +106,8 @@ export const ToC = ({ headings, isMobile, showOnlyOnTablet, lang }) => {
                     </TitleWrapper>
                     <ContentWrapper className={ isOpen ? "container show" : "container" }>
                         {
-                            getNestedList(nestedHeadings, true)
+                            getNestedList(nestedHeadings, true, [])
                         }
-                        {/* <OrderedList ref={ contentRef }>
-                        {headings.map(heading => {
-                            const startingDepth = 2;
-
-                            if ( heading.depth < startingDepth || heading.depth > 4) {
-                                return (null);
-                            }
-
-                            const inset = `${heading.depth - startingDepth}em`
-
-                            return (
-                            <ListItem key={heading.value} inset={inset}>
-                                <A color="main1" hoverColor="main2" 
-                                    href={`#${
-                                        slugify(heading.value)
-                                    }`}
-                                >
-                                {heading.value}
-                                </A>
-                            </ListItem>
-                            )
-                        })}
-                        </OrderedList> */}
                     </ContentWrapper>
                 </Toc>
                 :
@@ -174,6 +156,14 @@ const Toc = styled.div`
         }
     }
 
+    @media ${props => props.theme.breakpoints.mobile} {
+        display: block;
+        position: static;
+        grid-column: auto;
+        grid-area: auto;
+        z-index: auto;
+    }
+
 `
 
 const ContentWrapper = styled.div``
@@ -203,20 +193,11 @@ const ListItem = styled.li`
     margin: 0.4rem 0;
 `
 
+const ItemNumber = styled.span`
+    margin-right: .25em;
+`
+
 const OrderedList = styled.ol`
     list-style: none;
     padding: ${props => props.isFirst ? '0' : null};
-
-    & > li:first-child {
-        counter-reset: item;
-    }
-
-    & > li {
-        counter-increment: item;
-    }
-
-    & > li:before {
-        content:counters(item, ".") ". "; 
-    }
-
 `

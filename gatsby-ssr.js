@@ -2,7 +2,7 @@ import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import Theme from "./src/themes/theme";
-import { Table, ToC } from "./src/components";
+import { Table, ToC, ProductCarousel } from "./src/components";
 
 const GlobalStyles = createGlobalStyle`
     *:not(ol):not(ul) {
@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
 
     body, html {
         scroll-behavior: smooth;
-        font-family: ${props => props.theme.fonts.main};
+        font-family: "Mulish", sans-serif;
         height: 100%;
         min-width: 23em;
     }
@@ -22,9 +22,10 @@ const GlobalStyles = createGlobalStyle`
 const components = {
     table: Table,
     ToC,
+    ProductCarousel,
 }
 
-export const wrapRootElement = ({ element }) => (
+export const wrapPageElement = ({ element }) => (
     <MDXProvider components={ components }>
         <ThemeProvider theme={ Theme }>
             <GlobalStyles />

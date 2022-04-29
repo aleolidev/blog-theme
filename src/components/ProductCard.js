@@ -20,9 +20,9 @@ const ProductCard = ({ lang, image, name, tags, stars, description, buyHref, isM
                                     return ( <Tag tag={tag}/> )
                                 }
                             )}
-                            <a href={ buyHref } target="_blank">
+                            <ImageLink href={ buyHref } target="_blank">
                                 <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain" loading='lazy'/>
-                            </a>
+                            </ImageLink>
                         </ImageWrapper>
                         <TitleWrapper>
                             <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
@@ -77,6 +77,14 @@ const Card = styled.div`
 `
 
 const CardBody = styled.span`
+`
+
+const ImageLink = styled.a`
+    height: inherit;
+
+    & > div {
+        height: inherit;
+    }
 `
 
 const ImageWrapper = styled.div`

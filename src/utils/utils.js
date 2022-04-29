@@ -97,4 +97,27 @@ const nestify = (obj) => {
     return nested
 }
 
-module.exports = { slugify, nestify }
+const debounce = (fn, ms) => {
+    let timer
+    return _ => {
+        clearTimeout(timer)
+        timer = setTimeout(_ => {
+            timer = null
+            fn.apply(this)
+        }, ms)
+    };
+}
+
+const objectMap = (obj, fn) => {
+    return Object.fromEntries(
+        Object.entries(obj).map(
+            ([k, v], i) => [k, fn(v, k, i)]
+        )
+    )
+}
+
+const mediaQuery = (request) => {
+    return window.matchMedia(request).matches;
+}
+
+module.exports = { slugify, nestify, debounce, objectMap, mediaQuery }

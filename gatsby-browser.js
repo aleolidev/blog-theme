@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
 
     body, html {
         scroll-behavior: smooth;
-        font-family: ${props => props.theme.fonts.main};
+        font-family: "Mulish", sans-serif;
         height: 100%;
         min-width: 23em;
     }
@@ -25,7 +25,7 @@ const components = {
     ProductCarousel,
 }
 
-export const wrapRootElement = ({ element }) => (
+export const wrapPageElement = ({ element }) => (
     <MDXProvider components={ components }>
         <ThemeProvider theme={ Theme }>
             <GlobalStyles />

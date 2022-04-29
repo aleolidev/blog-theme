@@ -4,7 +4,7 @@ import { Cookies, Footer, Nav } from "../components"
 import theme from "../themes/theme"
 import { useLocation } from "@reach/router"
 import langs from "../translations/langs"
-import "../css/typography.css"
+import "./layout.css"
 
 export const Container = ({ children }) => {
     const location = useLocation();

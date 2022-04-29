@@ -2,12 +2,14 @@
     font-family: "Mulish";
     src: url('../fonts/mulish.woff2');
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Mulish";
     src: url('../fonts/mulish-italic.woff2');
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -15,6 +17,7 @@
     src: url('../fonts/mulish700.woff2');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -22,4 +25,5 @@
     src: url('../fonts/mulish-700italic.woff2');
     font-weight: bold;
     font-style: italic;
+    font-display: swap;
 }

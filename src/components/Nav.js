@@ -15,7 +15,7 @@ export const Nav = ({ lang }) => {
                 <Categories href='#all-categories'>
                     { navbar.categories[lang] }
                 </Categories>
-                <LanguageWrapper href='#countries'>
+                <LanguageWrapper href='#countries' aria-label="Translations">
                     <LangIconWrapper>
                         <HiOutlineTranslate />
                     </LangIconWrapper>
@@ -42,7 +42,7 @@ const Categories = styled.a`
     font-size: 1rem;
     font-weight: 700;
     color ${props => props.theme.colors.main1};   
-    background-color: ${props => props.theme.colors.light1};
+    // background-color: ${props => props.theme.colors.light1};
     text-decoration: none;
     transition: all .25s ease;
 
@@ -58,7 +58,7 @@ const LanguageWrapper = styled.a`
     align-items: center;
     height: 100%;
     cursor: pointer;
-    background-color: ${props => props.theme.colors.light1};
+    // background-color: ${props => props.theme.colors.light1};
     transition: all .25s ease;
 
     svg {

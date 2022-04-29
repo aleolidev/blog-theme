@@ -2,8 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Articles, Column, Container, Content, ContentCard, FeatureArticle, Grid, Pagination, Seo } from "../components"
 import theme from "../themes/theme"
-import { useMediaQuery } from "@material-ui/core"
 import { slugify } from "../utils/utils"
+import useBreakpoints from "../hooks/useBreakpoints"
 
 const AllArticles = ({ pageContext, data }) => {
     const { currentPage, numPages, lang } = pageContext
@@ -24,13 +24,13 @@ const AllArticles = ({ pageContext, data }) => {
     const description = "This is the description of the main page"
     const author = "Author"
     
-    const isMobile = useMediaQuery('(max-width: 50rem)')
+    const breakpoints = useBreakpoints();
 
     return (
         <Container>
             <Seo title={ title } description={ description } author={ author } lang={lang} />
             {
-                isMobile
+                breakpoints.mobile
                 ?
                 <Content mobilePadding={'0'} hideBanner={ true } tabletGridColumn={'1 / span 8'}>
                     {articles.map((article, index) => {

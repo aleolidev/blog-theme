@@ -4,15 +4,15 @@ import { ProductCarouselElement } from "../elements"
 import Slider from "react-slick"
 import ProductCard from "./ProductCard"
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs"
-import { useMediaQuery } from "@material-ui/core"
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import "../css/carousel.css";
+import useBreakpoints from "../hooks/useBreakpoints"
 
 export const ProductCarousel = ({ products, lang }) => {
     
-    const isMobile = useMediaQuery('(max-width: 50rem)')
+    const breakpoints = useBreakpoints();
 
     let settings = {
         dots: false,
@@ -27,7 +27,7 @@ export const ProductCarousel = ({ products, lang }) => {
     }
     
     return (
-        (!isMobile)
+        (!breakpoints.mobile)
         ? 
             <ProductCarouselElement>
                 <Slider {...settings} style={{padding: '0 .5em'}}>
@@ -66,7 +66,7 @@ export const ProductCarousel = ({ products, lang }) => {
                             stars={ product.stars }
                             description={ product.description }
                             buyHref={ product.href }
-                            isMobile={ isMobile }
+                            isMobile={ breakpoints.mobile }
                         />
                     </ProductWrapper>
                 )
