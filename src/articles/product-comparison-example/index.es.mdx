@@ -11,51 +11,43 @@ products: [
     {
         image: asus-l210.jpeg,
         name: "Asus L210",
-        tags: [],
+        tags: ["Calidad/precio"],
         stars: 4.5,
-        description: "Este portátil ASUS de 11,6 pulgadas es ultradelgado y cuenta con un procesador Intel Celeron N4020, 4 GB de RAM y 64 GB de almacenamiento eMMC",
+        description: "Este portátil está dirigido a estudiantes y a quienes buscan una computadora liviana y asequible.",
         href: "https://www.amazon.com/-/es/ASUS-pulgadas-Procesador-almacenamiento-L210MA-DB02/dp/B09HX29TPY/ref=zg_bs_565108_1/147-1202366-7708134?pd_rd_i=B09HX29TPY&psc=1"
     }, 
     {
-        image: shop.jpeg,
-        name: "Prueba",
+        image: samsung-chromebook-4.jpeg,
+        name: "Samsung Chromebook 4",
         tags: [],
         stars: 4.5,
-        description: "",
-        href: "https://google.com"
+        description: "El Samsung Chromebook 4 está destinado a quienes buscan una computadora compacta, ligera y económica para tareas sencillas de Internet y oficina.",
+        href: "https://www.amazon.com/-/es/Samsung-Chromebook-Celeron-Procesador-Gigabit/dp/B07XQQTVS3"
     }, 
     {
-        image: shop.jpeg,
-        name: "Prueba",
-        tags: [],
+        image: apple-macbook-pro-2021.jpeg,
+        name: "Apple Macbook Pro 2021",
+        tags: ["Tope de gama"],
         stars: 4.5,
-        description: "",
-        href: "https://google.com"
+        description: "Este portátil de Apple es ideal para usuarios profesionales de la informática y el diseño, que necesiten un ordenador potente y fiable.",
+        href: "https://www.amazon.com/-/es/Apple-MacBook-pulgadas-n%C3%BAcleos-color/dp/B09JQKBQSB"
     }, 
     {
-        image: shop.jpeg,
-        name: "Prueba",
+        image: acer-aspire-5.jpeg,
+        name: "Acer Aspire 5",
         tags: [],
         stars: 4.5,
-        description: "",
-        href: "https://google.com"
+        description: "Este portátil está destinado para compradores con un presupuesto ajustado que buscan una computadora portátil para uso general.",
+        href: "https://www.amazon.com/-/es/A515-46-R3UB-15-6-pulgadas-procesador-retroiluminado-Windows-11/dp/B09HVC79PC"
     }, 
     {
-        image: shop.jpeg,
-        name: "Prueba",
+        image: asus-tuf-dash-15-(2021).jpeg,
+        name: "ASUS TUF Dash 15 (2021)",
         tags: [],
         stars: 4.5,
-        description: "",
-        href: "https://google.com"
-    }, 
-    {
-        image: shop.jpeg,
-        name: "Prueba",
-        tags: [],
-        stars: 4.5,
-        description: "",
-        href: "https://google.com"
-    },
+        description: "Este portátil está destinado para jugadores que buscan una laptop delgada y compacta que pueda ofrecer un rendimiento en juegos y multitarea fluida.",
+        href: "https://www.amazon.com/pulgadas-GeForce-i7-11370H-Memoria-TUF516PE-AB73/dp/B08XPC3WFQ"
+    }
 ]
 ---
 
@@ -65,7 +57,7 @@ Los portátiles han recorrido un largo camino en los últimos años y ahora hay 
 
 <ToC isMobile={true} showOnlyOnTablet={true} headings={props.headings} lang={props.lang} />
 
-<ProductCarousel products={ props.products }/>
+<ProductCarousel products={ props.products } lang={ props.lang }/>
 
 ## Principales marcas y alternativas
 

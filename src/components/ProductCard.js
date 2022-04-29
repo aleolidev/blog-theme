@@ -2,22 +2,35 @@ import React from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import Stars from './Stars';
+import BuyButton from './BuyButton';
+import { productcard } from '../translations/translations';
+import { GrAmazon } from "react-icons/gr"
+import Tag from './Tag';
 
-const ProductCard = ({ image, name, tags, stars, description, buyHref }) => {
+const ProductCard = ({ lang, image, name, tags, stars, description, buyHref }) => {
     return (
-        <Card style={{ width: "inherit" }}>
-            {/* Tag */}
+        <Card style={{ width: "inherit", height: "100%" }}>
+            {
+                (tags !== null && tags !== undefined && tags.length > 0) &&
+                tags.map(tag => {
+                    return ( <Tag tag={tag}/> )
+                })
+            }
             <ImageWrapper>
-                <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name }/>
+                <a href={ buyHref } target="_blank">
+                    <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain"/>
+                </a>
             </ImageWrapper>
             <CardBody>
-                <CardTitle>{ name }</CardTitle>
+                <TitleWrapper>
+                    <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
+                </TitleWrapper>
                 <Stars stars={ stars } />
                 <CardText>
                     { description }
                 </CardText>
-                {/* Buy button */}
             </CardBody>
+            <BuyButton text={ productcard.viewAtAmazon[lang] } href={ buyHref } icon={<GrAmazon />}  />
         </Card>
     );
 }
@@ -25,22 +38,39 @@ const ProductCard = ({ image, name, tags, stars, description, buyHref }) => {
 export default ProductCard
 
 const Card = styled.div`
-    padding: 0 1em;
-    
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.15em;
     border-right: 1px solid ${props => props.theme.colors.gray3};
 `
 
 const CardBody = styled.div`
-
 `
 
 const ImageWrapper = styled.div`
     margin: 1.25em 0;
+    height: 10em;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        height: 10em;
+        width: 100%;
+    }
 `
 
-const CardTitle = styled.h5`
-    margin: .25em 0 !important;
+const CardTitle = styled.a`
     padding: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: ${props => props.theme.colors.dark1} !important;
+    text-decoration: none !important;
+`
+
+const TitleWrapper = styled.div`
+    margin: .25em 0 .5em 0 !important;
 `
 
 const CardText = styled.p`

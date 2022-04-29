@@ -102,6 +102,7 @@ export const pageQuery = graphql`
                 description
                 stars
                 name
+                tags
               }
             }
             headings {

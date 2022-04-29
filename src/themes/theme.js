@@ -6,6 +6,7 @@ const theme = {
     colors: {
         main1: "hsl(207, 95%, 40%)",
         main2: "hsl(207, 95%, 50%)",
+        main3: "hsl(217, 81%, 36%)",
         dark1: "hsl(227, 2%, 12%)",
         dark2: "hsl(227, 2%, 26%)",
         dark3: "hsl(227, 2%, 40%)",
@@ -15,6 +16,7 @@ const theme = {
         light1: "hsl(0, 0%, 97%)",
         light2: "hsl(0, 0%, 99%)",
         starColor: "hsl(38, 95%, 55%)",
+        amazonBuy: "hsl(36, 100%, 50%)",
     },
     breakpoints: {
         mobile: "only screen and (max-width: 50rem)",

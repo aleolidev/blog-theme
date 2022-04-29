@@ -120,4 +120,16 @@ const toc = {
     }
 }
 
-module.exports = { breadcrumb, cardelement, articleelement, navbar, footer, cookies, toc }
+const productcard = {
+    viewAtAmazon: {
+        'en-US': 'View at Amazon',
+        'en-AU': 'View at Amazon',
+        'en-GB': 'View at Amazon',
+        'en-CA': 'View at Amazon',
+        'de-DE': 'Bei Amazon ansehen',
+        'fr-FR': 'Voir sur Amazon',
+        'es-ES': 'Ver en Amazon'
+    }
+}
+
+module.exports = { breadcrumb, cardelement, articleelement, navbar, footer, cookies, toc, productcard }

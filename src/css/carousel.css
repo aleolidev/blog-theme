@@ -1,5 +1,18 @@
+.slick-track {
+    display: flex !important;
+}
+
+.slick-slide {
+    height: inherit !important;
+}
+
+.slick-slide > div {
+    height: 100%;
+}
+
 .slick-list {
     margin: 2.5em 0;
+    /* padding: .75em; */
 }
 
 .slick-prev,

@@ -9,17 +9,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/carousel.css";
 
-export const ProductCarousel = ({ products }) => {
+export const ProductCarousel = ({ products, lang }) => {
     let settings = {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 3.05,
+        slidesToShow: 3,
         slidesToScroll: 3,
         initialSlide: 0,
         nextArrow: <CustomArrow isLeft={false} />,
         prevArrow: <CustomArrow isLeft={true} />,   
     }
+
     
     return (
         <ProductCarouselElement>
@@ -28,8 +29,9 @@ export const ProductCarousel = ({ products }) => {
                     products.map((product, i) => {
                         // return product
                         return (
-                            <div key={i}>
+                            <ProductWrapper key={i}>
                                 <ProductCard 
+                                    lang={ lang }
                                     image={ product.image }
                                     name={ product.name }
                                     tags={ product.tags }
@@ -37,7 +39,7 @@ export const ProductCarousel = ({ products }) => {
                                     description={ product.description }
                                     buyHref={ product.href }
                                 />
-                            </div>
+                            </ProductWrapper>
                         )
                     })
                 }
@@ -76,3 +78,7 @@ const CustomArrowDiv = styled.div`
         background-color: ${props => props.theme.colors.light1};
     }
 `;
+
+const ProductWrapper = styled.div`
+    height: 100%;
+`
