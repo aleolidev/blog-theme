@@ -12,11 +12,9 @@ const useBreakpoints = (props) => {
         setBreakpoints(objectMap(theme.breakpoints, v => {
             return window.matchMedia(v).matches;
         }))
-        console.log('HOLA')
     }, [])
 
     React.useLayoutEffect(() => {
-        console.log('isBrowser?', isBrowser)
         const debouncedHandleResize = debounce(function handleResize() {
             setBreakpoints(objectMap(theme.breakpoints, v => {
                 return window.matchMedia(v).matches;
@@ -32,8 +30,6 @@ const useBreakpoints = (props) => {
             window.removeEventListener('resize', debouncedHandleResize)
         }
     })
-
-    console.log('returning', breakpoints)
 
     return breakpoints;
 }

@@ -49,6 +49,6 @@ const Button = styled.div`
     width: 100%;
 
     @media ${props => props.theme.breakpoints.mobile} {  
-        margin-top: 1.5em;
+        padding-top: 1.5em;
     }
 `

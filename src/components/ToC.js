@@ -137,7 +137,7 @@ const Toc = styled.div`
         // display: inline-block;
         grid-column: 1 / span 8;
         padding: 1.25rem 1.5rem;
-        margin: 2em 0 0 0;
+        margin: 1em 0 .5em 0;
         border: 1px solid ${props => props.theme.colors.gray3};
         border-radius: .5em;
         

@@ -32,7 +32,7 @@ const UnderTag = styled.div`
     z-index: -1;
     width: 1em;
     border-right: 1em solid ${props => props.theme.colors.main3};
-    border-left: 0.1em solid transparent;
+    border-left: 0em solid transparent;
     border-bottom: 0.5em solid transparent;
     border-top: 1.8em solid transparent;
     box-sizing: border-box;

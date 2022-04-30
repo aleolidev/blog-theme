@@ -4,15 +4,22 @@
 
 .slick-slide {
     height: inherit !important;
+    width: inherit !important;
 }
 
 .slick-slide > div {
     height: 100%;
+    width: 100%;
 }
 
 .slick-list {
-    margin: 2.5em 0;
-    /* padding: .75em; */
+    margin: 2em 0;
+}
+
+@media only screen and (max-width: 65rem) {
+    .slick-list {
+        margin: 1em 0;
+    }
 }
 
 .slick-prev,
