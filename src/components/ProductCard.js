@@ -77,7 +77,7 @@ const CardBody = styled.span`
 `
 
 const CardWrapper = styled.div`
-    display: ${props => props.mobile ? "none" : "block"};
+    display: ${props => props.mobile ? "none" : "contents"};
 
     @media ${props => props.theme.breakpoints.mobile} {  
         display: ${props => props.mobile ? "block" : "none"};
