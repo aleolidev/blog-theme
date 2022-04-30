@@ -7,56 +7,53 @@ import { productcard } from '../translations/translations';
 import { GrAmazon } from "react-icons/gr"
 import Tag from './Tag';
 
-const ProductCard = ({ lang, image, name, tags, stars, description, buyHref, isMobile }) => {
+const ProductCard = ({ lang, image, name, tags, stars, description, buyHref }) => {
     return (
         <Card style={{ width: "inherit", height: "100%" }}>
-            {
-                isMobile
-                ?
+            <CardWrapper mobile={ true }>
                 <CardBody>
-                        <ImageWrapper>
-                            {(tags !== null && tags !== undefined && tags.length > 0) &&
-                                tags.map(tag => {
-                                    return ( <Tag tag={tag}/> )
-                                }
-                            )}
-                            <ImageLink href={ buyHref } target="_blank">
-                                <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain" loading='lazy'/>
-                            </ImageLink>
-                        </ImageWrapper>
-                        <TitleWrapper>
-                            <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
-                        </TitleWrapper>
-                        <Stars stars={ stars } />
-                        <CardText>
-                            { description }
-                        </CardText>        
-                        <BuyButton text={ productcard.viewAtAmazon[lang] } href={ buyHref } icon={<GrAmazon />}  />
-                    </CardBody>
-                :
-                <>
-                    {(tags !== null && tags !== undefined && tags.length > 0) &&
-                        tags.map(tag => {
-                            return ( <Tag tag={tag}/> )
-                        }
-                    )}
                     <ImageWrapper>
-                        <a href={ buyHref } target="_blank">
-                            <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain"/>
-                        </a>
+                        {(tags !== null && tags !== undefined && tags.length > 0) &&
+                            tags.map(tag => {
+                                return ( <Tag tag={tag}/> )
+                            }
+                        )}
+                        <ImageLink href={ buyHref } target="_blank">
+                            <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain" loading='lazy'/>
+                        </ImageLink>
                     </ImageWrapper>
-                    <CardBody>
-                        <TitleWrapper>
-                            <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
-                        </TitleWrapper>
-                        <Stars stars={ stars } />
-                        <CardText>
-                            { description }
-                        </CardText>
-                    </CardBody>
+                    <TitleWrapper>
+                        <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
+                    </TitleWrapper>
+                    <Stars stars={ stars } />
+                    <CardText>
+                        { description }
+                    </CardText>        
                     <BuyButton text={ productcard.viewAtAmazon[lang] } href={ buyHref } icon={<GrAmazon />}  />
-                </>
-            }
+                </CardBody>
+            </CardWrapper>
+            <CardWrapper mobile={ false }>
+                {(tags !== null && tags !== undefined && tags.length > 0) &&
+                    tags.map(tag => {
+                        return ( <Tag tag={tag}/> )
+                    }
+                )}
+                <ImageWrapper>
+                    <a href={ buyHref } target="_blank">
+                        <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain"/>
+                    </a>
+                </ImageWrapper>
+                <CardBody>
+                    <TitleWrapper>
+                        <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
+                    </TitleWrapper>
+                    <Stars stars={ stars } />
+                    <CardText>
+                        { description }
+                    </CardText>
+                </CardBody>
+                <BuyButton text={ productcard.viewAtAmazon[lang] } href={ buyHref } icon={<GrAmazon />}  />
+            </CardWrapper>
         </Card>
     );
 }
@@ -77,6 +74,14 @@ const Card = styled.div`
 `
 
 const CardBody = styled.span`
+`
+
+const CardWrapper = styled.div`
+    display: ${props => props.mobile ? "none" : "block"};
+
+    @media ${props => props.theme.breakpoints.mobile} {  
+        display: ${props => props.mobile ? "block" : "none"};
+    }
 `
 
 const ImageLink = styled.a`

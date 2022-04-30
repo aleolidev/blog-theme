@@ -2,13 +2,10 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import React from "react"
 import styled from "styled-components"
 import { A } from "../elements"
-import useBreakpoints from '../hooks/useBreakpoints';
 import { articleelement } from "../translations/translations"
 import { slugify } from "../utils/utils"
 
 export const Articles = ({ articles, lang }) => {
-    const breakpoints = useBreakpoints();
-
     return (
         <ArticlesWrapper>
             {articles.map(({ node }) => {    
@@ -31,7 +28,6 @@ export const Articles = ({ articles, lang }) => {
                     <TitleWrapper>
                         <A 
                             href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`} 
-                            fontSize={breakpoints.mobile ? '1.2em' : '1.5em'} 
                             fontWeight='700'
                             hoverColor="main1"
                             color="main2" 
@@ -39,25 +35,22 @@ export const Articles = ({ articles, lang }) => {
                             {node.frontmatter.title}
                         </A>
                     </TitleWrapper>
-                    {
-                        !breakpoints.mobile ?
-                        <>
-                            <ExcerptWrapper>
-                                {node.frontmatter.excerpt}
-                            </ExcerptWrapper>
-                            <ReadMoreWrapper>
-                                <A 
-                                    href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`} 
-                                    fontSize='.8em' 
-                                    fontWeight='700'
-                                    color="main1"
-                                    textTransform="uppercase"
-                                >
-                                    { articleelement.read_more[lang] } »
-                                </A>
-                            </ReadMoreWrapper>
-                        </> : null
-                    }
+                    <InfoWrapper>
+                        <ExcerptWrapper>
+                            {node.frontmatter.excerpt}
+                        </ExcerptWrapper>
+                        <ReadMoreWrapper>
+                            <A 
+                                href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`} 
+                                fontSize='.8em' 
+                                fontWeight='700'
+                                color="main1"
+                                textTransform="uppercase"
+                            >
+                                { articleelement.read_more[lang] } »
+                            </A>
+                        </ReadMoreWrapper>
+                    </InfoWrapper>
                     <PublicationWrapper>
                         {node.frontmatter.author} - {node.frontmatter.date}
                     </PublicationWrapper>
@@ -81,6 +74,14 @@ const ArticleWrapper = styled.div`
     border-bottom: 1px solid ${props => props.theme.colors.gray3}
 `
 
+const InfoWrapper = styled.div`
+    display: block;
+
+    @media ${props => props.theme.breakpoints.mobile} {    
+        display: none;
+    }
+`
+
 const ImageWrapper = styled.div`
     float: right;
     width: 38%;
@@ -97,7 +98,15 @@ const ImageWrapper = styled.div`
 `
 
 const TitleWrapper = styled.div`
-    // padding: 1.5em 0 0 0;
+    & > a {
+        font-size: 1.5em;
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {    
+        & > a {
+            font-size: 1.2em;
+        }
+    }
 `
 
 const PublicationWrapper = styled.div`

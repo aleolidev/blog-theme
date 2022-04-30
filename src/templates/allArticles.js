@@ -4,6 +4,7 @@ import { Articles, Column, Container, Content, ContentCard, FeatureArticle, Grid
 import theme from "../themes/theme"
 import { slugify } from "../utils/utils"
 import useBreakpoints from "../hooks/useBreakpoints"
+import styled from "styled-components"
 
 const AllArticles = ({ pageContext, data }) => {
     const { currentPage, numPages, lang } = pageContext
@@ -29,9 +30,7 @@ const AllArticles = ({ pageContext, data }) => {
     return (
         <Container>
             <Seo title={ title } description={ description } author={ author } lang={lang} />
-            {
-                breakpoints.mobile
-                ?
+            <ArticlesWrapper mobile={ true }>
                 <Content mobilePadding={'0'} hideBanner={ true } tabletGridColumn={'1 / span 8'}>
                     {articles.map((article, index) => {
                         const category = article.node.frontmatter.category
@@ -54,60 +53,43 @@ const AllArticles = ({ pageContext, data }) => {
                             padding={"2em 0 .5em 0"}
                     />}
                 </Content>
-                :
-                <>
-                    {
-                        (currentPage === 1) 
-                        ?
-                        <>
+            </ArticlesWrapper>
+            <ArticlesWrapper mobile={ false }>
+                {
+                    (currentPage === 1) 
+                    ?
+                    <>
 
-                            <FeatureArticle image={ featuredImage } title={ featuredArticle.node.frontmatter.title } href={ `/${lang}/${featuredCategory}/${featuredSlug}/` } />
-                            <Content padding={ `${ theme.spacings.small } ${ theme.spacings.xLarge }` } tabletGridColumn={'1 / span 8'}>
-                                <Grid columns={3} mobileColumns={1} gap={"2em"}>
-                                    {articles.map((article, index) => {
-                                        if (index > 0 && index < 4) {
-                                            const category = article.node.frontmatter.category
-                                            const prettyCategory = slugify(category)
-                                            return (
-                                                <Column style={{margin: '1em 0'}}>
-                                                    <ContentCard 
-                                                        key={article.node.frontmatter.slug}
-                                                        date={article.node.frontmatter.date}
-                                                        title={article.node.frontmatter.title}
-                                                        image={article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData}
-                                                        slug={article.node.frontmatter.slug}
-                                                        lang={lang}
-                                                        category={prettyCategory}
-                                                    />
-                                                </Column>
-                                            )
-                                        } return null;
-                                    })}
-                                </Grid>
-                                {
-                                    (articles.length > 4)
-                                    ?
-                                        <Articles articles={ articles.slice(4, articles.length) } lang={lang}/>
-                                    :
-                                    null
-                                }
-                                {(numPages > 1) &&
-                                    <Pagination
-                                        isFirst={isFirst}
-                                        isLast={isLast}
-                                        prevPage={prevPage}
-                                        nextPage={nextPage}
-                                        padding={"2em 0 .5em 0"}
-                                />}
-                            </Content>
-                        </>
-                        :
-                        <Content 
-                            hideBanner={ true } 
-                            padding={ `${ theme.spacings.small } ${ theme.spacings.xLarge }` } 
-                            tabletGridColumn={'1 / span 8'}
-                        >
-                            <Articles articles={ articles } lang={lang}/>
+                        <FeatureArticle image={ featuredImage } title={ featuredArticle.node.frontmatter.title } href={ `/${lang}/${featuredCategory}/${featuredSlug}/` } />
+                        <Content padding={ `${ theme.spacings.small } ${ theme.spacings.xLarge }` } tabletGridColumn={'1 / span 8'}>
+                            <Grid columns={3} mobileColumns={1} gap={"2em"}>
+                                {articles.map((article, index) => {
+                                    if (index > 0 && index < 4) {
+                                        const category = article.node.frontmatter.category
+                                        const prettyCategory = slugify(category)
+                                        return (
+                                            <Column style={{margin: '1em 0'}}>
+                                                <ContentCard 
+                                                    key={article.node.frontmatter.slug}
+                                                    date={article.node.frontmatter.date}
+                                                    title={article.node.frontmatter.title}
+                                                    image={article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData}
+                                                    slug={article.node.frontmatter.slug}
+                                                    lang={lang}
+                                                    category={prettyCategory}
+                                                />
+                                            </Column>
+                                        )
+                                    } return null;
+                                })}
+                            </Grid>
+                            {
+                                (articles.length > 4)
+                                ?
+                                    <Articles articles={ articles.slice(4, articles.length) } lang={lang}/>
+                                :
+                                null
+                            }
                             {(numPages > 1) &&
                                 <Pagination
                                     isFirst={isFirst}
@@ -117,14 +99,38 @@ const AllArticles = ({ pageContext, data }) => {
                                     padding={"2em 0 .5em 0"}
                             />}
                         </Content>
-                    }
-                </>
-            }
+                    </>
+                    :
+                    <Content 
+                        hideBanner={ true } 
+                        padding={ `${ theme.spacings.small } ${ theme.spacings.xLarge }` } 
+                        tabletGridColumn={'1 / span 8'}
+                    >
+                        <Articles articles={ articles } lang={lang}/>
+                        {(numPages > 1) &&
+                            <Pagination
+                                isFirst={isFirst}
+                                isLast={isLast}
+                                prevPage={prevPage}
+                                nextPage={nextPage}
+                                padding={"2em 0 .5em 0"}
+                        />}
+                    </Content>
+                }
+            </ArticlesWrapper>
         </Container>
     )
 }
 
 export default AllArticles
+
+const ArticlesWrapper = styled.div`
+    display: ${props => props.mobile ? "none" : "contents"};
+
+    @media ${props => props.theme.breakpoints.mobile} {     
+        display: ${props => props.mobile ? "contents" : "none"};
+    }
+`
 
 export const pageQuery = graphql`
     query AllArticlesQuery($skip: Int!, $limit: Int!, $lang: String!) {

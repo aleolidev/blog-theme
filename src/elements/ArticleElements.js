@@ -195,6 +195,17 @@ export const ArticleWrapper = styled.main`
     @media ${props => props.theme.breakpoints.mobile} {    
         grid-row: 2 / span 5;
         padding: ${props => 
-            `${props.theme.spacings.small} ${props.theme.spacings.large} 3em ${props.theme.spacings.large}`};
+            `${props.theme.spacings.xSmall} ${props.theme.spacings.small} ${props.theme.spacings.large} ${props.theme.spacings.small}`};
+        h1 {
+            font-size: 1.5rem;
+            line-height: 1.875rem;
+            font-weight: 400;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.75rem;
+            margin-top: 1.5rem;
+        }
     }
 `

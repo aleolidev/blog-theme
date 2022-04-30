@@ -4,22 +4,14 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { H1 } from "../elements"
 import { Container, Article, FeatureImage, Seo, Breadcrumb, ToC } from "../components"
 import { breadcrumb } from "../translations/translations"
-import { mediaQuery } from "../utils/utils"
-import theme from "../themes/theme"
-import useBreakpoints from "../hooks/useBreakpoints"
 
 const SingleArticle = ({pageContext, data, location }, props) => {
     const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData;
     const headings = data.mdx.headings;
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
     const products = data.mdx.frontmatter.products
-    
-    const breakpoints = useBreakpoints()
 
     let { breadcrumb: { crumbs }, lang } = pageContext
-
-    // console.log('breakpoints:', )
-    // breakpoints()
 
     crumbs = crumbs.map((crumb, i) => {
         if (i > 0) {
@@ -43,20 +35,8 @@ const SingleArticle = ({pageContext, data, location }, props) => {
                 description={ data.mdx.frontmatter.excerpt }
                 lang={lang}
             />
-            {
-                !breakpoints.mobile 
-                ?
-                    <FeatureImage image={ featureImage } alt={ data.mdx.frontmatter.title } />
-                :
-                    <></>
-            }
-            { 
-                (headings !== null && headings !== undefined && headings.length > 0 && !breakpoints.tablet) 
-                ?
-                    <ToC headings={headings} isMobile={false} lang={ lang } isTablet={ breakpoints.tablet } />
-                : 
-                    <></>
-            }
+            <FeatureImage image={ featureImage } alt={ data.mdx.frontmatter.title } hideOnMobile={ true } />
+            <ToC isTablet={ false } headings={headings ? headings : []} lang={ lang } />
             <Article>
                 <Breadcrumb
                     crumbs={crumbs.slice(1, crumbs.length)}
@@ -65,10 +45,11 @@ const SingleArticle = ({pageContext, data, location }, props) => {
                 <H1 
                     margin="1.5rem 0 0 0 !important"
                     tabletMargin=".75rem 0 2rem 0 !important"
+                    mobileMargin=".5rem 0 .25rem 0 !important"
                 >
                     {data.mdx.frontmatter.title}
                 </H1>
-                <MDXRenderer headings={headings} lang={lang} img={ featureImage } products={ products } isTablet={ breakpoints.tablet }>
+                <MDXRenderer headings={headings} lang={lang} img={ featureImage } products={ products }>
                     {data.mdx.body}
                 </MDXRenderer>
             </Article>

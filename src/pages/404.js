@@ -8,7 +8,7 @@ const notFound = ({ data }) => {
 
     return (
         <Container>
-            <FeatureImage image={ featureImage } />
+            <FeatureImage image={ featureImage } hideOnMobile={ false } />
             <Content>
                 <H1 textAlign="center" margin="0 0 1rem 0">
                     {" "}

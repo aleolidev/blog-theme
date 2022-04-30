@@ -7,7 +7,7 @@ import { toc } from "../translations/translations"
 import ConditionalWrapper from "./ConditionalWrapper"
 
 
-export const ToC = ({ headings, showOnlyOnTablet, lang, isMobile, isTablet }) => {
+export const ToC = ({ headings, showOnlyOnTablet, lang, isTablet }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [contentHeight, setContentHeight] = useState('200em')
@@ -16,7 +16,7 @@ export const ToC = ({ headings, showOnlyOnTablet, lang, isMobile, isTablet }) =>
     const [reset, setReset] = useState(false);
  
     const contentRef = useRef();
-    
+
     const filterHeadings = (obj, minDepth, maxDepth) => {
         const filteredObj = JSON.parse(JSON.stringify(obj)) // In-depth copy
         
@@ -94,26 +94,24 @@ export const ToC = ({ headings, showOnlyOnTablet, lang, isMobile, isTablet }) =>
         }
     }, [])
 
+    
+    if (headings === null || headings === undefined || headings.length <= 0)
+        return null;
+
     return (
-        <>
-            { 
-                ((isTablet && showOnlyOnTablet && headings && headings.length > 0) || (!isTablet && !showOnlyOnTablet)) 
-                ?
-                <Toc contentHeight={ contentHeight } contentWidth={ contentWidth } sizeSet={ sizeSet }>
-                    <TitleWrapper onClick={() => (isMobile ? setIsOpen(current => !current) : null)}>
-                        <H2>{ toc.title[lang] }</H2>
-                        { isMobile ? <HiMenu /> : null }
-                    </TitleWrapper>
-                    <ContentWrapper className={ isOpen ? "container show" : "container" }>
-                        {
-                            getNestedList(nestedHeadings, true, [])
-                        }
-                    </ContentWrapper>
-                </Toc>
-                :
-                null
-            }
-        </>
+        <Toc isTablet={ isTablet } contentHeight={ contentHeight } contentWidth={ contentWidth } sizeSet={ sizeSet }>
+            <TitleWrapper onClick={() => setIsOpen(current => !current)}>
+                <H2>{ toc.title[lang] }</H2>
+                <IconWrapper>
+                    <HiMenu />
+                </IconWrapper>
+            </TitleWrapper>
+            <ContentWrapper className={ isOpen ? "container show" : "container" }>
+                {
+                    getNestedList(nestedHeadings, true, [])
+                }
+            </ContentWrapper>
+        </Toc>
     )
 }
 
@@ -122,6 +120,7 @@ export const ToC = ({ headings, showOnlyOnTablet, lang, isMobile, isTablet }) =>
 const Toc = styled.div`  
     grid-column: 11 / span 3;
     grid-row: 4 / span 1;
+    display: ${props => props.isTablet ? "none" : "block"};
     overflow: hidden;
     position: relative;
     margin: .5em 4rem 0 0rem;
@@ -134,7 +133,8 @@ const Toc = styled.div`
     }
 
     @media ${props => props.theme.breakpoints.tablet} {
-        display: inline-block;
+        display: ${props => props.isTablet ? "inline-block" : "none"};
+        // display: inline-block;
         grid-column: 1 / span 8;
         padding: 1.25rem 1.5rem;
         margin: 2em 0 0 0;
@@ -157,7 +157,7 @@ const Toc = styled.div`
     }
 
     @media ${props => props.theme.breakpoints.mobile} {
-        display: block;
+        display: ${props => props.isTablet ? "block" : "none"};
         position: static;
         grid-column: auto;
         grid-area: auto;
@@ -186,6 +186,14 @@ const TitleWrapper = styled.div`
         h2 {
             margin: 0 !important;
         }
+    }
+`
+
+const IconWrapper = styled.span`
+    display: none;
+
+    @media ${props => props.theme.breakpoints.tablet} {
+        display: block;
     }
 `
 

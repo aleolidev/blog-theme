@@ -116,8 +116,4 @@ const objectMap = (obj, fn) => {
     )
 }
 
-const mediaQuery = (request) => {
-    return window.matchMedia(request).matches;
-}
-
-module.exports = { slugify, nestify, debounce, objectMap, mediaQuery }
+module.exports = { slugify, nestify, debounce, objectMap }

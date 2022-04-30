@@ -8,11 +8,8 @@ import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs"
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import "../css/carousel.css";
-import useBreakpoints from "../hooks/useBreakpoints"
 
 export const ProductCarousel = ({ products, lang }) => {
-    
-    const breakpoints = useBreakpoints();
 
     let settings = {
         dots: false,
@@ -27,8 +24,7 @@ export const ProductCarousel = ({ products, lang }) => {
     }
     
     return (
-        (!breakpoints.mobile)
-        ? 
+        <>
             <ProductCarouselElement>
                 <Slider {...settings} style={{padding: '0 .5em'}}>
                     {
@@ -51,28 +47,27 @@ export const ProductCarousel = ({ products, lang }) => {
                     }
                 </Slider>
             </ProductCarouselElement>
-        :
-        <MobileWrapper>
-        {
-            products.map((product, i) => {
-                // return product
-                return (
-                    <ProductWrapper key={i}>
-                        <ProductCard 
-                            lang={ lang }
-                            image={ product.image }
-                            name={ product.name }
-                            tags={ product.tags }
-                            stars={ product.stars }
-                            description={ product.description }
-                            buyHref={ product.href }
-                            isMobile={ breakpoints.mobile }
-                        />
-                    </ProductWrapper>
-                )
-            })
-        }
-        </MobileWrapper>
+            <MobileWrapper>
+            {
+                products.map((product, i) => {
+                    // return product
+                    return (
+                        <ProductWrapper key={i}>
+                            <ProductCard 
+                                lang={ lang }
+                                image={ product.image }
+                                name={ product.name }
+                                tags={ product.tags }
+                                stars={ product.stars }
+                                description={ product.description }
+                                buyHref={ product.href }
+                            />
+                        </ProductWrapper>
+                    )
+                })
+            }
+            </MobileWrapper>
+        </>
     )
 }
 
@@ -92,8 +87,12 @@ const CustomArrow = props => {
 }
 
 const MobileWrapper = styled.div`
-    display: flex;
+    display: none;
     flex-direction: column;
+
+    @media ${props => props.theme.breakpoints.mobile} {  
+        display: flex;
+    }
 `
 
 const CustomArrowDiv = styled.div`

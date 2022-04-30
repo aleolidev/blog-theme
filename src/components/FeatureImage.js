@@ -3,7 +3,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { FeatureImageWrapper } from "../elements"
 
-export const FeatureImage = ({ image, alt }) => {
+export const FeatureImage = ({ image, alt, hideOnMobile }) => {
 
     const data = useStaticQuery(graphql`
         {
@@ -16,7 +16,7 @@ export const FeatureImage = ({ image, alt }) => {
     `)
 
     return (
-        <FeatureImageWrapper>
+        <FeatureImageWrapper hideOnMobile={ hideOnMobile }>
             <GatsbyImage 
                 image={ image ? image : data.file.childImageSharp.gatsbyImageData } 
                 alt={ alt ? alt : "" }

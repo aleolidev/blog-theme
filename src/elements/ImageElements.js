@@ -6,6 +6,7 @@ export const FeatureImageWrapper = styled.div`
     overflow: hidden;
     position: relative;
     margin: 0 4rem;
+    display: "block";
 
     @media ${props => props.theme.breakpoints.tablet} {
         grid-column: 1 / span 8;
@@ -13,6 +14,7 @@ export const FeatureImageWrapper = styled.div`
     }
 
     @media ${props => props.theme.breakpoints.mobile} {
+        display: ${props => props.hideOnMobile ? "none" : "block"};
         grid-column: none !important;
         grid-row: none !important;
         margin: 0;
