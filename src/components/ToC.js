@@ -141,7 +141,7 @@ const Toc = styled.div`
         margin: 1em 0 .5em 0;
         border: 1px solid ${props => props.theme.colors.gray3};
         border-radius: .5em;
-        position: relative;
+        position: static;
         
         .container {
             display: ${props => props.sizeSet ? 'block' : 'none'};
