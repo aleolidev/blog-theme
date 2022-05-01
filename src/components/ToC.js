@@ -122,11 +122,12 @@ const Toc = styled.div`
     grid-row: 4 / span 1;
     display: ${props => props.isTablet ? "none" : "block"};
     overflow: hidden;
-    position: relative;
+    position: sticky;
     margin: .5em 4rem 0 0rem;
     padding: ${props => 
         `${props.theme.spacings.xLarge} 0`};
     z-index: 10;
+    top: -1.5em; // Sticky
     
     @media ${props => props.theme.breakpoints.smallDesktop} {
         grid-column: 10 / span 4; 
@@ -140,6 +141,7 @@ const Toc = styled.div`
         margin: 1em 0 .5em 0;
         border: 1px solid ${props => props.theme.colors.gray3};
         border-radius: .5em;
+        position: relative;
         
         .container {
             display: ${props => props.sizeSet ? 'block' : 'none'};
