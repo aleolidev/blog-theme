@@ -9,6 +9,7 @@ export const Nav = ({ lang }) => {
     return (
         <NavWrapper>
             <a href={`/${lang}`} style={{marginLeft: '1.5em'}}>
+                {/* TODO: Modify alt for web name */}
                 <StaticImage src={ "../images/logo.svg" } alt="Web Logo" placeholder="blurred" width={50} height={50}/>
             </a>
             <EndWrapper>
