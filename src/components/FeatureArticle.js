@@ -22,7 +22,7 @@ export const FeatureArticle = ({ title, href, image, alt, gridRow }) => {
                 <BlackCover>
                     <GatsbyImage 
                         image={ image ? image : data.file.childImageSharp.gatsbyImageData } 
-                        alt={ alt ? alt : "" }
+                        alt={ alt ? alt : title }
                         loading="eager"
                         decoding="async"
                     />

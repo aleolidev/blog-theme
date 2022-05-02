@@ -10,9 +10,8 @@ export const ContentCard = ({ date, title, image, slug, category, lang }) => {
         <CardWrapper href={`/${lang}/${category}/${slug}/`}>
             <GatsbyImage 
                 image={ image ? image : null } 
-                // placeholder="blurred"
                 fadeIn={false}
-                alt=""
+                alt={ title }
             />
             <P size="small" color="dark2" margin="1rem 1rem 0 1rem">
                 {title} <br />

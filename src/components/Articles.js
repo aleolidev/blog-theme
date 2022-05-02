@@ -21,7 +21,7 @@ export const Articles = ({ articles, lang }) => {
                                 image={ image ? image : null }
                                 fadeIn={false} 
                                 placeholder="blurred"
-                                alt=""
+                                alt={ node.frontmatter.title }
                             />
                         </A>
                     </ImageWrapper>

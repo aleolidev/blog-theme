@@ -135,7 +135,6 @@ const Toc = styled.div`
 
     @media ${props => props.theme.breakpoints.tablet} {
         display: ${props => props.isTablet ? "inline-block" : "none"};
-        // display: inline-block;
         grid-column: 1 / span 8;
         padding: 1.25rem 1.5rem;
         margin: 1em 0 .5em 0;
