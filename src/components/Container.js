@@ -15,11 +15,13 @@ export const Container = ({ children }) => {
     lang = lang ? lang : langs[0]
 
     return (
-        <ContainerWrapper>
+        <>
             <Nav lang={ lang }/>
-            { children }
+            <ContainerWrapper>
+                { children }
+            </ContainerWrapper>
             <Footer lang={ lang }/>
             <Cookies theme={ theme } lang={ lang }/>
-        </ContainerWrapper>
+        </>
     )
 }

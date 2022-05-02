@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const ContentWrapper = styled.main`
     grid-column: 2 / span 12;
-    grid-row: ${props => props.hideBanner ? "2 / span 5" :  "4 / span 5"};
+    grid-row: ${props => props.hideBanner ? "1 / span 5" :  "3 / span 5"};
     
     padding: ${props => props.padding ? props.padding :
         `${props.theme.spacings.xLarge} ${props.theme.spacings.xLarge}`};

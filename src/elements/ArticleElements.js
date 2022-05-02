@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const ArticleWrapper = styled.main`
     grid-column: 2 / span 9;
-    grid-row: 4 / span 5;
+    grid-row: 3 / span 5;
     margin: ${props => 
         `0 0 0 ${props.theme.spacings.xLarge}`};
     padding: ${props => 
@@ -42,7 +42,7 @@ export const ArticleWrapper = styled.main`
     h3 {
         font-size: 1.375rem;
         line-height: 1.625rem;
-        font-weight: 700;
+        font-weight: 400;
     }
 
     h4 {
@@ -54,7 +54,7 @@ export const ArticleWrapper = styled.main`
     h5 {
         font-size: 1.125rem;
         line-height: 1.375rem;
-        font-weight: 700;
+        font-weight: 400;
     }
 
     h6 {
@@ -189,16 +189,16 @@ export const ArticleWrapper = styled.main`
         padding: ${props => 
             `${props.theme.spacings.small} ${props.theme.spacings.xLarge} 3em ${props.theme.spacings.xLarge}`};
         grid-column: 1 / span 8;  
-        grid-row: 5 / span 5;
+        grid-row: 3 / span 5;
     }
     
     @media ${props => props.theme.breakpoints.mobile} {    
-        grid-row: 2 / span 5;
+        grid-row: 1 / span 5;
         padding: ${props => 
             `${props.theme.spacings.xSmall} ${props.theme.spacings.small} ${props.theme.spacings.large} ${props.theme.spacings.small}`};
         h1 {
-            font-size: 1.5rem;
-            line-height: 1.875rem;
+            font-size: 2rem;
+            line-height: 2.75rem;
             font-weight: 400;
         }
 

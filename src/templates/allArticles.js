@@ -40,7 +40,7 @@ const AllArticles = ({ pageContext, data }) => {
                                 title={ article.node.frontmatter.title } 
                                 image={ article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData } 
                                 href={ `/${lang}/${prettyCategory}/${article.node.frontmatter.slug}/` }
-                                gridRow={ () => (`${1 + (index * 2)} / span 2`) } 
+                                gridRow={ () => (`${index * 2} / span 2`) } 
                             />
                         )
                     })}

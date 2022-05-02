@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const FeatureImageWrapper = styled.div`
     grid-column: 2 / span 12;
-    grid-row: ${props => props.gridRow ? props.gridRow : '2 / span 2' };
+    grid-row: ${props => props.gridRow ? props.gridRow : '1 / span 2' };
     overflow: hidden;
     position: relative;
     margin: 0 4rem;

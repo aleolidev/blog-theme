@@ -93,7 +93,7 @@ export const H1 = styled.h1`
     }
 
     @media ${props => props.theme.breakpoints.mobile} {
-        font-size: 1.5rem;
+        font-size: 2rem;
         margin: ${props => props.mobileMargin ? props.mobileMargin : (props.tabletMargin ? props.tabletMargin : (props.margin ? props.margin : 0))};
         text-align: ${props => props.mobileTextAlign ? props.mobileTextAlign : (props.textAlign ? props.textAlign : "left")};
     }
