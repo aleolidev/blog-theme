@@ -1,13 +1,20 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled from 'styled-components'
+import BuyButton from './BuyButton'
+import { productcard } from '../translations/translations'
+import { GrAmazon } from "react-icons/gr"
 
-export const FloatingImage = ({ product, float }) => {
+export const FloatingImage = ({ product, float, lang, showBuyButton }) => {
     return (
         <ImageWrapper float={float}>
             <ImageLink href={ product.href } target="_blank">
                 <GatsbyImage image={ product.image.childImageSharp.gatsbyImageData } alt={ product.name } objectFit="contain" loading='lazy'/>
             </ImageLink>
+            {
+                (showBuyButton && lang) &&
+                <BuyButton text={ productcard.viewAtAmazon[lang] } href={ product.href } icon={<GrAmazon />} marginTop={"1.5rem !important"} hideMobile={ true } />
+            }
         </ImageWrapper>
     )
 }

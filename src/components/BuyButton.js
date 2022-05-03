@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { BuyButtonElement } from '../elements'
 
-const BuyButton = ({ text, href, icon, style }) => {
+const BuyButton = ({ text, href, icon, marginTop, hideMobile, showJustInMobile, autoHeight }) => {
     return (
-        <Button>
+        <Button marginTop={ marginTop } hideMobile={ hideMobile } showJustInMobile={ showJustInMobile } autoHeight={ autoHeight }>
             <ButtonLink href={ href } target="_blank" >
-                <BuyButtonElement style={ style }>
+                <BuyButtonElement>
 
                     <ContentWrapper>
                         { icon }
@@ -41,14 +41,15 @@ const ButtonLink = styled.a`
 `
 
 const Button = styled.div`
-    margin-top: 1em;
-    display: flex;
+    margin-top: ${props => props.marginTop ? props.marginTop : "1em"};
+    display: ${props => props.showJustInMobile === true ? "none" : "flex"};
     align-items: flex-end;
     justify-content: center;
-    height: 100%;
+    height: ${props => props.autoHeight ? "auto" : "100%"};
     width: 100%;
 
     @media ${props => props.theme.breakpoints.mobile} {  
         padding-top: 1.5em;
+        display: ${props => props.showJustInMobile ? "flex" : (props.hideMobile === true ? "none" : "flex")};
     }
 `

@@ -2,7 +2,7 @@ import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import Theme from "./src/themes/theme";
-import { Table, ToC, ProductCarousel, FloatingImage } from "./src/components";
+import { Table, ToC, ProductCarousel, FloatingImage, AmazonLink, MdxBuyButton } from "./src/components";
 
 const GlobalStyles = createGlobalStyle`
     *:not(ol):not(ul) {
@@ -24,6 +24,8 @@ const components = {
     ToC,
     ProductCarousel,
     FloatingImage,
+    AmazonLink,
+    MdxBuyButton,
 }
 
 export const wrapPageElement = ({ element }) => (
