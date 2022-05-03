@@ -18,12 +18,12 @@ const ProductCard = ({ lang, image, name, tags, stars, description, buyHref }) =
                                 return ( <Tag tag={tag}/> )
                             }
                         )}
-                        <ImageLink href={ buyHref } target="_blank">
+                        <ImageLink href={ buyHref } rel="nofollow sponsored noopener" target="_blank">
                             <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain" loading='lazy'/>
                         </ImageLink>
                     </ImageWrapper>
                     <TitleWrapper>
-                        <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
+                        <CardTitle href={ buyHref } rel="nofollow sponsored noopener" target="_blank">{ name }</CardTitle>
                     </TitleWrapper>
                     <Stars stars={ stars } />
                     <CardText>
@@ -39,13 +39,13 @@ const ProductCard = ({ lang, image, name, tags, stars, description, buyHref }) =
                     }
                 )}
                 <ImageWrapper>
-                    <a href={ buyHref } target="_blank">
+                    <a href={ buyHref } rel="nofollow sponsored noopener" target="_blank">
                         <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain"/>
                     </a>
                 </ImageWrapper>
                 <CardBody>
                     <TitleWrapper>
-                        <CardTitle href={ buyHref } target="_blank">{ name }</CardTitle>
+                        <CardTitle href={ buyHref } rel="nofollow sponsored noopener" target="_blank">{ name }</CardTitle>
                     </TitleWrapper>
                     <Stars stars={ stars } />
                     <CardText>

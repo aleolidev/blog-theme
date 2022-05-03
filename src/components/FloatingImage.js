@@ -8,7 +8,7 @@ import { GrAmazon } from "react-icons/gr"
 export const FloatingImage = ({ product, float, lang, showBuyButton }) => {
     return (
         <ImageWrapper float={float}>
-            <ImageLink href={ product.href } target="_blank">
+            <ImageLink href={ product.href } rel="nofollow sponsored noopener" target="_blank">
                 <GatsbyImage image={ product.image.childImageSharp.gatsbyImageData } alt={ product.name } objectFit="contain" loading='lazy'/>
             </ImageLink>
             {

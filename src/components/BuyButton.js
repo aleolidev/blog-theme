@@ -4,7 +4,7 @@ import { BuyButtonElement } from '../elements'
 
 const BuyButton = ({ text, href, icon, marginTop, hideMobile, showJustInMobile, autoHeight }) => {
     return (
-        <Button marginTop={ marginTop } hideMobile={ hideMobile } showJustInMobile={ showJustInMobile } autoHeight={ autoHeight }>
+        <Button rel="nofollow sponsored noopener" target="_blank" marginTop={ marginTop } hideMobile={ hideMobile } showJustInMobile={ showJustInMobile } autoHeight={ autoHeight }>
             <ButtonLink href={ href } target="_blank" >
                 <BuyButtonElement>
 

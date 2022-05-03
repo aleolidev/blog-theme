@@ -65,16 +65,17 @@ In our comparison, we have included only the best Chromebooks on the market. Lik
 
 ### Acer Nitro 5
 
-<FloatingImage product={ props.products[0] } float={ "left" } />
+<FloatingImage lang={ props.lang } showBuyButton={ true } product={ props.products[0] } float={ "left" } />
 
 The <AmazonLink href={`/${props.lang}`}>Acer Nitro 5</AmazonLink> is a gaming laptop with a 15.6-inch screen, an eight-core Intel Core i5-9300H processor, an NVIDIA GeForce GTX 1650 4GB GDDR5 graphics card and 16 GB RAM. With this laptop, you can play almost any current game and, in addition, it is much cheaper than other more powerful gaming laptops.
 
 This laptop has a 128 GB SSD hard drive and a 1 TB HDD solid state drive, so you can save all your movies and series without a problem. In addition, it has a next-generation screen with a resolution of Full HD and a refresh rate of 144 Hz so you can enjoy a really sharp and vivid image.
+<MdxBuyButton lang={ props.lang } href={props.products[0].href} />
 
 ### Acer Aspire 5 A515-46-R3UB
 
 
-<FloatingImage product={ props.products[3] } float={ "right" } />
+<FloatingImage lang={ props.lang } showBuyButton={ true } product={ props.products[3] } float={ "right" } />
 
 The <AmazonLink href={`/${props.lang}`}>Acer Aspire 5 A515-46-R3UB</AmazonLink> is a laptop with a 15.6″ Full HD screen, an AMD Ryzen 3 3350U processor and 4 GB of RAM. In addition, it has a 128 GB SSD drive to store all your files and games. The Acer Aspire 5 is equipped with WiFi 6 connection and an integrated fingerprint reader.
 
@@ -84,10 +85,12 @@ This model includes the Windows Home operating system in S mode, a secure system
 
 *   Cons: User reviews indicate that the keyboard is not very comfortable.
 
+<MdxBuyButton lang={ props.lang } href={props.products[1].href} />
+
 ## Samsung Chromebook 4
 
 
-<FloatingImage product={ props.products[1] } float={ "left" } />
+<FloatingImage lang={ props.lang } showBuyButton={ true } product={ props.products[1] } float={ "left" } />
 
 The <AmazonLink href={`/${props.lang}`}>Samsung Chromebook 4</AmazonLink> is a very popular _Chromebook_ notebook among users. It features an Intel Celeron N4000 processor, 4GB of RAM, and 32GB of eMMC storage.
 
@@ -95,12 +98,16 @@ This model has an 11.6-inch screen and a built-in HD camera. In addition, it inc
 
 In user reviews and comparisons, its battery stands out, which lasts more than 12 hours. It is also highlighted that it is easy to use thanks to the intuitive user interface of Chrome OS.
 
+<MdxBuyButton lang={ props.lang } href={props.products[2].href} />
+
 ### Apple MacBook Air 2020
 
 The <AmazonLink href={`/${props.lang}`}>Apple MacBook Air 2020</AmazonLink> is a laptop with a very elegant and light design. It weighs only 1.1 kg and has a backlit keyboard. Its 13.3-inch Retina display offers a unique visual experience thanks to a resolution of 2256 x 1440 pixels.
 
-<FloatingImage product={ props.products[2] } float={ "right" } />
+<FloatingImage lang={ props.lang } showBuyButton={ true } product={ props.products[2] } float={ "right" } />
 
 It features an Apple M1 chip with an 8-core CPU and up to 8GB RAM. Also, its SSD storage can reach 256GB.
 
 On the other hand, its battery lasts up to 18 hours and it has USB-C and Thunderbolt 3 connections. You can connect to the Internet with Wi-Fi and Bluetooth. In addition, it includes a backlit keyboard and a touch screen. The Apple MacBook Air 2020 is, therefore, a very complete laptop with a great value for money.
+
+<MdxBuyButton lang={ props.lang } href={props.products[3].href} />

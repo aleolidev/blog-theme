@@ -80,7 +80,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-page-progress",
       options: {
-        includePaths: [{ regex: "^\/.+\/.+" }], // TODO: Include manual paths
+        includePaths: [{ regex: "^\/.+\/.+\/.+" }], // TODO: Include manual paths
+        excludePaths: [{ regex: "^\/.*-.*\/.*\/\\d+\/?$"}],
         height: 5,
         prependToBody: false,
         color: `${theme.colors.main1}`,
