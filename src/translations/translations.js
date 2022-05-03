@@ -132,4 +132,141 @@ const productcard = {
     }
 }
 
-module.exports = { breadcrumb, cardelement, articleelement, navbar, footer, cookies, toc, productcard }
+const date = {
+    localeLangs: {
+        'en-US': 'en',
+        'en-AU': 'en-au',
+        'en-GB': 'en-gb',
+        'en-CA': 'en-ca',
+        'de-DE': 'de',
+        'fr-FR': 'fr',
+        'es-ES': 'es'
+    },
+    dateRelativeFormat: {
+        'en-US': {
+            future: "in %s",
+            past: "%s ago",
+            s: 'a few seconds',
+            m: "a minute",
+            mm: "%d minutes",
+            h: "an hour",
+            hh: "%d hours",
+            d: "a day",
+            dd: "%d days",
+            M: "a month",
+            MM: "%d months",
+            y: "a year",
+            yy: "%d years"
+        },
+        'en-AU': {
+            future: "in %s",
+            past: "%s ago",
+            s: 'a few seconds',
+            m: "a minute",
+            mm: "%d minutes",
+            h: "an hour",
+            hh: "%d hours",
+            d: "a day",
+            dd: "%d days",
+            M: "a month",
+            MM: "%d months",
+            y: "a year",
+            yy: "%d years"
+        },
+        'en-GB': {
+            future: "in %s",
+            past: "%s ago",
+            s: 'a few seconds',
+            m: "a minute",
+            mm: "%d minutes",
+            h: "an hour",
+            hh: "%d hours",
+            d: "a day",
+            dd: "%d days",
+            M: "a month",
+            MM: "%d months",
+            y: "a year",
+            yy: "%d years"
+        },
+        'en-CA': {
+            future: "in %s",
+            past: "%s ago",
+            s: 'a few seconds',
+            m: "a minute",
+            mm: "%d minutes",
+            h: "an hour",
+            hh: "%d hours",
+            d: "a day",
+            dd: "%d days",
+            M: "a month",
+            MM: "%d months",
+            y: "a year",
+            yy: "%d years"
+        },
+        'de-DE': {
+            future: "in %s",
+            past: "vor %s",
+            s: 'wenigen Sekunden',
+            m: "einer Minute",
+            mm: "%d Minuten",
+            h: "einer Stunde",
+            hh: "%d Stunden",
+            d: "einem Tag",
+            dd: "%d Tagen",
+            M: "einem Monat",
+            MM: "%d Monaten",
+            y: "enime Jahr",
+            yy: "%d Jahren"
+        },
+        'fr-FR': {
+            future: "Dans %s",
+            past: "Il y'a %s",
+            s: function (number, withoutSuffix, key, isFuture) {
+                return isFuture ? 
+                    "En quelques secondes" : 
+                    "Il y'a quelques secondes"
+            },
+            m: "une minute",
+            mm: "%d minutes",
+            h: "une heure",
+            hh: "%d heures",
+            d: function (number, withoutSuffix, key, isFuture) {
+                return isFuture ? 
+                    "En un jour" : 
+                    "Il y'a un jour"
+            },
+            dd: "%d jours",
+            M: "un mois",
+            MM: "%d mois",
+            y: "un an",
+            yy: "%d ans"
+        },
+        'es-ES': {
+            future: "en %s",
+            past: "hace %s",
+            s: 'unos segundos',
+            m: "un minuto",
+            mm: "%d minutos",
+            h: "una hora",
+            hh: "%d horas",
+            d: "un día",
+            dd: "%d días",
+            M: "un mes",
+            MM: "%d meses",
+            y: "un año",
+            yy: "%d años"
+        }
+    }
+}
+
+module.exports = { 
+    breadcrumb, 
+    cardelement, 
+    articleelement, 
+    navbar, 
+    footer, 
+    cookies, 
+    toc, 
+    productcard,
+    date,
+}

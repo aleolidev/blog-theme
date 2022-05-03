@@ -44,6 +44,10 @@ const slugify = (text) => {
         .replace(/-+$/, '')      // Trim - from end of text
 }
 
+const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 const nestify = (obj) => {
     const minDepth = Math.min.apply(Math, obj.map(item => item.depth))
     let normalizedObj = JSON.parse(JSON.stringify(obj)) // Create a deep copy
@@ -116,4 +120,4 @@ const objectMap = (obj, fn) => {
     )
 }
 
-module.exports = { slugify, nestify, debounce, objectMap }
+module.exports = { slugify, capitalize, nestify, debounce, objectMap }

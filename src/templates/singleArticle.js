@@ -2,9 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { H1 } from "../elements"
-import { Container, Article, FeatureImage, Seo, Breadcrumb, ToC } from "../components"
+import { Container, Article, FeatureImage, Seo, Breadcrumb, ToC, Date } from "../components"
 import { breadcrumb } from "../translations/translations"
 import ShareButtons from "../components/ShareButtons"
+import styled from "styled-components"
+import { capitalize } from "../utils/utils"
 
 const SingleArticle = ({pageContext, data, location }, props) => {
     const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData;
@@ -15,6 +17,8 @@ const SingleArticle = ({pageContext, data, location }, props) => {
     const url = typeof window !== 'undefined' ? window.location.href : '';
     const title = data.mdx.frontmatter.title;
     const excerpt = data.mdx.frontmatter.excerpt;
+    const date = data.mdx.frontmatter.date;
+    const modifiedDate = data.mdx.frontmatter.modifiedDate;
 
     let { breadcrumb: { crumbs }, lang } = pageContext
 
@@ -22,8 +26,7 @@ const SingleArticle = ({pageContext, data, location }, props) => {
         if (i > 0) {
             let prettyName = crumb
             if (i > 1) {
-                prettyName.crumbLabel = prettyName.crumbLabel.toLowerCase().replaceAll('-', ' ').replaceAll('/', '')
-                prettyName.crumbLabel = prettyName.crumbLabel.charAt(0).toUpperCase() + prettyName.crumbLabel.slice(1) // Capitalize
+                prettyName.crumbLabel = capitalize(prettyName.crumbLabel.toLowerCase().replaceAll('-', ' ').replaceAll('/', ''))
             } else {
                 prettyName.crumbLabel = breadcrumb.home[lang]
             }
@@ -54,7 +57,10 @@ const SingleArticle = ({pageContext, data, location }, props) => {
                 >
                     {data.mdx.frontmatter.title}
                 </H1>
-                <ShareButtons url={ url } title={ title } description={ excerpt } />
+                <DateShareWrapper>
+                    <ShareButtons url={ url } title={ title } description={ excerpt } />
+                    <Date lang={ lang } originalDate={ date } modifiedDate={ modifiedDate } />
+                </DateShareWrapper>
                 <MDXRenderer headings={headings} lang={lang} img={ featureImage } products={ products }>
                     {data.mdx.body}
                 </MDXRenderer>
@@ -74,6 +80,7 @@ export const pageQuery = graphql`
             body
             frontmatter {
               date
+              modifiedDate
               excerpt
               title
               slug
@@ -102,4 +109,9 @@ export const pageQuery = graphql`
             }
         }
     }
+`
+
+const DateShareWrapper = styled.div`
+    display: flex;
+    align-items: center;
 `

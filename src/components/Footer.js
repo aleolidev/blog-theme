@@ -5,7 +5,7 @@ import { Column, Grid } from "../components"
 import { footer } from "../translations/translations"
 import styled from "styled-components"
 import langs from "../translations/langs"
-import { slugify } from "../utils/utils"
+import { capitalize, slugify } from "../utils/utils"
 import useBreakpoints from "../hooks/useBreakpoints"
 
 export const Footer = ({ lang }) => {
@@ -85,8 +85,7 @@ export const Footer = ({ lang }) => {
                 { 
                     Object.keys(categoryData).map((category, i) => {
                         const prettyCategory = slugify(category);
-                        let prettyName = category.replaceAll('-', ' ');
-                        prettyName = prettyName.charAt(0).toUpperCase() + prettyName.slice(1) // Capitalize
+                        let prettyName = capitalize(category.replaceAll('-', ' '));
                         
                         let specialMargin = '2.5em 0 0 0';
                         if (breakpoints.mobile && i < mobileColumns ) {

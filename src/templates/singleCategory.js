@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { Articles, Container, Content, Pagination, Seo } from "../components"
 import { H1 } from "../elements"
 import theme from "../themes/theme"
-import { slugify } from "../utils/utils"
+import { capitalize, slugify } from "../utils/utils"
 
 const SingleCategory = ({pageContext, data}) => {
     const articles = data.allMdx.edges
@@ -15,8 +15,7 @@ const SingleCategory = ({pageContext, data}) => {
     const prevPage = currentPage - 1 === 1 ? `/${lang}/${prettyCategory}` : `/${lang}/${prettyCategory}/${currentPage - 1}`
     const nextPage = `/${lang}/${prettyCategory}/${currentPage + 1}`
 
-    let title = pageContext.category.replaceAll('-', ' ')
-    title = title.charAt(0).toUpperCase() + title.slice(1) // Capitalize
+    let title = capitalize(pageContext.category.replaceAll('-', ' '))
     const description = `This is the description of the ${pageContext.category} category`
     const author = "Author"
 
