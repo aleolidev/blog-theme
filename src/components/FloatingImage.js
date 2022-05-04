@@ -23,8 +23,8 @@ const ImageWrapper = styled.div`
     float: ${props => props.float ? props.float : "none" };
     margin-top: 2rem;
     padding: ${props => 
-        props.float == "left" ? ".25em 1.5em .25em 0" : 
-        props.float == "right" ? ".25em 0 .25em 1.5em" : "0"
+        props.float === "left" ? ".25em 1.5em .25em 0" : 
+        props.float === "right" ? ".25em 0 .25em 1.5em" : "0"
     };
     max-width: 20em;
     max-height: 20em;

@@ -39,13 +39,13 @@ const ProductCard = ({ lang, image, name, tags, stars, description, buyHref }) =
                     }
                 )}
                 <ImageWrapper>
-                    <a href={ buyHref } rel="nofollow sponsored noopener" target="_blank">
+                    <a href={ buyHref } rel="nofollow sponsored noopener noreferrer" target="_blank">
                         <GatsbyImage image={ image.childImageSharp.gatsbyImageData } alt={ name } objectFit="contain"/>
                     </a>
                 </ImageWrapper>
                 <CardBody>
                     <TitleWrapper>
-                        <CardTitle href={ buyHref } rel="nofollow sponsored noopener" target="_blank">{ name }</CardTitle>
+                        <CardTitle href={ buyHref } rel="nofollow sponsored noopener noreferrer" target="_blank">{ name }</CardTitle>
                     </TitleWrapper>
                     <Stars stars={ stars } />
                     <CardText>

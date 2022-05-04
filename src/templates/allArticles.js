@@ -3,7 +3,6 @@ import { graphql } from "gatsby"
 import { Articles, Column, Container, Content, ContentCard, FeatureArticle, Grid, Pagination, Seo } from "../components"
 import theme from "../themes/theme"
 import { slugify } from "../utils/utils"
-import useBreakpoints from "../hooks/useBreakpoints"
 import styled from "styled-components"
 
 const AllArticles = ({ pageContext, data }) => {
@@ -25,10 +24,6 @@ const AllArticles = ({ pageContext, data }) => {
     const title = "Main page"
     const description = "This is the description of the main page"
     const author = "Author"
-    
-    const breakpoints = useBreakpoints();
-
-    console.log('articles:', articles)
 
     return (
         <Container>

@@ -10,7 +10,7 @@ export const Nav = ({ lang }) => {
     return (
         <NavWrapper>
             { 
-            (path == `/${lang}` || path == `/${lang}/`)
+            (path === `/${lang}` || path === `/${lang}/`)
             ?
                 //  TODO: Modify alt for web name */
                 <RootLogoWrapper>

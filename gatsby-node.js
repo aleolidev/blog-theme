@@ -32,6 +32,7 @@ exports.createPages = async ({ actions, graphql }) => {
                         frontmatter {
                             category
                             slug
+                            modifiedDate
                         }
                         id
                       }
@@ -105,6 +106,7 @@ exports.createPages = async ({ actions, graphql }) => {
         data.allMdx.edges.forEach(edge => {
             const slug = edge.node.frontmatter.slug
             const category = edge.node.frontmatter.category
+            const modifiedDate = edge.node.frontmatter.modifiedDate
             const prettyCategory = slugify(category)
             const id = edge.node.id
     
@@ -114,6 +116,7 @@ exports.createPages = async ({ actions, graphql }) => {
                 context: { 
                     lang: langs[lang],
                     id, 
+                    modifiedDate,
                 },
             })
         })

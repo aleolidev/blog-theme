@@ -1,11 +1,15 @@
+const { resolve } = require('path');
 const theme = require('./src/themes/theme');
+
+const siteUrl = "http://localhost:8000" // TODO: Change url
 
 module.exports = {
   trailingSlash: "always",
   siteMetadata: {
     title: "My Starter Blog",
     description: "A simple blog built with Gatsby and MDX",
-    url: "https://url.url",
+    url: siteUrl,
+    siteUrl: siteUrl,
     image: "/laptop.jpeg",
     author: "Author",
   },
@@ -134,5 +138,53 @@ module.exports = {
         },
     },
     `gatsby-plugin-preload-fonts`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [
+          `/`, // Avoid indexing the redirect root path
+          `/dev-404-page`,
+          `/404`,
+          `/404.html`,
+          `/offline-plugin-app-shell-fallback`,
+        ],
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              nodes {
+                path
+                pageContext
+              }
+            }
+          }
+        `,
+        // query: `
+        //   {
+        //     allSitePage {
+        //       nodes {
+        //         pageContext
+        //         path
+        //       }
+        //     }
+        //   }
+        // `,
+        // resolveSiteUrl: () => siteUrl,
+        serialize: (page, { resolvePagePath }) => {
+          console.log('logging:', resolvePagePath(page));
+          console.log(JSON.stringify(page))
+          return {
+            url: `${resolvePagePath(page)}`,
+            changefreq: `daily`,
+            priority: 0.7,
+            lastmod: page.pageContext.modifiedDate,
+          }
+        },
+      }
+    }
   ]
 }

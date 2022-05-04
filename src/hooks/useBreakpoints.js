@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react"
+import React, { useLayoutEffect, useState } from "react"
 import theme from "../themes/theme";
-import { debounce, mediaQuery, objectMap } from "../utils/utils";
+import { debounce, objectMap } from "../utils/utils";
 
 const useBreakpoints = (props) => {
     const isBrowser = typeof window !== "undefined"
