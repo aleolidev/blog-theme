@@ -1,0 +1,7 @@
+@media only screen and (max-width: 50rem) {
+    .buttons-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}

@@ -1,6 +1,7 @@
 import React from "react"
 import CookieConsent from "react-cookie-consent";
 import { cookies } from "../translations/translations";
+import "../css/cookies.css"
 
 export const Cookies = ({ theme, lang }) => {
     return (
@@ -12,11 +13,17 @@ export const Cookies = ({ theme, lang }) => {
             enableDeclineButton
             style={{
                 background: theme.colors.light1,
-                boxShadow: '0px 0px 15px -1px rgba(0, 0, 0, 0.5)',
+                boxShadow: '0px 0px 15px 2px rgba(0, 0, 0, 0.25)',
+                margin: '0 1.5em 1.5em',
+                width: 'calc(100% - 3em)',
+                borderRadius: '.5em',
+                padding: '.25rem',
+                alignItems: 'center',
             }}
             contentStyle={{
                 color: theme.colors.dark1
             }}
+            buttonWrapperClasses='buttons-wrapper'
             buttonStyle={{
                 padding: '0.6rem 1.5rem',
                 margin: '.75rem .5rem',

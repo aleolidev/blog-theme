@@ -1,3 +1,7 @@
+import React from "react"
+import { BiCookie } from 'react-icons/bi'
+import styled from "styled-components"
+
 const breadcrumb = {
     home: {
         'en-US': 'Home',
@@ -77,15 +81,35 @@ const footer = {
     
 }
 
+const CookieWrapper = styled.span`
+    display: flex;
+    align-items: center;
+
+    svg {
+        font-size: 1.75rem;
+        color: ${props => props.theme.colors.main1};
+        margin-right: .5em;
+    }
+`
+
+const StyledCookies = ({ children }) => {
+    return (
+        <CookieWrapper>
+            <BiCookie />
+            { children }
+        </CookieWrapper>
+    )
+}
+
 const cookies = {
     text: {
-        'en-US': 'We use cookies!',
-        'en-AU': 'We use cookies!',
-        'en-GB': 'We use cookies!',
-        'en-CA': 'We use cookies!',
-        'de-DE': 'Wir verwenden Cookies!',
-        'fr-FR': 'Nous utilisons des cookies !',
-        'es-ES': '¡Usamos cookies!'
+        'en-US': <StyledCookies><span><b>We use cookies!</b> This website uses cookies to ensure you get the best experience on our website.</span></StyledCookies>,
+        'en-AU': <StyledCookies><span><b>We use cookies!</b> This website uses cookies to ensure you get the best experience on our website.</span></StyledCookies>,
+        'en-GB': <StyledCookies><span><b>We use cookies!</b> This website uses cookies to ensure you get the best experience on our website.</span></StyledCookies>,
+        'en-CA': <StyledCookies><span><b>We use cookies!</b> This website uses cookies to ensure you get the best experience on our website.</span></StyledCookies>,
+        'de-DE': <StyledCookies><span><b>Wir verwenden Cookies!</b> Diese Website verwendet Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website erhalten.</span></StyledCookies>,
+        'fr-FR': <StyledCookies><span><b>Nous utilisons des cookies !</b> Ce site utilise des cookies pour vous garantir la meilleure expérience sur notre site.</span></StyledCookies>,
+        'es-ES': <StyledCookies><span><b>¡Usamos cookies!</b> Este página utiliza cookies para garantizar que obtengas la mejor experiencia en nuestro sitio web.</span></StyledCookies>,
     },
     accept: {
         'en-US': 'Accept',
@@ -259,7 +283,7 @@ const date = {
     }
 }
 
-module.exports = { 
+export { 
     breadcrumb, 
     cardelement, 
     articleelement, 
