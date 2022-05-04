@@ -2,9 +2,7 @@ const { resolve } = require('path');
 const theme = require('./src/themes/theme');
 require("dotenv").config()
 
-console.log(process.env.URL)
-
-const siteUrl = process.env.URL // TODO: Change url
+const siteUrl = process.env.URL
 
 module.exports = {
   trailingSlash: "always",

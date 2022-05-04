@@ -70,9 +70,4 @@ const IconWrapper = styled.div`
     background-color: ${props => props.color};
     border-radius: .25em;
     display: flex;
-
-    @media ${props => props.theme.breakpoints.mobile} {    
-        margin: 0em .4em 0 0;
-        padding: .35em;
-    }
 `
