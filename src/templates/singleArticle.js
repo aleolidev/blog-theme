@@ -13,6 +13,7 @@ const SingleArticle = ({pageContext, data, location }, props) => {
     const headings = data.mdx.headings;
     const seoImage = data.mdx.frontmatter.featureImage.publicURL
     const products = data.mdx.frontmatter.products
+    const keywords = data.mdx.frontmatter.keywords
 
     const url = typeof window !== 'undefined' ? window.location.href : '';
     const title = data.mdx.frontmatter.title;
@@ -42,6 +43,9 @@ const SingleArticle = ({pageContext, data, location }, props) => {
                 image={ seoImage }
                 description={ data.mdx.frontmatter.excerpt }
                 lang={lang}
+                keywords={ keywords }
+                author={ "" }
+                url={ url }
             />
             <FeatureImage image={ featureImage } alt={ data.mdx.frontmatter.title } hideOnMobile={ true } />
             <ToC isTablet={ false } headings={headings ? headings : []} lang={ lang } />
@@ -84,6 +88,7 @@ export const pageQuery = graphql`
               excerpt
               title
               slug
+              keywords
               featureImage {
                 publicURL
                 childImageSharp {

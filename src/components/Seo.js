@@ -20,6 +20,9 @@ export const Seo = ({ description, keywords, title, image, url, author, lang }) 
                             lang: lang ? lang : 'en-US',
                         }}
                         title={title}
+                        link={[
+                            { rel : 'canonical', href : metaUrl  },
+                        ]}
                         meta={[
                             {
                                 name: `description`,

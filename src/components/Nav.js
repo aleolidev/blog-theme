@@ -13,9 +13,9 @@ export const Nav = ({ lang }) => {
             (path === `/${lang}` || path === `/${lang}/`)
             ?
                 //  TODO: Modify alt for web name */
-                <RootLogoWrapper>
+                <div style={{marginLeft: '1.5em'}}>
                     <StaticImage src={ "../images/logo.svg" } alt="Web Logo" placeholder="blurred" width={50} height={50}/>
-                </RootLogoWrapper>
+                </div>
             :
                 <a href={`/${lang}`} style={{marginLeft: '1.5em'}}>
                     {/* TODO: Modify alt for web name */}
@@ -91,12 +91,4 @@ const LanguageWrapper = styled.a`
 const LangIconWrapper = styled.div`
     padding: 0 .65em;
     border-left: 1px solid ${props => props.theme.colors.gray3};
-`
-
-const RootLogoWrapper = styled.div`
-    margin-left: 1.5rem;
-
-    & img {
-        cursor: pointer;
-    }
 `

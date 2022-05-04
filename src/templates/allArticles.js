@@ -11,6 +11,7 @@ const AllArticles = ({ pageContext, data }) => {
     const isLast = currentPage === numPages
     const prevPage = currentPage - 1 === 1 ? `/${lang}` : `/${lang}/${currentPage - 1}`
     const nextPage = `/${lang}/${currentPage + 1}`
+    const url = typeof window !== 'undefined' ? window.location.href : '';
 
     let articles = data.allMdx.edges
     
@@ -27,7 +28,7 @@ const AllArticles = ({ pageContext, data }) => {
 
     return (
         <Container>
-            <Seo title={ title } description={ description } author={ author } lang={lang} />
+            <Seo title={ title } description={ description } author={ author } lang={lang} keywords={ "" } url={ url } />
             <ArticlesWrapper mobile={ true }>
                 <Content mobilePadding={'0'} hideBanner={ true } tabletGridColumn={'1 / span 8'}>
                     {articles.map((article, index) => {

@@ -14,6 +14,7 @@ const SingleCategory = ({pageContext, data}) => {
     const isLast = currentPage === numPages
     const prevPage = currentPage - 1 === 1 ? `/${lang}/${prettyCategory}` : `/${lang}/${prettyCategory}/${currentPage - 1}`
     const nextPage = `/${lang}/${prettyCategory}/${currentPage + 1}`
+    const url = typeof window !== 'undefined' ? window.location.href : '';
 
     let title = capitalize(pageContext.category.replaceAll('-', ' '))
     const description = `This is the description of the ${pageContext.category} category`
@@ -21,7 +22,7 @@ const SingleCategory = ({pageContext, data}) => {
 
     return (
         <Container>
-            <Seo title={ title } description={ description } author={ author } lang={lang} />
+            <Seo title={ title } description={ description } author={ author } lang={lang} keywords={ "" } url={ url } />
             <Content hideBanner={ true } padding={`${theme.spacings.large} ${theme.spacings.xLarge}`}>
                 <H1 margin="0 0 .75em 0">
                     {title}
