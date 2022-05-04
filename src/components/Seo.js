@@ -1,8 +1,12 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
+import { getSrc } from "gatsby-plugin-image"
 
-export const Seo = ({ description, keywords, title, image, url, author, lang }) => {
+export const Seo = ({ description, keywords, title, image, url, author, lang, publishedDate, modifiedDate, isArticle, articleCategory }) => {
+    
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+
     return (
         <StaticQuery
             query={ detailsQuery }
@@ -13,6 +17,9 @@ export const Seo = ({ description, keywords, title, image, url, author, lang }) 
                 const metaUrl = url || data.site.siteMetadata.url
                 const metaImage = image || data.site.siteMetadata.image
                 const metaKeywords = keywords || ["default metakeywords", "blog keywords"]
+
+                const imageUrl = origin + getSrc(metaImage);
+                const { width: imgWidth, height: imgHeight} = metaImage
 
                 return (
                     <Helmet
@@ -42,7 +49,7 @@ export const Seo = ({ description, keywords, title, image, url, author, lang }) 
                             },
                             {
                                 name: `og:image`,
-                                content: metaImage,
+                                content: imageUrl,
                             },
                             {
                                 name: `og:url`,
@@ -66,7 +73,7 @@ export const Seo = ({ description, keywords, title, image, url, author, lang }) 
                             },
                             {
                                 name: `twitter:image`,
-                                content: metaImage,
+                                content: imageUrl,
                             },
                         ].concat(
                             metaKeywords && metaKeywords.length > 0 ? {
@@ -74,7 +81,37 @@ export const Seo = ({ description, keywords, title, image, url, author, lang }) 
                                 content: metaKeywords.join(`, `),
                             } : []
                         )}
-                    />
+                    >                        
+                        <script type="application/ld+json">{JSON.stringify( isArticle && {
+                            "@context": "https://schema.org",
+                            "@type": "Article",
+                            "mainEntityOfPage": metaUrl,
+                            "name": metaTitle,
+                            "headline": metaTitle,
+                            "datePublished": publishedDate,
+                            "dateModified": modifiedDate,
+                            "publisher": {
+                                "@type": "Organization",
+                                "name": "Web Page", // TODO: Change webpage name
+                            },
+                            "image": {
+                                "@type": "ImageObject",
+                                "url": imageUrl,
+                                "width": imgWidth,
+                                "height": imgHeight
+                            },
+                            "author": {
+                                "@type": "Person",
+                                "name": metaAuthor,
+                                "url": "https://twitter.com/InmortalKaktus",
+                            },
+                            "url": metaUrl,
+                            "thumbnailUrl": imageUrl,
+                            "articleSection": articleCategory,
+                            "creator": metaAuthor,
+                            "keywords": metaKeywords
+                        })}</script>
+                    </Helmet> 
                 )
             }}
         />

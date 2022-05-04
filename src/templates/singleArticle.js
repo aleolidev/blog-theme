@@ -11,7 +11,6 @@ import { capitalize } from "../utils/utils"
 const SingleArticle = ({pageContext, data, location }, props) => {
     const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData;
     const headings = data.mdx.headings;
-    const seoImage = data.mdx.frontmatter.featureImage.publicURL
     const products = data.mdx.frontmatter.products
     const keywords = data.mdx.frontmatter.keywords
 
@@ -40,12 +39,16 @@ const SingleArticle = ({pageContext, data, location }, props) => {
         <Container>
             <Seo
                 title={ data.mdx.frontmatter.title }
-                image={ seoImage }
+                image={ featureImage }
                 description={ data.mdx.frontmatter.excerpt }
                 lang={lang}
                 keywords={ keywords }
                 author={ "" }
                 url={ url }
+                publishedDate={ date }
+                modifiedDate={ modifiedDate }
+                isArticle={ true }
+                articleCategory={ crumbs[crumbs.length - 2].crumbLabel }
             />
             <FeatureImage image={ featureImage } alt={ data.mdx.frontmatter.title } hideOnMobile={ true } />
             <ToC isTablet={ false } headings={headings ? headings : []} lang={ lang } />
