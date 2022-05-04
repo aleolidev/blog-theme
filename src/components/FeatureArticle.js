@@ -3,8 +3,10 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { A, FeatureImageWrapper, H1 } from "../elements"
 import styled from "styled-components"
+import { Date } from "./Date"
+import theme from "../themes/theme"
 
-export const FeatureArticle = ({ title, href, image, alt, gridRow }) => {
+export const FeatureArticle = ({ title, href, image, alt, gridRow, lang, date, modifiedDate }) => {
 
     const data = useStaticQuery(graphql`
         {
@@ -29,7 +31,16 @@ export const FeatureArticle = ({ title, href, image, alt, gridRow }) => {
                 </BlackCover>
                 <TitleWrapper>
                     <H1 color="light1" fontWeight="700">
-                        { title }
+                        <Title>
+                            { title }
+                        </Title>
+                        <Date 
+                            lang={ lang } 
+                            originalDate={ date } 
+                            modifiedDate={ modifiedDate } 
+                            fontSize={ "1.75rem" } 
+                            color={ theme.colors.light1 } 
+                        />
                     </H1>
                 </TitleWrapper>
             </A>
@@ -60,6 +71,7 @@ const BlackCover = styled.div`
 
 const TitleWrapper = styled.div`
     z-index: 0;
+    display: flex;
     position: absolute;
     bottom: 1.5em;
     left: 1.5em;
@@ -69,5 +81,8 @@ const TitleWrapper = styled.div`
 
     @media ${props => props.theme.breakpoints.tablet} {
         width: 100%;
+        padding-right: 3em;
     }
 `
+
+const Title = styled.span``

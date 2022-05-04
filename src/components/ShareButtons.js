@@ -54,8 +54,6 @@ const ButtonsWrapper = styled.div`
     }
 
     @media ${props => props.theme.breakpoints.mobile} {    
-        margin-top: .5em;
-
         & svg {
             font-size: .9em;
         }
@@ -68,7 +66,7 @@ const ButtonsWrapper = styled.div`
 
 const IconWrapper = styled.div`
     padding: .45em;
-    margin: .75em .5em 0 0;
+    margin: 0 .5em 0 0;
     background-color: ${props => props.color};
     border-radius: .25em;
     display: flex;

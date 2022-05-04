@@ -114,4 +114,9 @@ export const pageQuery = graphql`
 const DateShareWrapper = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 1rem;
+
+    @media ${props => props.theme.breakpoints.mobile} {    
+        margin-top: .75rem;
+    }
 `

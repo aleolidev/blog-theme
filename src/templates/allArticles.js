@@ -13,19 +13,22 @@ const AllArticles = ({ pageContext, data }) => {
     const prevPage = currentPage - 1 === 1 ? `/${lang}` : `/${lang}/${currentPage - 1}`
     const nextPage = `/${lang}/${currentPage + 1}`
 
-    
     let articles = data.allMdx.edges
     
     const featuredArticle = articles[0]
     const featuredImage = featuredArticle.node.frontmatter.featureImage.childImageSharp.gatsbyImageData;
     const featuredCategory = slugify(featuredArticle.node.frontmatter.category)
     const featuredSlug = featuredArticle.node.frontmatter.slug
+    const featuredDate = featuredArticle.node.frontmatter.date
+    const featuredModifiedDate = featuredArticle.node.frontmatter.modifiedDate
     
     const title = "Main page"
     const description = "This is the description of the main page"
     const author = "Author"
     
     const breakpoints = useBreakpoints();
+
+    console.log('articles:', articles)
 
     return (
         <Container>
@@ -41,6 +44,9 @@ const AllArticles = ({ pageContext, data }) => {
                                 image={ article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData } 
                                 href={ `/${lang}/${prettyCategory}/${article.node.frontmatter.slug}/` }
                                 gridRow={ () => (`${index * 2} / span 2`) } 
+                                lang={ lang }
+                                date={ article.node.frontmatter.date }
+                                modifiedDate={ article.node.frontmatter.modifiedDate }
                             />
                         )
                     })}
@@ -60,7 +66,14 @@ const AllArticles = ({ pageContext, data }) => {
                     ?
                     <>
 
-                        <FeatureArticle image={ featuredImage } title={ featuredArticle.node.frontmatter.title } href={ `/${lang}/${featuredCategory}/${featuredSlug}/` } />
+                        <FeatureArticle 
+                            image={ featuredImage } 
+                            title={ featuredArticle.node.frontmatter.title } 
+                            href={ `/${lang}/${featuredCategory}/${featuredSlug}/` }
+                            lang={ lang }
+                            date={ featuredDate }
+                            modifiedDate={ featuredModifiedDate }
+                        />
                         <Content padding={ `${ theme.spacings.small } ${ theme.spacings.xLarge }` } tabletGridColumn={'1 / span 8'}>
                             <Grid columns={3} mobileColumns={1} gap={"2em"}>
                                 {articles.map((article, index) => {
@@ -72,6 +85,7 @@ const AllArticles = ({ pageContext, data }) => {
                                                 <ContentCard 
                                                     key={article.node.frontmatter.slug}
                                                     date={article.node.frontmatter.date}
+                                                    modifiedDate={article.node.frontmatter.modifiedDate}
                                                     title={article.node.frontmatter.title}
                                                     image={article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData}
                                                     slug={article.node.frontmatter.slug}
@@ -136,7 +150,7 @@ export const pageQuery = graphql`
     query AllArticlesQuery($skip: Int!, $limit: Int!, $lang: String!) {
         allMdx(
             filter: {frontmatter: {lang: {eq: $lang}}} 
-            sort: {fields: frontmatter___date, order: DESC}
+            sort: {fields: frontmatter___modifiedDate, order: DESC}
             skip: $skip
             limit: $limit
         ) {
@@ -145,7 +159,8 @@ export const pageQuery = graphql`
                     frontmatter {
                         slug
                         title
-                        date(formatString: "DD/MM/YYYY")
+                        date
+                        modifiedDate
                         excerpt
                         author
                         category

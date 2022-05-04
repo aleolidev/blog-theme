@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { A } from "../elements"
 import { articleelement } from "../translations/translations"
 import { slugify } from "../utils/utils"
+import { Date } from "./Date"
 
 export const Articles = ({ articles, lang }) => {
     return (
@@ -12,6 +13,9 @@ export const Articles = ({ articles, lang }) => {
             const image = node.frontmatter.featureImage.childImageSharp.gatsbyImageData;
             const category = node.frontmatter.category
             const prettyCategory = slugify(category)
+            const date = node.frontmatter.date
+            const modifiedDate = node.frontmatter.modifiedDate
+            const author = node.frontmatter.author
 
             return (
                 <ArticleWrapper key={ node.frontmatter.title }>
@@ -52,7 +56,14 @@ export const Articles = ({ articles, lang }) => {
                         </ReadMoreWrapper>
                     </InfoWrapper>
                     <PublicationWrapper>
-                        {node.frontmatter.author} - {node.frontmatter.date}
+                        {author ?
+                            <>
+                                <span> {node.frontmatter.author} </span>
+                                <Date lang={ lang } originalDate={ date } modifiedDate={ modifiedDate } fontSize={ ".8rem" } />
+                            </> 
+                        :
+                            <Date lang={ lang } originalDate={ date } modifiedDate={ modifiedDate } fontSize={ ".8rem" } hideDash={ true } />
+                        }
                     </PublicationWrapper>
                 </ArticleWrapper>
                 )
@@ -110,11 +121,16 @@ const TitleWrapper = styled.div`
 `
 
 const PublicationWrapper = styled.div`
+    display: flex;
+    align-items: center;
     font-size: 0.8em;
-    margin: 1.5rem 0 0.5rem 0;
+    margin: .75rem 0 0.5rem 0;
     color: ${props => props.theme.colors.dark3};
-    text-transform: uppercase;
     font-weight: 700;
+
+    & > span {
+        margin: 0 .4rem 0 0;
+    }
 
     @media ${props => props.theme.breakpoints.tablet} {   
         margin: 1rem 0 0.5rem 0;
@@ -122,6 +138,10 @@ const PublicationWrapper = styled.div`
 
     @media ${props => props.theme.breakpoints.mobile} {    
         margin: .5rem 0;
+        
+        & > span {
+            margin: 0 .5rem 0 0;
+        }
     }
 `
 

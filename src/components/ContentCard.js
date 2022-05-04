@@ -4,8 +4,9 @@ import { CardWrapper, P } from "../elements"
 import { FakeButton } from "../components"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { cardelement } from "../translations/translations"
+import { Date } from "./Date"
 
-export const ContentCard = ({ date, title, image, slug, category, lang }) => {
+export const ContentCard = ({ date, modifiedDate, title, image, slug, category, lang }) => {
     return (
         <CardWrapper href={`/${lang}/${category}/${slug}/`}>
             <GatsbyImage 
@@ -16,7 +17,13 @@ export const ContentCard = ({ date, title, image, slug, category, lang }) => {
             <P size="small" color="dark2" margin="1rem 1rem 0 1rem">
                 {title} <br />
                 <DateWrapper>
-                    {date}
+                    <Date 
+                        lang={ lang } 
+                        originalDate={ date } 
+                        modifiedDate={ modifiedDate } 
+                        hideDash={ true } 
+                        fontSize={ ".8rem" }
+                    />
                 </DateWrapper>
                 <ButtonWrapper style={{ justifyContent: 'flex-end' }}>
                     <FakeButton>{ cardelement.read_more[lang] }</FakeButton> {/* SEO Purposes */}

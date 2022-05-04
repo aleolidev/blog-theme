@@ -7,7 +7,6 @@ import { navbar } from "../translations/translations"
 
 export const Nav = ({ lang }) => {
     const path = typeof window !== 'undefined' ? window.location.pathname : '';
-    console.log(path)
     return (
         <NavWrapper>
             { 

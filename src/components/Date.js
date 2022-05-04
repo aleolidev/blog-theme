@@ -5,7 +5,7 @@ import * as relativeTime from 'dayjs/plugin/relativeTime';
 import { date } from "../translations/translations"
 import { capitalize } from '../utils/utils';
 
-export const Date = ({ lang, originalDate, modifiedDate }) => {
+export const Date = ({ lang, originalDate, modifiedDate, fontSize, hideDash, color }) => {
     dayjs.extend(relativeTime)
     
     const localeObject = {
@@ -19,7 +19,7 @@ export const Date = ({ lang, originalDate, modifiedDate }) => {
 
     return (
         typeof window !== 'undefined' && // Avoid printing incorrect date taken from build status
-        <DateWrapper>
+        <DateWrapper fontSize={ fontSize } hideDash={ hideDash } color={ color }>
             { modifiedDate 
             ?
                 <time datetime={ originalDate } datetime-updated={ modifiedDate }>
@@ -34,21 +34,24 @@ export const Date = ({ lang, originalDate, modifiedDate }) => {
     )
 }
 
-const DateWrapper = styled.div`
-    margin: .75em 0 0 0;
-    font-size: 1em;
-    color: ${props => props.theme.colors.gray1};
+const DateWrapper = styled.span`
+    margin: 0;
+    font-size: ${props => props.fontSize ? props.fontSize : "1rem" };
+    color: ${props => props.color ? props.color : props.theme.colors.dark3};
+    font-weight: 400!important;
     
-    &:before {
-        content: '—';
-        margin: 0 1rem 0 .5rem;
-    }
-
-    @media ${props => props.theme.breakpoints.mobile} {    
-        margin: 0.5em 0 0 0;
-
+    ${({hideDash}) => !hideDash && `
+    
         &:before {
-            margin: 0 1rem 0 .6rem;
+            content: '—';
+            margin: 0 1rem 0 .5rem;  
+            font-size: ${props => props.fontSize ? props.fontSize : "1rem" };
         }
-    }
+    
+        @media ${props => props.theme.breakpoints.mobile} {    
+            &:before {
+                margin: 0 1rem 0 .6rem;
+            }
+        }
+    `};
 `
