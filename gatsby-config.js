@@ -1,7 +1,10 @@
 const { resolve } = require('path');
 const theme = require('./src/themes/theme');
+require("dotenv").config()
 
-const siteUrl = "http://localhost:8000" // TODO: Change url
+console.log(process.env.URL)
+
+const siteUrl = process.env.URL // TODO: Change url
 
 module.exports = {
   trailingSlash: "always",
@@ -10,7 +13,7 @@ module.exports = {
     description: "A simple blog built with Gatsby and MDX",
     url: siteUrl,
     siteUrl: siteUrl,
-    image: "/laptop.jpeg",
+    image: "",
     author: "Author",
   },
   plugins: [
@@ -163,20 +166,7 @@ module.exports = {
             }
           }
         `,
-        // query: `
-        //   {
-        //     allSitePage {
-        //       nodes {
-        //         pageContext
-        //         path
-        //       }
-        //     }
-        //   }
-        // `,
-        // resolveSiteUrl: () => siteUrl,
         serialize: (page, { resolvePagePath }) => {
-          console.log('logging:', resolvePagePath(page));
-          console.log(JSON.stringify(page))
           return {
             url: `${resolvePagePath(page)}`,
             changefreq: `daily`,
