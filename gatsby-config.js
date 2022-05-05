@@ -19,6 +19,12 @@ module.exports = {
     `gatsby-plugin-webpack-bundle-analyser-v2`,
     `gatsby-plugin-preact`,
     {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{userAgent: '*', allow: '/'}]
+      }
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,

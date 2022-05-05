@@ -9,19 +9,10 @@ export const Nav = ({ lang }) => {
     const path = typeof window !== 'undefined' ? window.location.pathname : '';
     return (
         <NavWrapper>
-            { 
-            (path === `/${lang}` || path === `/${lang}/`)
-            ?
-                //  TODO: Modify alt for web name */
-                <div style={{marginLeft: '1.5em'}}>
-                    <StaticImage src={ "../images/logo.svg" } alt="Web Logo" placeholder="blurred" width={50} height={50}/>
-                </div>
-            :
-                <a href={`/${lang}`} style={{marginLeft: '1.5em'}}>
-                    {/* TODO: Modify alt for web name */}
-                    <StaticImage src={ "../images/logo.svg" } alt="Web Logo" placeholder="blurred" width={50} height={50}/>
-                </a>
-            }
+            <a href={ (path === `/${lang}` || path === `/${lang}/`) ? null : `/${lang}`} style={{marginLeft: '1.5em'}}>
+                {/* TODO: Modify alt for web name */}
+                <StaticImage src={ "../images/logo.svg" } alt="Web Logo" placeholder="blurred" width={50} height={50}/>
+            </a>
             <EndWrapper>
                 <Categories href='#all-categories'>
                     { navbar.categories[lang] }
