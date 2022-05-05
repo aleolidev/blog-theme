@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
 
     body, html {
         scroll-behavior: smooth;
-        font-family: "Mulish", sans-serif;
+        font-family: sans-serif;
         height: 100%;
         min-width: 23em;
     }

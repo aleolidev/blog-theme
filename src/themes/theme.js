@@ -1,6 +1,6 @@
 const theme = {
     fonts: {
-        main: "\"Mulish\", sans-serif",
+        main: "sans-serif",
         code: "monospace",
     },
     colors: {
