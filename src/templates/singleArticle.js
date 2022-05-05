@@ -95,7 +95,7 @@ export const pageQuery = graphql`
               featureImage {
                 publicURL
                 childImageSharp {
-                    gatsbyImageData(placeholder: BLURRED)
+                    gatsbyImageData
                 }
               }
               products {
