@@ -1,3 +1,4 @@
+// TODO: Customize theme 
 const theme = {
     fonts: {
         main: "sans-serif",

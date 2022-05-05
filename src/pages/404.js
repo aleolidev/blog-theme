@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Container, Content, FeatureImage } from "../components"
 import { H1 } from "../elements"
+import { error404 } from "../translations/translations"
 
 const notFound = ({ data }) => {
     const featureImage = data.file.childImageSharp.gatsbyImageData;
@@ -12,7 +13,7 @@ const notFound = ({ data }) => {
             <Content>
                 <H1 textAlign="center" margin="0 0 1rem 0">
                     {" "}
-                    Vaya... Parece que no hemos podido encontrar lo que buscabas
+                    { error404.message }
                 </H1>
             </Content>
         </Container>

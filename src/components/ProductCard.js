@@ -94,14 +94,14 @@ const ImageLink = styled.a`
 
 const ImageWrapper = styled.div`
     margin: 1.25em 0;
-    height: 10em;
+    height: 10em !important;
     width: 100%;
     text-align: center;
     justify-content: center;
     align-items: center;
 
     img {
-        height: 10em;
+        height: 10em !important;
         width: 100%;
     }
 

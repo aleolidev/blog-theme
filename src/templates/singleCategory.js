@@ -16,6 +16,7 @@ const SingleCategory = ({pageContext, data}) => {
     const nextPage = `/${lang}/${prettyCategory}/${currentPage + 1}`
     const url = typeof window !== 'undefined' ? window.location.href : '';
 
+    // TODO: Change default metadata for categories
     let title = capitalize(pageContext.category.replaceAll('-', ' '))
     const description = `This is the description of the ${pageContext.category} category`
     const author = "Author"

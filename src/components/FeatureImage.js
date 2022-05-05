@@ -7,7 +7,7 @@ export const FeatureImage = ({ image, alt, hideOnMobile }) => {
 
     const data = useStaticQuery(graphql`
         {
-            file(relativePath: { eq: "laptop.jpeg" }) {
+            file(relativePath: { eq: "default.jpeg" }) {
                 childImageSharp {
                     gatsbyImageData
                 }

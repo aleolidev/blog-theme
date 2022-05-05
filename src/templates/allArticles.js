@@ -22,6 +22,7 @@ const AllArticles = ({ pageContext, data }) => {
     const featuredDate = featuredArticle.node.frontmatter.date
     const featuredModifiedDate = featuredArticle.node.frontmatter.modifiedDate
     
+    // TODO: Change default metadata for main page
     const title = "Main page"
     const description = "This is the description of the main page"
     const author = "Author"

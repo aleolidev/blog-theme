@@ -7,12 +7,12 @@ const siteUrl = process.env.URL
 module.exports = {
   trailingSlash: "always",
   siteMetadata: {
-    title: "My Starter Blog",
-    description: "A simple blog built with Gatsby and MDX",
+    title: "My Starter Blog", // TODO: Change default title
+    description: "A simple blog built with Gatsby and MDX", // TODO: Change default description
     url: siteUrl,
     siteUrl: siteUrl,
     image: "",
-    author: "Author",
+    author: "Author", // TODO: Change default author
   },
   plugins: [
     `gatsby-plugin-styled-components`,

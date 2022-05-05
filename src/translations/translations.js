@@ -144,6 +144,19 @@ const toc = {
     }
 }
 
+const error404 = {
+    message: {
+        'en-US': 'Oops... Looks like we couldn\'t find what you were looking for',
+        'en-AU': 'Oops... Looks like we couldn\'t find what you were looking for',
+        'en-GB': 'Oops... Looks like we couldn\'t find what you were looking for',
+        'en-CA': 'Oops... Looks like we couldn\'t find what you were looking for',
+        'de-DE': 'Hoppla... Anscheinend konnten wir nicht finden, wonach Sie gesucht haben',
+        'fr-FR': 'Oups... Il semble que nous n\'ayons pas trouvé ce que vous cherchiez',
+        'es-ES': 'Vaya... Parece que no hemos podido encontrar lo que buscabas'
+    }
+    
+}
+
 const productcard = {
     viewAtAmazon: {
         'en-US': 'View at Amazon',
@@ -291,6 +304,7 @@ export {
     footer, 
     cookies, 
     toc, 
+    error404,
     productcard,
     date,
 }

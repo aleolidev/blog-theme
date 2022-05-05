@@ -10,7 +10,7 @@ export const FeatureArticle = ({ title, href, image, alt, gridRow, lang, date, m
 
     const data = useStaticQuery(graphql`
         {
-            file(relativePath: { eq: "laptop.jpeg" }) {
+            file(relativePath: { eq: "default.jpeg" }) {
                 childImageSharp {
                     gatsbyImageData
                 }
