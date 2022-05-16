@@ -74,11 +74,10 @@ const footer = {
         'en-AU': 'Australia',
         'en-GB': 'United Kingdom',
         'en-CA': 'Canada',
-        'de-DE': 'Deutschland',
+        'de-DE': 'Deutsch',
         'fr-FR': 'France',
         'es-ES': 'España'
     }
-    
 }
 
 const CookieWrapper = styled.span`

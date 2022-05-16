@@ -1,3 +1,5 @@
+const { legal } = require("../translations/legal");
+
 const slugify = (text) => {
     text = text.toString().toLowerCase().trim();
   
@@ -46,6 +48,10 @@ const slugify = (text) => {
 
 const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+const capitalizeNth = (str, n) => {
+    return str.slice(0,n) + str.charAt(n).toUpperCase() + str.slice(n+1)
 }
 
 const nestify = (obj) => {
@@ -120,4 +126,24 @@ const objectMap = (obj, fn) => {
     )
 }
 
-module.exports = { slugify, capitalize, nestify, debounce, objectMap }
+const sitemapExcludePaths = () => {
+    let paths = new Set([
+        `/`, // Avoid indexing the redirect root path
+        `/dev-404-page`,
+        `/404`,
+        `/404.html`,
+        `/offline-plugin-app-shell-fallback`,
+    ])
+
+    const { privacyPolicyURL, cookiesPolicyURL, legalClaimURL } = legal
+
+    for (const item in privacyPolicyURL) { paths.add(`/${slugify(item)}/${privacyPolicyURL[item]}`) }
+    for (const item in cookiesPolicyURL) { paths.add(`/${slugify(item)}/${cookiesPolicyURL[item]}`) }
+    for (const item in legalClaimURL) { paths.add(`/${slugify(item)}/${legalClaimURL[item]}`) }
+
+    paths = Array.from(paths)
+
+    return paths
+}
+
+module.exports = { slugify, capitalize, capitalizeNth, nestify, debounce, objectMap, sitemapExcludePaths }

@@ -7,6 +7,7 @@ import styled from "styled-components"
 import langs from "../translations/langs"
 import { capitalize, slugify } from "../utils/utils"
 import useBreakpoints from "../hooks/useBreakpoints"
+import { legal } from "../translations/legal"
 
 export const Footer = ({ lang }) => {
     
@@ -67,7 +68,7 @@ export const Footer = ({ lang }) => {
 
     const desktopColumns = 6;
     const tabletColumns = 3;
-    const mobileColumns = 1;    
+    const mobileColumns = 1;
 
     return (
         <FooterWrapper>
@@ -98,7 +99,7 @@ export const Footer = ({ lang }) => {
 
                         return (
                             <Column justifyContent={"start"} specialMargin={specialMargin}>
-                                <A href={`/${lang}/${prettyCategory}`} 
+                                <A href={`/${slugify(lang)}/${prettyCategory}`} 
                                     color="light1" 
                                     fontSize={'0.875em'} 
                                     fontWeight={700} 
@@ -111,7 +112,7 @@ export const Footer = ({ lang }) => {
                                 {
                                     Object.keys(categoryData[category]).map((article) => {
                                         return (
-                                            <A href={`/${lang}/${prettyCategory}/${categoryData[category][article].slug}`} 
+                                            <A href={`/${slugify(lang)}/${prettyCategory}/${categoryData[category][article].slug}`} 
                                                 color="gray2" 
                                                 fontSize={'0.875em'} 
                                                 fontWeight={400}
@@ -160,7 +161,7 @@ export const Footer = ({ lang }) => {
                                 )
                             } else {
                                 return (
-                                    <A href={`/${lang_code}`} 
+                                    <A href={`/${slugify(lang_code)}`} 
                                         color="gray3" 
                                         fontSize={'0.875em'} 
                                         fontWeight={400}
@@ -176,6 +177,22 @@ export const Footer = ({ lang }) => {
                     })
                 }
             </CountryWrapper>
+            <HRFullWidthWrapper>
+                <HorizontalRule />
+            </HRFullWidthWrapper>
+
+            <LegalWrapper>
+                <A rel="nofollow noopener noreferrer" href={`/${slugify(lang)}/${ legal.privacyPolicyURL[lang] }`} color="gray3" fontSize={'0.875em'} fontWeight={400} textAlign="center"> 
+                    { legal.privacyPolicy[lang] } 
+                </A>
+                <A rel="nofollow noopener noreferrer" href={`/${slugify(lang)}/${ legal.cookiesPolicyURL[lang] }`} color="gray3" fontSize={'0.875em'} fontWeight={400} textAlign="center"> 
+                    { legal.cookiesPolicy[lang] } 
+                </A>
+                <A rel="nofollow noopener noreferrer" href={`/${slugify(lang)}/${ legal.legalClaimURL[lang] }`} color="gray3" fontSize={'0.875em'} fontWeight={400} textAlign="center"> 
+                    { legal.legalClaim[lang] } 
+                </A>
+            </LegalWrapper>
+
             <HRFullWidthWrapper>
                 <HorizontalRule />
             </HRFullWidthWrapper>
@@ -198,6 +215,17 @@ const HRFullWidthWrapper = styled.div`
 
 const CountryWrapper = styled.div`
     margin: .75em 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    p, a {
+        margin: .25em 1.25em;
+    }
+`
+
+const LegalWrapper = styled.div`
+    margin: 0 2rem .75rem 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

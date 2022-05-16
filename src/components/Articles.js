@@ -20,7 +20,7 @@ export const Articles = ({ articles, lang }) => {
             return (
                 <ArticleWrapper key={ node.frontmatter.title }>
                     <ImageWrapper>
-                        <A href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`}>
+                        <A href={`/${slugify(lang)}/${prettyCategory}/${node.frontmatter.slug}`}>
                             <GatsbyImage 
                                 image={ image ? image : null }
                                 fadeIn={false} 
@@ -31,7 +31,7 @@ export const Articles = ({ articles, lang }) => {
                     </ImageWrapper>
                     <TitleWrapper>
                         <A 
-                            href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`} 
+                            href={`/${slugify(lang)}/${prettyCategory}/${node.frontmatter.slug}`} 
                             fontWeight='700'
                             hoverColor="main1"
                             color="main2" 
@@ -45,7 +45,7 @@ export const Articles = ({ articles, lang }) => {
                         </ExcerptWrapper>
                         <ReadMoreWrapper>
                             <A 
-                                href={`/${lang}/${prettyCategory}/${node.frontmatter.slug}`} 
+                                href={`/${slugify(lang)}/${prettyCategory}/${node.frontmatter.slug}`} 
                                 fontSize='.8em' 
                                 fontWeight='700'
                                 color="main1"

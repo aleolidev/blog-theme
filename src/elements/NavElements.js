@@ -5,7 +5,6 @@ export const NavWrapper = styled.nav`
     align-items: center;
     justify-content: space-between;
     position: relative;
-    padding: .5em 0;
 
     box-sizing: content-box;
     box-shadow: ${props => props.theme.shadows.shadow2};

@@ -9,8 +9,8 @@ const AllArticles = ({ pageContext, data }) => {
     const { currentPage, numPages, lang } = pageContext
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
-    const prevPage = currentPage - 1 === 1 ? `/${lang}` : `/${lang}/${currentPage - 1}`
-    const nextPage = `/${lang}/${currentPage + 1}`
+    const prevPage = currentPage - 1 === 1 ? `/${slugify(lang)}` : `/${slugify(lang)}/${currentPage - 1}`
+    const nextPage = `/${slugify(lang)}/${currentPage + 1}`
     const url = typeof window !== 'undefined' ? window.location.href : '';
 
     let articles = data.allMdx.edges
@@ -39,7 +39,7 @@ const AllArticles = ({ pageContext, data }) => {
                             <FeatureArticle 
                                 title={ article.node.frontmatter.title } 
                                 image={ article.node.frontmatter.featureImage.childImageSharp.gatsbyImageData } 
-                                href={ `/${lang}/${prettyCategory}/${article.node.frontmatter.slug}/` }
+                                href={ `/${slugify(lang)}/${prettyCategory}/${article.node.frontmatter.slug}/` }
                                 gridRow={ () => (`${index * 2} / span 2`) } 
                                 lang={ lang }
                                 date={ article.node.frontmatter.date }
@@ -66,7 +66,7 @@ const AllArticles = ({ pageContext, data }) => {
                         <FeatureArticle 
                             image={ featuredImage } 
                             title={ featuredArticle.node.frontmatter.title } 
-                            href={ `/${lang}/${featuredCategory}/${featuredSlug}/` }
+                            href={ `/${slugify(lang)}/${featuredCategory}/${featuredSlug}/` }
                             lang={ lang }
                             date={ featuredDate }
                             modifiedDate={ featuredModifiedDate }

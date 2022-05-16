@@ -1,8 +1,11 @@
 const { resolve } = require('path');
 const theme = require('./src/themes/theme');
+const { excludeLegalPaths, sitemapExcludePaths } = require('./src/utils/utils');
 require("dotenv").config()
 
 const siteUrl = process.env.URL
+
+const sitemapExcludes = sitemapExcludePaths()
 
 module.exports = {
   trailingSlash: "always",
@@ -148,13 +151,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        excludes: [
-          `/`, // Avoid indexing the redirect root path
-          `/dev-404-page`,
-          `/404`,
-          `/404.html`,
-          `/offline-plugin-app-shell-fallback`,
-        ],
+        excludes: sitemapExcludes,
         query: `
           {
             site {

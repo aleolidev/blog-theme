@@ -5,10 +5,11 @@ import { FakeButton } from "../components"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { cardelement } from "../translations/translations"
 import { Date } from "./Date"
+import { slugify } from "../utils/utils"
 
 export const ContentCard = ({ date, modifiedDate, title, image, slug, category, lang }) => {
     return (
-        <CardWrapper href={`/${lang}/${category}/${slug}/`}>
+        <CardWrapper href={`/${slugify(lang)}/${category}/${slug}/`}>
             <GatsbyImage 
                 image={ image ? image : null } 
                 fadeIn={false}

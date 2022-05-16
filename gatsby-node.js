@@ -1,21 +1,13 @@
+const langs = require("./src/translations/langs")
+const { legal } = require("./src/translations/legal")
 const { slugify } = require("./src/utils/utils")
 
 exports.createPages = async ({ actions, graphql }) => {
-    const langs = [
-        'en-US',
-        'de-DE',
-        'en-AU',
-        'en-GB',
-        'fr-FR',
-        'en-CA',
-        'es-ES'
-    ]
-    
     const { createRedirect } = actions
     
     createRedirect({
         fromPath: `/`,
-        toPath: `/${langs[0]}`,
+        toPath: `/${slugify(langs[0])}`,
         redirectInBrowser: false,
         isPermanent: true,
     })
@@ -49,7 +41,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
         Array.from({ length: numPages }).forEach((_, i) => {
             actions.createPage({
-                path: i === 0 ? `/${langs[lang]}/` : `/${langs[lang]}/${i + 1}`,
+                path: i === 0 ? `/${slugify(langs[lang])}/` : `/${slugify(langs[lang])}/${i + 1}`,
                 component: require.resolve("./src/templates/allArticles.js"),
                 context: {
                     lang: langs[lang],
@@ -86,7 +78,7 @@ exports.createPages = async ({ actions, graphql }) => {
     
             Array.from({ length: numCategoryPages }).forEach((_, i) => {
                 actions.createPage({
-                    path: i === 0 ? `${langs[lang]}/${prettyCategory}` : `${langs[lang]}/${prettyCategory}/${i + 1}`,
+                    path: i === 0 ? `${slugify(langs[lang])}/${prettyCategory}` : `${slugify(langs[lang])}/${prettyCategory}/${i + 1}`,
                     component: require.resolve("./src/templates/singleCategory.js"),
                     context: {
                         lang: langs[lang],
@@ -111,7 +103,7 @@ exports.createPages = async ({ actions, graphql }) => {
             const id = edge.node.id
     
             actions.createPage({
-                path: `${langs[lang]}/${prettyCategory}/${slug}`,
+                path: `${slugify(langs[lang])}/${prettyCategory}/${slug}`,
                 component: require.resolve(`./src/templates/singleArticle.js`),
                 context: { 
                     lang: langs[lang],
@@ -119,6 +111,26 @@ exports.createPages = async ({ actions, graphql }) => {
                     modifiedDate,
                 },
             })
+        })
+
+        // Create legal pages
+
+        actions.createPage({
+            path: `${slugify(langs[lang])}/${legal.privacyPolicyURL[langs[lang]]}`,
+            component: require.resolve(`./src/templates/privacyPolicy.js`),
+            context: { lang: langs[lang] }
+        })
+
+        actions.createPage({
+            path: `${slugify(langs[lang])}/${legal.cookiesPolicyURL[langs[lang]]}`,
+            component: require.resolve(`./src/templates/cookiesPolicy.js`),
+            context: { lang: langs[lang] }
+        })
+
+        actions.createPage({
+            path: `${slugify(langs[lang])}/${legal.legalClaimURL[langs[lang]]}`,
+            component: require.resolve(`./src/templates/legalClaim.js`),
+            context: { lang: langs[lang] }
         })
     }
 }

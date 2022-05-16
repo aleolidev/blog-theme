@@ -12,8 +12,8 @@ const SingleCategory = ({pageContext, data}) => {
     const prettyCategory = slugify(category)
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
-    const prevPage = currentPage - 1 === 1 ? `/${lang}/${prettyCategory}` : `/${lang}/${prettyCategory}/${currentPage - 1}`
-    const nextPage = `/${lang}/${prettyCategory}/${currentPage + 1}`
+    const prevPage = currentPage - 1 === 1 ? `/${slugify(lang)}/${prettyCategory}` : `/${slugify(lang)}/${prettyCategory}/${currentPage - 1}`
+    const nextPage = `/${slugify(lang)}/${prettyCategory}/${currentPage + 1}`
     const url = typeof window !== 'undefined' ? window.location.href : '';
 
     // TODO: Change default metadata for categories
